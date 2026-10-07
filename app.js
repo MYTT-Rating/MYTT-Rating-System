@@ -347,7 +347,20 @@ function openProfile(name){
   const {db,lb,name:playerName}=playerItem(decodeURIComponent(name));
   const rec=parseRecord(lb.record);
   const matches=rec.wins+rec.losses;
-  document.getElementById("profileContent").innerHTML=`
+  const heroMembersHTML=members.map(member=>{
+  const db=findDbByName(member);
+
+  return `
+    <button
+      type="button"
+      class="doubles-hero-player"
+      data-player="${encodeURIComponent(member)}"
+    >
+      ${avatarHTML(db,"doubles-hero-avatar")}
+      <span>${member}</span>
+    </button>
+  `;
+}).join('<span class="doubles-hero-plus">+</span>');  document.getElementById("profileContent").innerHTML=`
     <section class="profile-hero-pro">
       <div class="profile-hero-bg"></div>
       <div class="profile-hero-main">
