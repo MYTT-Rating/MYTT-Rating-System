@@ -3142,15 +3142,22 @@ async function refreshVisibleData(){
   if(target==="home")jobs.push(loadPlayerDb(),loadLeaderboard(config.singlesCsv,"singlesBody","singlesStatus","singles","singles"),loadActivePlayers());
   if(target==="players")jobs.push(loadPlayerDb(),loadLeaderboard(config.singlesCsv,"singlesBody","singlesStatus","singles","singles"),ensureMatchData());
   if(target==="singles")jobs.push(loadLeaderboard(config.singlesCsv,"singlesBody","singlesStatus","singles","singles"),loadActivePlayers());
-  if(target==="doubles")jobs.push(ensureDoublesData(),loadActiveDoublesTeams());
-  if(target==="submit")jobs.push(loadActivePlayers(),loadActiveDoublesTeams());
+  if(target==="doubles")jobs.push(
+  ensureDoublesData(),
+  ensureDoublesMatchData(),
+  loadActiveDoublesTeams()
+);  if(target==="submit")jobs.push(loadActivePlayers(),loadActiveDoublesTeams());
   if(jobs.length)await Promise.allSettled(jobs);
 }
 
 config.ensurePageData=function(target){
   const page=String(target||"");
   if(page==="events")return loadUpcomingEvents({maxAttempts:1,timeoutMs:18000});
-  if(page==="doubles")return Promise.allSettled([ensureDoublesData(),loadActiveDoublesTeams()]);
+  if(page==="doubles")return Promise.allSettled([
+  ensureDoublesData(),
+  ensureDoublesMatchData(),
+  loadActiveDoublesTeams()
+]);
   if(page==="players")return Promise.allSettled([ensureMatchData(),loadPlayerDb()]);
   if(page==="singles")return Promise.allSettled([loadActivePlayers()]);
   if(page==="submit")return Promise.allSettled([loadActivePlayers(),loadActiveDoublesTeams()]);
