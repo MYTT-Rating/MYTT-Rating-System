@@ -28,6 +28,21 @@ function rowToLb(row,type){return{type,rank:row[0]||"-",name:row[1]||"-",rating:
 function rowToDb(row){return{id:row[0]||"",name:row[1]||"",grip:row[2]||"",hand:row[3]||"",blade:row[4]||"",fh:row[5]||"",bh:row[6]||"",photo:row[7]||"",status:row[8]||"",joined:row[9]||""}}
 
 function rowToMatch(row){return{timestamp:row[0]||"",matchDate:row[1]||"",playerA:row[2]||"",playerB:row[3]||"",winner:row[4]||"",score:row[5]||"",playerABefore:row[6]||"",playerAAfter:row[7]||"",playerBBefore:row[8]||"",playerBAfter:row[9]||"",ratingChange:row[10]||""}}
+function rowToDoublesMatch(row){
+  return{
+    timestamp:row[0]||"",
+    matchDate:row[1]||"",
+    teamA:row[2]||"",
+    teamB:row[3]||"",
+    winner:row[4]||"",
+    score:row[5]||"",
+    submissionId:row[6]||"",
+    teamAId:row[7]||"",
+    teamBId:row[8]||"",
+    winnerId:row[9]||"",
+    matchId:row[10]||""
+  };
+}
 function samePlayer(a,b){return slug(a)===slug(b)}
 function displayDate(value){const text=String(value||"").trim();if(!text)return"-";const d=new Date(text);if(!isNaN(d.getTime()))return d.toLocaleDateString([],{day:"2-digit",month:"short",year:"numeric"});return text}
 function playerMatches(name){return matchResults.filter(m=>samePlayer(m.playerA,name)||samePlayer(m.playerB,name))}
