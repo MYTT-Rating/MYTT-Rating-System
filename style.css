@@ -6978,57 +6978,114 @@ td{
 
 /* ===== MYTT Doubles Match History ===== */
 
-.doubles-history-panel .equipment-row{
-  display:grid;
-  grid-template-columns:170px minmax(0,1fr);
-  align-items:center;
-  gap:22px;
+.doubles-history-panel{
+  overflow:hidden;
+}
 
-  margin-top:14px;
-  padding:18px 20px;
+.doubles-history-panel .equipment-row{
+  position:relative;
+  display:grid;
+  grid-template-columns:220px minmax(0,1fr);
+  align-items:center;
+  gap:28px;
+
+  margin-top:18px;
+  padding:24px 26px 24px 32px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(220,38,38,.18),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      #1a1c20,
+      #111316
+    );
+
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:18px;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.03);
+
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.doubles-history-panel .equipment-row::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:18px;
+  bottom:18px;
+  width:4px;
+
+  border-radius:0 4px 4px 0;
 
   background:linear-gradient(
-    135deg,
-    rgba(255,255,255,.045),
-    rgba(255,255,255,.015)
+    180deg,
+    #ff4545,
+    #b71919
   );
-
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:16px;
 }
 
 .doubles-history-panel .equipment-row small{
-  color:#9a9da5;
+  display:inline-block;
+  width:max-content;
+
+  padding:8px 12px;
+
+  border-radius:10px;
+
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+
+  color:#aeb1b8;
+
   font-size:12px;
-  font-weight:800;
-  letter-spacing:.06em;
-  line-height:1.4;
+  font-weight:900;
+  letter-spacing:.07em;
+  line-height:1.35;
 }
 
 .doubles-history-panel .equipment-row strong{
   color:#fff;
-  font-size:17px;
+
+  font-size:21px;
   font-weight:900;
-  line-height:1.4;
+  letter-spacing:-.015em;
+  line-height:1.35;
 }
 
 .doubles-history-panel .equipment-row:hover{
-  border-color:rgba(229,72,72,.55);
-  background:linear-gradient(
-    135deg,
-    rgba(229,72,72,.10),
-    rgba(255,255,255,.025)
-  );
+  transform:translateY(-2px);
+
+  border-color:rgba(235,55,55,.55);
+
+  box-shadow:
+    0 16px 36px rgba(0,0,0,.3),
+    0 0 24px rgba(220,38,38,.08);
 }
 
 @media(max-width:700px){
+
   .doubles-history-panel .equipment-row{
     grid-template-columns:1fr;
-    gap:8px;
-    padding:16px;
+    gap:14px;
+
+    padding:20px 18px 20px 24px;
   }
 
   .doubles-history-panel .equipment-row strong{
-    font-size:15px;
+    font-size:17px;
+  }
+
+  .doubles-history-panel .equipment-row small{
+    font-size:11px;
   }
 }
