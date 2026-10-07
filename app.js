@@ -3025,7 +3025,23 @@ function ensureMatchData(){
     .finally(()=>{myttMatchesLoadPromise=null;});
   return myttMatchesLoadPromise;
 }
+function ensureDoublesMatchData(){
+  if(myttDataState.doublesMatchesLoaded)return Promise.resolve();
 
+  if(myttDoublesMatchesLoadPromise){
+    return myttDoublesMatchesLoadPromise;
+  }
+
+  myttDoublesMatchesLoadPromise=loadDoublesMatchResults()
+    .then(ok=>{
+      myttDataState.doublesMatchesLoaded=Boolean(ok);
+    })
+    .finally(()=>{
+      myttDoublesMatchesLoadPromise=null;
+    });
+
+  return myttDoublesMatchesLoadPromise;
+}
 function refreshAfterSinglesSubmission(){
   Promise.allSettled([
     loadLeaderboard(config.singlesCsv,"singlesBody","singlesStatus","singles","singles"),
