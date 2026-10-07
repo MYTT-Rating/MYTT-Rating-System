@@ -407,7 +407,7 @@ function openDoublesTeamProfile(teamId){
       return db-da;
     });
 
-  const historyHTML=history.length
+const historyHTML=history.length
   ? history.map(match=>{
       const isA=
         String(match.teamAId||"").toUpperCase()===
@@ -420,182 +420,19 @@ function openDoublesTeamProfile(teamId){
         String(match.winnerId||"").toUpperCase()===
         String(team.teamId||"").toUpperCase();
 
-      const rawScore=String(match.score||"-");
-      const scoreParts=rawScore.match(/(\d+)\s*[-–]\s*(\d+)/);
-
-      let displayScore=rawScore;
-
-      if(scoreParts){
-        displayScore=won
-          ? `${scoreParts[1]}–${scoreParts[2]}`
-          : `${scoreParts[2]}–${scoreParts[1]}`;
-      }
-
       return `
-        <div style="
-          background:linear-gradient(135deg,#17191d,#111215);
-          border:1px solid rgba(255,255,255,.14);
-          border-radius:18px;
-          padding:20px;
-          margin-top:14px;
-        ">
-
-          <div style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap:12px;
-            margin-bottom:20px;
-          ">
-
-            <span style="
-              display:inline-flex;
-              align-items:center;
-              justify-content:center;
-              min-width:64px;
-              padding:7px 14px;
-              border-radius:999px;
-              font-size:13px;
-              font-weight:900;
-              letter-spacing:.08em;
-              color:white;
-              background:${won ? "#159447" : "#c93636"};
-            ">
-              ${won ? "WIN" : "LOSS"}
-            </span>
-
-            <div style="
-              text-align:right;
-              color:#aeb0b6;
-              font-size:12px;
-              font-weight:700;
-              letter-spacing:.04em;
-            ">
-              <div>${match.matchDate||"-"}</div>
-              <div>${match.matchId||""}</div>
-            </div>
-
-          </div>
-
-
-          <div style="
-            display:grid;
-            grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
-            align-items:center;
-            gap:20px;
-          ">
-
-            <div>
-              <div style="
-                color:#8e9299;
-                font-size:11px;
-                font-weight:800;
-                letter-spacing:.08em;
-                margin-bottom:6px;
-              ">
-                ${won ? "WINNER" : "MYTT TEAM"}
-              </div>
-
-              <div style="
-                color:#fff;
-                font-size:18px;
-                font-weight:900;
-                line-height:1.25;
-              ">
-                ${team.name}
-              </div>
-
-              <div style="
-                color:#e54848;
-                font-size:12px;
-                font-weight:800;
-                margin-top:6px;
-              ">
-                ${team.teamId}
-              </div>
-            </div>
-
-
-            <div style="text-align:center;min-width:100px;">
-
-              <div style="
-                color:#fff;
-                font-size:34px;
-                font-weight:950;
-                line-height:1;
-                letter-spacing:-.04em;
-              ">
-                ${displayScore}
-              </div>
-
-              <div style="
-                color:#777b82;
-                font-size:11px;
-                font-weight:900;
-                letter-spacing:.15em;
-                margin-top:8px;
-              ">
-                FINAL
-              </div>
-
-            </div>
-
-
-            <div style="text-align:right;">
-
-              <div style="
-                color:#8e9299;
-                font-size:11px;
-                font-weight:800;
-                letter-spacing:.08em;
-                margin-bottom:6px;
-              ">
-                OPPONENT
-              </div>
-
-              <div style="
-                color:#fff;
-                font-size:18px;
-                font-weight:900;
-                line-height:1.25;
-              ">
-                ${opponent}
-              </div>
-
-              <div
-                data-doubles-team="${encodeURIComponent(opponentId)}"
-                style="
-                  color:#e54848;
-                  font-size:12px;
-                  font-weight:800;
-                  margin-top:6px;
-                  cursor:pointer;
-                "
-              >
-                ${opponentId} ↗
-              </div>
-
-            </div>
-
-          </div>
-
+        <div class="equipment-row">
+          <small>${match.matchDate||"-"} · ${match.matchId||""}</small>
+          <strong>
+            ${won ? "W" : "L"} · vs ${opponent}
+            ${opponentId ? ` (${opponentId})` : ""}
+            · ${match.score||"-"}
+          </strong>
         </div>
       `;
     }).join("")
+  : `<div class="equipment-row"><small>Match History</small><strong>No matches yet</strong></div>`;
 
-  : `
-      <div style="
-        padding:28px 20px;
-        margin-top:14px;
-        text-align:center;
-        border:1px dashed rgba(255,255,255,.16);
-        border-radius:18px;
-        color:#8e9299;
-        font-weight:700;
-      ">
-        No doubles matches yet.
-      </div>
-    `;     
   document.getElementById("profileContent").innerHTML=`
     <section class="profile-hero-pro">
       <div class="profile-hero-bg"></div>
