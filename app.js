@@ -166,8 +166,7 @@ function teamCellHTML(teamName,tierIconHtml=""){
     <div class="team-cell"
       ${teamId ? `data-doubles-team="${encodeURIComponent(teamId)}"` : ""}>
 
-      <div class="team-members">
-        ${members.map(member=>{
+      <div class="team-members" style="display:flex;align-items:center;gap:10px;flex-wrap:nowrap;">        ${members.map(member=>{
           const db=findDbByName(member);
 
           return `
