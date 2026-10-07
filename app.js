@@ -43,7 +43,20 @@ function rowToDoublesMatch(row){
     matchId:row[10]||""
   };
 }
-function samePlayer(a,b){return slug(a)===slug(b)}
+function rowToDoublesTeamMaster(row){
+  return{
+    name:row[0]||"",
+    rating:row[1]||"",
+    wins:row[2]||"0",
+    losses:row[3]||"0",
+    matches:row[4]||"0",
+    peak:row[5]||"",
+    teamId:row[6]||"",
+    player1Id:row[7]||"",
+    player2Id:row[8]||"",
+    status:row[9]||""
+  };
+}function samePlayer(a,b){return slug(a)===slug(b)}
 function displayDate(value){const text=String(value||"").trim();if(!text)return"-";const d=new Date(text);if(!isNaN(d.getTime()))return d.toLocaleDateString([],{day:"2-digit",month:"short",year:"numeric"});return text}
 function playerMatches(name){return matchResults.filter(m=>samePlayer(m.playerA,name)||samePlayer(m.playerB,name))}
 function opponentOf(match,name){if(samePlayer(match.playerA,name))return match.playerB;if(samePlayer(match.playerB,name))return match.playerA;return""}
