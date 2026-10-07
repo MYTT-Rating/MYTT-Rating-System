@@ -2996,10 +2996,15 @@ async function loadDoublesMatchResults(){
     return false;
   }
 }
-const myttDataState={doublesLoaded:false,matchesLoaded:false};
+const myttDataState={
+  doublesLoaded:false,
+  matchesLoaded:false,
+  doublesMatchesLoaded:false
+};
+
 let myttDoublesLoadPromise=null;
 let myttMatchesLoadPromise=null;
-
+let myttDoublesMatchesLoadPromise=null;
 function ensureDoublesData(){
   if(myttDataState.doublesLoaded)return Promise.resolve();
   if(myttDoublesLoadPromise)return myttDoublesLoadPromise;
