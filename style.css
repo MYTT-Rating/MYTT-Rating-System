@@ -6975,3 +6975,60 @@ td{
     text-overflow:ellipsis !important;
   }
 }
+
+/* ===== MYTT Doubles Match History ===== */
+
+.doubles-history-panel .equipment-row{
+  display:grid;
+  grid-template-columns:170px minmax(0,1fr);
+  align-items:center;
+  gap:22px;
+
+  margin-top:14px;
+  padding:18px 20px;
+
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.045),
+    rgba(255,255,255,.015)
+  );
+
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:16px;
+}
+
+.doubles-history-panel .equipment-row small{
+  color:#9a9da5;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.06em;
+  line-height:1.4;
+}
+
+.doubles-history-panel .equipment-row strong{
+  color:#fff;
+  font-size:17px;
+  font-weight:900;
+  line-height:1.4;
+}
+
+.doubles-history-panel .equipment-row:hover{
+  border-color:rgba(229,72,72,.55);
+  background:linear-gradient(
+    135deg,
+    rgba(229,72,72,.10),
+    rgba(255,255,255,.025)
+  );
+}
+
+@media(max-width:700px){
+  .doubles-history-panel .equipment-row{
+    grid-template-columns:1fr;
+    gap:8px;
+    padding:16px;
+  }
+
+  .doubles-history-panel .equipment-row strong{
+    font-size:15px;
+  }
+}
