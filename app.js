@@ -2979,7 +2979,23 @@ function bindEvents(){
   }})
 }
 async function loadMatchResults(){if(!config.matchResultsCsv)return false;try{const rows=await fetchRows(config.matchResultsCsv);matchResults=rows.map(rowToMatch).filter(m=>m.playerA&&m.playerB);return true}catch(e){console.error("Failed to load match results",e);matchResults=[];return false}}
+async function loadDoublesMatchResults(){
+  if(!config.doublesMatchResultsCsv)return false;
 
+  try{
+    const rows=await fetchRows(config.doublesMatchResultsCsv);
+
+    doublesMatchResults=rows
+      .map(rowToDoublesMatch)
+      .filter(m=>m.teamAId&&m.teamBId);
+
+    return true;
+  }catch(e){
+    console.error("Failed to load doubles match results",e);
+    doublesMatchResults=[];
+    return false;
+  }
+}
 const myttDataState={doublesLoaded:false,matchesLoaded:false};
 let myttDoublesLoadPromise=null;
 let myttMatchesLoadPromise=null;
