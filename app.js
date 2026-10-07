@@ -3139,8 +3139,13 @@ async function loadInitialData(){
   ];
 
   if(!isPhone){
-    essential.push(loadActivePlayers(),loadActiveDoublesTeams(),ensureDoublesData(),ensureMatchData());
-  }
+   essential.push(
+  loadActivePlayers(),
+  loadActiveDoublesTeams(),
+  ensureDoublesData(),
+  ensureDoublesMatchData(),
+  ensureMatchData()
+);  }
 
   await Promise.allSettled(essential);
   renderPlayers();
