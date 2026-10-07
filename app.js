@@ -481,7 +481,7 @@ const historyHTML=history.length
       <div class="equipment-row"><small>Status</small><strong>${team.status||"-"}</strong></div>
     </div>
 
-    <div class="profile-panel">
+    <div class="profile-panel doubles-history-panel">
       <h3>🏓 Doubles Match History</h3>
       ${historyHTML}
     </div>
