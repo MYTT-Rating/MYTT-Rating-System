@@ -595,9 +595,7 @@ function openDoublesTeamProfile(teamId){
       ">
         No doubles matches yet.
       </div>
-    `;      }).join("")
-    : `<div class="equipment-row"><small>Match History</small><strong>No matches yet</strong></div>`;
-
+    `;     
   document.getElementById("profileContent").innerHTML=`
     <section class="profile-hero-pro">
       <div class="profile-hero-bg"></div>
