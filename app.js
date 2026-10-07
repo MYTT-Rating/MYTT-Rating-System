@@ -445,7 +445,20 @@ const historyHTML=history.length
       `;
     }).join("")
   : `<div class="equipment-row"><small>Match History</small><strong>No matches yet</strong></div>`;
+const heroMembersHTML=members.map(member=>{
+  const db=findDbByName(member);
 
+  return `
+    <button
+      type="button"
+      class="doubles-hero-player"
+      data-player="${encodeURIComponent(member)}"
+    >
+      ${avatarHTML(db,"doubles-hero-avatar")}
+      <span>${member}</span>
+    </button>
+  `;
+}).join('<span class="doubles-hero-plus">+</span>');
   document.getElementById("profileContent").innerHTML=`
     <section class="profile-hero-pro">
       <div class="profile-hero-bg"></div>
@@ -453,9 +466,7 @@ const historyHTML=history.length
       <div class="profile-hero-main">
         <div class="profile-identity">
           <p class="profile-kicker">MYTT Doubles Team</p>
-<div class="doubles-hero-members">
-  ${heroMembersHTML}
-</div>
+
           <h3>${team.name}</h3>
 
           <div class="profile-badges">
