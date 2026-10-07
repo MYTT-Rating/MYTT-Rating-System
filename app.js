@@ -3065,9 +3065,12 @@ function ensureDoublesMatchData(){
     return myttDoublesMatchesLoadPromise;
   }
 
-  myttDoublesMatchesLoadPromise=loadDoublesMatchResults()
-    .then(ok=>{
-      myttDataState.doublesMatchesLoaded=Boolean(ok);
+  myttDoublesMatchesLoadPromise=Promise.all([
+    loadDoublesMatchResults(),
+    loadDoublesTeamMaster()
+  ])
+    .then(results=>{
+      myttDataState.doublesMatchesLoaded=results.every(Boolean);
     })
     .finally(()=>{
       myttDoublesMatchesLoadPromise=null;
