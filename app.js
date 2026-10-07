@@ -458,45 +458,6 @@ const historyHTML=history.length
       ${profileStatCard("Matches",team.matches,"🏓")}
     </div>
 
-<div class="profile-panel doubles-members-panel">
-  <h3>👥 Team Members</h3>
-
-  <div class="doubles-members-grid">
-    ${members.map((member,index)=>{
-      const db=findDbByName(member);
-
-      return `
-        <button
-          type="button"
-          class="doubles-member-card"
-          data-player="${encodeURIComponent(member)}"
-        >
-          ${avatarHTML(db,"row-avatar")}
-
-          <div class="doubles-member-info">
-            <strong>${member}</strong>
-            <small>${db?.id||"MYTT Player"}</small>
-          </div>
-        </button>
-
-        ${
-          index===0 && members.length>1
-            ? `<div class="doubles-member-plus">+</div>`
-            : ""
-        }
-      `;
-    }).join("")}
-  </div>
-</div>
-
-    <div class="profile-panel">
-      <h3>📊 Team Record</h3>
-      <div class="equipment-row"><small>Wins</small><strong>${team.wins}</strong></div>
-      <div class="equipment-row"><small>Losses</small><strong>${team.losses}</strong></div>
-      <div class="equipment-row"><small>Win Rate</small><strong>${lb?.winRate||"-"}</strong></div>
-      <div class="equipment-row"><small>Status</small><strong>${team.status||"-"}</strong></div>
-    </div>
-
     <div class="profile-panel doubles-history-panel">
       <h3>🏓 Doubles Match History</h3>
       ${historyHTML}
