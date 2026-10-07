@@ -3009,6 +3009,26 @@ async function loadDoublesMatchResults(){
     return false;
   }
 }
+async function loadDoublesTeamMaster(){
+  if(!config.doublesTeamsCsv){
+    doublesTeamMaster=[];
+    return false;
+  }
+
+  try{
+    const rows=await fetchRows(config.doublesTeamsCsv);
+
+    doublesTeamMaster=rows
+      .map(rowToDoublesTeamMaster)
+      .filter(team=>team.name&&team.teamId);
+
+    return true;
+  }catch(e){
+    console.error("Failed to load Doubles Teams master",e);
+    doublesTeamMaster=[];
+    return false;
+  }
+}
 const myttDataState={
   doublesLoaded:false,
   matchesLoaded:false,
