@@ -1,4 +1,4 @@
-const config=window.MYTT;let singlesPlayers=[],doublesTeams=[],playerDb=[],matchResults=[],doublesMatchResults=[],activePlayers=[],activeDoublesTeams=[];let activePlayersLoaded=false,activePlayersError=false,activeDoublesTeamsLoaded=false,activeDoublesTeamsError=false;
+const config=window.MYTT;let singlesPlayers=[],doublesTeams=[],doublesTeamMaster=[],playerDb=[],matchResults=[],doublesMatchResults=[],activePlayers=[],activeDoublesTeams=[];let activePlayersLoaded=false,activePlayersError=false,activeDoublesTeamsLoaded=false,activeDoublesTeamsError=false;
 const TIERS=[
   {min:-Infinity,name:"Novice",icon:"🌿",cls:"tier-novice",badge:"v22-novice.webp",next:1500},
   {min:1500,name:"Rookie",icon:"🌱",cls:"tier-rookie",badge:"v22-novice.webp",next:1600},
