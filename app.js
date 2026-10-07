@@ -3050,8 +3050,23 @@ function bindEvents(){
       return;
     }
     if(!e.target.closest(".player-picker")){closePlayerMenus();closeDoublesTeamMenus();}
-    const p=e.target.closest("[data-player]");if(p){e.stopPropagation();openProfile(p.dataset.player)}
-    if(e.target.matches("[data-close-modal]"))closeProfile();
+const p=e.target.closest("[data-player]");
+
+if(p){
+  e.stopPropagation();
+  openProfile(p.dataset.player);
+  return;
+}
+
+const doublesTeam=e.target.closest("[data-doubles-team]");
+
+if(doublesTeam){
+  e.stopPropagation();
+  openDoublesTeamProfile(doublesTeam.dataset.doublesTeam);
+  return;
+}
+
+if(e.target.matches("[data-close-modal]"))closeProfile();
   });
   document.addEventListener("submit",e=>{if(e.target.id==="eventRegistrationForm"){
     if(!validateEventRegistrationForm()){e.preventDefault();return}
