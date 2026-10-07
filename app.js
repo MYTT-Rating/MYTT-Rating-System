@@ -134,24 +134,58 @@ function splitTeamName(teamName){
 }
 
 function teamCellHTML(teamName,tierIconHtml=""){
-  const members = splitTeamName(teamName);
-  if (members.length < 2) {
-    const db = findDbByName(teamName);
-    return `<div class="player-cell">${avatarHTML(db,"row-avatar")}<div class="leaderboard-name-wrap"><span class="leaderboard-name-text">${teamName} ↗</span>${tierIconHtml}</div></div>`;
+  const members=splitTeamName(teamName);
+
+  const masterTeam=doublesTeamMaster.find(team=>
+    slug(team.name)===slug(teamName)
+  );
+
+  const teamId=masterTeam?.teamId||"";
+
+  if(members.length<2){
+    const db=findDbByName(teamName);
+
+    return `
+      <div class="team-cell"
+        ${teamId ? `data-doubles-team="${encodeURIComponent(teamId)}"` : ""}>
+        
+        <div class="player-cell">
+          ${avatarHTML(db,"row-avatar")}
+          <div class="leaderboard-name-wrap">
+            <span class="leaderboard-name-text">${teamName}</span>
+            ${tierIconHtml}
+          </div>
+        </div>
+
+        ${teamId ? `<span class="team-id-link">${teamId} ↗</span>` : ""}
+      </div>
+    `;
   }
 
-  return `<div class="team-cell">
-    ${members.map(member => {
-      const db = findDbByName(member);
-      return `<div class="team-member" data-player="${encodeURIComponent(member)}">
-        ${avatarHTML(db,"row-avatar")}
-        <span>${member}</span>
-      </div>`;
-    }).join('<span class="team-plus">+</span>')}
-    ${tierIconHtml}
-  </div>`;
-}
+  return `
+    <div class="team-cell"
+      ${teamId ? `data-doubles-team="${encodeURIComponent(teamId)}"` : ""}>
 
+      <div class="team-members">
+        ${members.map(member=>{
+          const db=findDbByName(member);
+
+          return `
+            <div class="team-member"
+              data-player="${encodeURIComponent(member)}">
+              ${avatarHTML(db,"row-avatar")}
+              <span>${member}</span>
+            </div>
+          `;
+        }).join('<span class="team-plus">+</span>')}
+      </div>
+
+      ${teamId ? `<span class="team-id-link">${teamId} ↗</span>` : ""}
+
+      ${tierIconHtml}
+    </div>
+  `;
+}
 function makeRow(item){const db=findDbByName(item.name);const tr=document.createElement("tr");tr.className="rank-"+String(item.rank||"").trim();const mobileTierIcon=leaderboardTierIconHTML(item.rating);const nameHtml=item.type==="doubles"?teamCellHTML(item.name,mobileTierIcon):`<div class="player-cell">${avatarHTML(db,"row-avatar")}<div class="leaderboard-name-wrap"><span class="leaderboard-name-text">${item.name} ↗</span>${mobileTierIcon}</div></div>`;tr.innerHTML=`<td><span class="rank-badge">${rankLabel(item.rank)}</span></td><td class="name" ${item.type==="doubles"?"":`data-player="${encodeURIComponent(item.name)}"`}>${nameHtml}</td><td>${tierHTML(item.rating)}</td><td class="rating">${item.rating}</td><td>${item.record}</td><td>${item.winRate}</td><td>${item.peak}</td>`;return tr}
 const LEADERBOARD_INITIAL_COUNT=10;
 const LEADERBOARD_STEP=10;
