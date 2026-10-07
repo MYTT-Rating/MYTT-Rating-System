@@ -453,7 +453,9 @@ const historyHTML=history.length
       <div class="profile-hero-main">
         <div class="profile-identity">
           <p class="profile-kicker">MYTT Doubles Team</p>
-
+<div class="doubles-hero-members">
+  ${heroMembersHTML}
+</div>
           <h3>${team.name}</h3>
 
           <div class="profile-badges">
