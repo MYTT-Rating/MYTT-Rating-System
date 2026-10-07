@@ -3022,14 +3022,17 @@ async function loadDoublesTeamMaster(){
       .map(rowToDoublesTeamMaster)
       .filter(team=>team.name&&team.teamId);
 
+    if(doublesTeams.length){
+      renderLeaderboardRows("doubles");
+    }
+
     return true;
   }catch(e){
     console.error("Failed to load Doubles Teams master",e);
     doublesTeamMaster=[];
     return false;
   }
-}
-const myttDataState={
+}const myttDataState={
   doublesLoaded:false,
   matchesLoaded:false,
   doublesMatchesLoaded:false
