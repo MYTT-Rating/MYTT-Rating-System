@@ -347,15 +347,18 @@ function openProfile(name){
   const {db,lb,name:playerName}=playerItem(decodeURIComponent(name));
   const rec=parseRecord(lb.record);
   const matches=rec.wins+rec.losses;
-  
+
   document.getElementById("profileContent").innerHTML=`
     <section class="profile-hero-pro">
       <div class="profile-hero-bg"></div>
+
       <div class="profile-hero-main">
         ${avatarHTML(db,"profile-avatar profile-avatar-pro")}
+
         <div class="profile-identity">
           <p class="profile-kicker">MYTT Player Profile</p>
           <h3>${playerName}</h3>
+
           <div class="profile-badges">
             <span class="id-pill">${db?.id||"MYTT Player"}</span>
             ${tierHTML(lb.rating)}
@@ -364,22 +367,58 @@ function openProfile(name){
         </div>
       </div>
     </section>
-   <div class="profile-stats profile-stats-pro profile-stats-core">
-  ${profileStatCard("Current Rating",team.rating,"📊")}
-  ${profileStatCard("Record",`${team.wins}-${team.losses}`,"🏓")}
-  ${profileStatCard("Win Rate",lb?.winRate||"-","🎯")}
-</div>
+
+    <div class="profile-stats profile-stats-pro profile-stats-core">
+      ${profileStatCard("Current Rating",lb.rating,"📊")}
+      ${profileStatCard("Peak Rating",lb.peak,"🚀")}
+      ${profileStatCard("Win Rate",lb.winRate,"🎯")}
+    </div>
+
     ${rankJourneyHTML(lb.rating)}
     ${careerSummaryHTML(lb,playerName)}
-    <div class="profile-panel"><h3>🏓 Player Info</h3><div class="equipment-row"><small>Grip</small><strong>${db?.grip||"-"}</strong></div><div class="equipment-row"><small>Hand</small><strong>${db?.hand||"-"}</strong></div><div class="equipment-row"><small>Blade</small><strong>${db?.blade||"-"}</strong></div><div class="equipment-row"><small>FH Rubber</small><strong>${db?.fh||"-"}</strong></div><div class="equipment-row"><small>BH Rubber</small><strong>${db?.bh||"-"}</strong></div><div class="equipment-row"><small>Member Since</small><strong>${db?.joined||"-"}</strong></div></div>
+
+    <div class="profile-panel">
+      <h3>🏓 Player Info</h3>
+
+      <div class="equipment-row">
+        <small>Grip</small>
+        <strong>${db?.grip||"-"}</strong>
+      </div>
+
+      <div class="equipment-row">
+        <small>Hand</small>
+        <strong>${db?.hand||"-"}</strong>
+      </div>
+
+      <div class="equipment-row">
+        <small>Blade</small>
+        <strong>${db?.blade||"-"}</strong>
+      </div>
+
+      <div class="equipment-row">
+        <small>FH Rubber</small>
+        <strong>${db?.fh||"-"}</strong>
+      </div>
+
+      <div class="equipment-row">
+        <small>BH Rubber</small>
+        <strong>${db?.bh||"-"}</strong>
+      </div>
+
+      <div class="equipment-row">
+        <small>Member Since</small>
+        <strong>${db?.joined||"-"}</strong>
+      </div>
+    </div>
+
     ${recentMatchesHTML(playerName)}
     ${ratingHistoryHTML(playerName)}
     ${headToHeadHTML(playerName)}
     ${achievementHTML(lb,playerName)}
   `;
+
   document.getElementById("profileModal").classList.remove("hidden");
-}
-function openDoublesTeamProfile(teamId){
+}function openDoublesTeamProfile(teamId){
   const id=decodeURIComponent(teamId||"");
 
   const team=doublesTeamMaster.find(t=>
