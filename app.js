@@ -357,7 +357,6 @@ function openProfile(name){
       data-player="${encodeURIComponent(member)}"
     >
       ${avatarHTML(db,"doubles-hero-avatar")}
-      <span>${member}</span>
     </button>
   `;
 }).join('<span class="doubles-hero-plus">+</span>');  document.getElementById("profileContent").innerHTML=`
