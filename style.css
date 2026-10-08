@@ -7443,3 +7443,50 @@ td{
     object-fit:contain !important;
   }
 }
+/* ===== MOBILE DOUBLES PROFILE AVATAR CENTER ===== */
+@media(max-width:700px){
+
+  #profileContent .doubles-hero-members{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    width:100% !important;
+    margin:14px auto 18px !important;
+
+    gap:12px !important;
+  }
+
+  #profileContent .doubles-hero-player{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    width:68px !important;
+    flex:0 0 68px !important;
+
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  #profileContent .doubles-hero-avatar{
+    width:64px !important;
+    height:64px !important;
+    min-width:64px !important;
+    min-height:64px !important;
+
+    margin:0 auto !important;
+  }
+
+  #profileContent .doubles-hero-plus{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    width:30px !important;
+    height:30px !important;
+    flex:0 0 30px !important;
+
+    margin:0 !important;
+  }
+}
