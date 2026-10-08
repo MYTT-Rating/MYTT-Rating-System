@@ -479,11 +479,12 @@ const heroMembersHTML=members.map(member=>{
 </div>
           <h3>${team.name}</h3>
 
-          <div class="profile-badges">
-            <span class="id-pill">${team.teamId}</span>
-            ${tierHTML(team.rating)}
-            <span class="rank-pill">Rank #${lb?.rank||"-"}</span>
-          </div>
+         <div class="profile-badges">
+  <span class="id-pill">${team.teamId}</span>
+  ${tierHTML(team.rating)}
+  <span class="rank-pill">Rank #${lb?.rank||"-"}</span>
+  <span class="rank-pill">Peak ${team.peak||"-"}</span>
+</div>
         </div>
       </div>
     </section>
