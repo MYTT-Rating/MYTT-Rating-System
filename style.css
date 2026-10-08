@@ -7351,65 +7351,60 @@ td{
   border:1px solid rgba(239,68,68,.55);
   box-shadow:0 0 14px rgba(239,68,68,.10);
 }
-/* ===== MOBILE DOUBLES LEADERBOARD V2 ===== */
+/* ===== MOBILE DOUBLES LEADERBOARD V3 ===== */
 @media(max-width:700px){
 
   #doubles .team-cell{
-    display:grid !important;
-
-    grid-template-columns:auto auto !important;
-    grid-template-areas:
-      "members members"
-      "teamid tier" !important;
-
-    justify-content:center !important;
+    display:flex !important;
     align-items:center !important;
+    justify-content:center !important;
+    gap:9px !important;
 
-    column-gap:10px !important;
-    row-gap:7px !important;
+    flex-wrap:nowrap !important;
 
-    width:max-content !important;
-    max-width:190px !important;
-    margin:0 auto !important;
+    width:100% !important;
+    min-width:0 !important;
+    margin:0 !important;
   }
 
   #doubles .team-members{
-    grid-area:members !important;
-
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
 
-    gap:7px !important;
+    gap:5px !important;
     flex-wrap:nowrap !important;
+
+    min-width:0 !important;
   }
 
   #doubles .team-member{
     display:flex !important;
     flex-direction:column !important;
     align-items:center !important;
+    justify-content:center !important;
 
-    gap:4px !important;
+    gap:3px !important;
 
-    width:64px !important;
-    min-width:64px !important;
+    width:52px !important;
+    min-width:52px !important;
   }
 
   #doubles .team-member .row-avatar{
-    width:44px !important;
-    height:44px !important;
-    min-width:44px !important;
-    min-height:44px !important;
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    min-height:40px !important;
   }
 
   #doubles .team-member span{
-    width:64px !important;
+    width:52px !important;
 
     color:#fff !important;
-    font-size:11px !important;
+    font-size:10px !important;
     font-weight:900 !important;
+    line-height:1.05 !important;
 
-    line-height:1.1 !important;
     text-align:center !important;
 
     white-space:nowrap !important;
@@ -7418,31 +7413,35 @@ td{
   }
 
   #doubles .team-plus{
-    font-size:15px !important;
+    margin:0 !important;
+
+    color:#aaa !important;
+    font-size:14px !important;
     font-weight:900 !important;
-    margin:0 1px !important;
   }
 
   #doubles .team-id-link{
-    grid-area:teamid !important;
+    flex:0 0 auto !important;
 
     margin:0 !important;
 
     color:#fff !important;
-    font-size:13px !important;
+    font-size:12px !important;
     font-weight:900 !important;
+
     white-space:nowrap !important;
   }
 
   #doubles .leaderboard-mobile-tier{
-    grid-area:tier !important;
-
     display:block !important;
 
-    width:34px !important;
-    height:34px !important;
+    width:32px !important;
+    height:32px !important;
+    min-width:32px !important;
 
     margin:0 !important;
+
     object-fit:contain !important;
+    flex:0 0 32px !important;
   }
 }
