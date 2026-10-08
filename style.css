@@ -7351,3 +7351,68 @@ td{
   border:1px solid rgba(239,68,68,.55);
   box-shadow:0 0 14px rgba(239,68,68,.10);
 }
+/* ===== MOBILE DOUBLES LEADERBOARD ===== */
+@media(max-width:700px){
+
+  #doubles .team-cell{
+    display:flex !important;
+    align-items:center !important;
+    gap:8px !important;
+    flex-wrap:wrap !important;
+    min-width:0 !important;
+  }
+
+  #doubles .team-members{
+    display:flex !important;
+    align-items:center !important;
+    gap:6px !important;
+    flex-wrap:nowrap !important;
+    min-width:0 !important;
+  }
+
+  #doubles .team-member{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:4px !important;
+
+    width:58px !important;
+    min-width:58px !important;
+  }
+
+  #doubles .team-member .row-avatar{
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+    min-height:42px !important;
+  }
+
+  #doubles .team-member span{
+    display:block !important;
+
+    width:58px !important;
+    max-width:58px !important;
+
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+
+    text-align:center !important;
+    font-size:11px !important;
+    line-height:1.1 !important;
+  }
+
+  #doubles .team-plus{
+    margin:0 1px !important;
+    font-size:14px !important;
+  }
+
+  #doubles .team-id-link{
+    flex-basis:100% !important;
+    margin-top:4px !important;
+
+    font-size:12px !important;
+    white-space:nowrap !important;
+  }
+}
