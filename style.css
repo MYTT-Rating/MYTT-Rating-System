@@ -7490,3 +7490,17 @@ td{
     margin:0 !important;
   }
 }
+/* ===== MOBILE DOUBLES PROFILE TITLE ===== */
+@media(max-width:700px){
+
+  #profileContent .profile-identity .doubles-hero-members + h3{
+    font-size:30px !important;
+    line-height:1 !important;
+    letter-spacing:-0.8px !important;
+
+    text-align:center !important;
+
+    margin:12px auto 0 !important;
+    width:100% !important;
+  }
+}
