@@ -466,7 +466,18 @@ const heroMembersHTML=members.map(member=>{
       <div class="profile-hero-main">
         <div class="profile-identity">
           <p class="profile-kicker">MYTT Doubles Team</p>
+<div class="doubles-hero-members">
+  ${members.map(member=>{
+    const db=findDbByName(member);
 
+    return '<button type="button" class="doubles-hero-player" data-player="' +
+      encodeURIComponent(member) +
+      '">' +
+      avatarHTML(db,"doubles-hero-avatar") +
+      '<span>' + member + '</span>' +
+      '</button>';
+  }).join('<span class="doubles-hero-plus">+</span>')}
+</div>
           <h3>${team.name}</h3>
 
           <div class="profile-badges">
