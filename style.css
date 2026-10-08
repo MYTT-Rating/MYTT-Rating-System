@@ -7320,4 +7320,34 @@ td{
 }
 .doubles-hero-player > span{
   display:none !important;
+}/* ===== Doubles Match Result Badge ===== */
+
+.match-result-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  min-width:36px;
+  height:30px;
+  padding:0 10px;
+
+  border-radius:999px;
+
+  font-size:14px;
+  font-weight:950;
+  line-height:1;
+}
+
+.match-result-badge.win{
+  color:#dfffea;
+  background:rgba(34,197,94,.18);
+  border:1px solid rgba(34,197,94,.55);
+  box-shadow:0 0 14px rgba(34,197,94,.10);
+}
+
+.match-result-badge.loss{
+  color:#ffe1e1;
+  background:rgba(239,68,68,.18);
+  border:1px solid rgba(239,68,68,.55);
+  box-shadow:0 0 14px rgba(239,68,68,.10);
 }
