@@ -7195,8 +7195,8 @@ td{
 .doubles-hero-members{
   display:flex;
   align-items:center;
-  gap:14px;
-  margin:14px 0 16px;
+  gap:16px;
+  margin:14px 0 18px;
 }
 
 .doubles-hero-player{
@@ -7208,12 +7208,13 @@ td{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:7px;
+  gap:8px;
 
   color:#fff;
   cursor:pointer;
 }
 
+/* 外层圆形容器 */
 .doubles-hero-avatar{
   width:82px;
   height:82px;
@@ -7221,7 +7222,7 @@ td{
   min-height:82px;
 
   border-radius:50%;
-  object-fit:cover;
+  overflow:hidden;
 
   border:3px solid rgba(255,255,255,.85);
 
@@ -7234,6 +7235,16 @@ td{
     box-shadow .2s ease;
 }
 
+/* 重点：把真正的照片锁在圆形里面 */
+.doubles-hero-avatar img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  border-radius:50%;
+}
+
 .doubles-hero-player:hover .doubles-hero-avatar{
   transform:translateY(-3px) scale(1.04);
 
@@ -7242,11 +7253,11 @@ td{
     0 14px 30px rgba(0,0,0,.4);
 }
 
-.doubles-hero-player span{
+.doubles-hero-player > span{
   color:#fff;
   font-size:14px;
   font-weight:900;
-  line-height:1;
+  line-height:1.1;
 }
 
 .doubles-hero-plus{
@@ -7256,6 +7267,7 @@ td{
 
   width:34px;
   height:34px;
+  flex:0 0 34px;
 
   border-radius:50%;
 
@@ -7267,12 +7279,9 @@ td{
   font-weight:900;
 }
 
-/* Phone */
 @media(max-width:700px){
-
   .doubles-hero-members{
     gap:10px;
-    margin:12px 0 14px;
   }
 
   .doubles-hero-avatar{
@@ -7282,13 +7291,14 @@ td{
     min-height:64px;
   }
 
-  .doubles-hero-player span{
+  .doubles-hero-player > span{
     font-size:12px;
   }
 
   .doubles-hero-plus{
     width:28px;
     height:28px;
+    flex-basis:28px;
     font-size:18px;
   }
 }
