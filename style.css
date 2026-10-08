@@ -7504,3 +7504,66 @@ td{
     width:100% !important;
   }
 }
+/* ===== MOBILE DOUBLES MATCH HISTORY COMPACT ===== */
+@media(max-width:700px){
+
+  #profileContent .doubles-history-panel{
+    padding:14px 12px !important;
+  }
+
+  #profileContent .doubles-history-panel h3{
+    font-size:21px !important;
+    line-height:1.1 !important;
+    margin:0 0 10px !important;
+  }
+
+  #profileContent .doubles-history-panel .equipment-row{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+
+    gap:8px !important;
+
+    margin-top:8px !important;
+    padding:12px 12px !important;
+
+    border-radius:14px !important;
+  }
+
+  #profileContent .doubles-history-panel .equipment-row small{
+    width:auto !important;
+    max-width:100% !important;
+
+    padding:6px 9px !important;
+
+    font-size:10px !important;
+    line-height:1.1 !important;
+
+    white-space:nowrap !important;
+  }
+
+  #profileContent .doubles-history-panel .equipment-row strong{
+    display:flex !important;
+    align-items:center !important;
+
+    gap:6px !important;
+
+    width:100% !important;
+
+    font-size:13px !important;
+    line-height:1.15 !important;
+
+    white-space:nowrap !important;
+  }
+
+  #profileContent .match-result-badge{
+    flex:0 0 auto !important;
+
+    min-width:34px !important;
+    height:26px !important;
+
+    padding:0 8px !important;
+
+    font-size:12px !important;
+  }
+}
