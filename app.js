@@ -436,7 +436,7 @@ const historyHTML=history.length
         <div class="equipment-row">
           <small>${match.matchDate||"-"} · ${match.matchId||""}</small>
           <strong>
-            ${won ? "W" : "L"} · vs ${opponent}
+           <span class="match-result-badge ${won ? "win" : "loss"}">${won ? "W" : "L"}</span> · vs ${opponent}
             ${opponentId ? ` (${opponentId})` : ""}
             · ${match.score||"-"}
           </strong>
