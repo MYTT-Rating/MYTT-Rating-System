@@ -489,10 +489,9 @@ const heroMembersHTML=members.map(member=>{
     </section>
 
     <div class="profile-stats profile-stats-pro profile-stats-core">
-      ${profileStatCard("Current Rating",team.rating,"📊")}
-      ${profileStatCard("Peak Rating",team.peak,"🚀")}
-      ${profileStatCard("Matches",team.matches,"🏓")}
-    </div>
+     ${profileStatCard("Current Rating",team.rating,"📊")}
+${profileStatCard("Record",`${team.wins}-${team.losses}`,"🏓")}
+${profileStatCard("Win Rate",lb?.winRate||"-","🎯")}    </div>
 
     <div class="profile-panel doubles-history-panel">
       <h3>🏓 Doubles Match History</h3>
