@@ -375,11 +375,11 @@ function openProfile(name){
         </div>
       </div>
     </section>
-    <div class="profile-stats profile-stats-pro profile-stats-core">
-      ${profileStatCard("Current Rating",lb.rating,"📊")}
-      ${profileStatCard("Peak Rating",lb.peak,"🚀")}
-      ${profileStatCard("Win Rate",lb.winRate,"🎯")}
-    </div>
+   <div class="profile-stats profile-stats-pro profile-stats-core">
+  ${profileStatCard("Current Rating",team.rating,"📊")}
+  ${profileStatCard("Record",`${team.wins}-${team.losses}`,"🏓")}
+  ${profileStatCard("Win Rate",lb?.winRate||"-","🎯")}
+</div>
     ${rankJourneyHTML(lb.rating)}
     ${careerSummaryHTML(lb,playerName)}
     <div class="profile-panel"><h3>🏓 Player Info</h3><div class="equipment-row"><small>Grip</small><strong>${db?.grip||"-"}</strong></div><div class="equipment-row"><small>Hand</small><strong>${db?.hand||"-"}</strong></div><div class="equipment-row"><small>Blade</small><strong>${db?.blade||"-"}</strong></div><div class="equipment-row"><small>FH Rubber</small><strong>${db?.fh||"-"}</strong></div><div class="equipment-row"><small>BH Rubber</small><strong>${db?.bh||"-"}</strong></div><div class="equipment-row"><small>Member Since</small><strong>${db?.joined||"-"}</strong></div></div>
