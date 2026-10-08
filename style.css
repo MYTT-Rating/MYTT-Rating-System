@@ -7351,17 +7351,15 @@ td{
   border:1px solid rgba(239,68,68,.55);
   box-shadow:0 0 14px rgba(239,68,68,.10);
 }
-/* ===== MOBILE DOUBLES LEADERBOARD V3 ===== */
+/* ===== MOBILE DOUBLES LEADERBOARD V4 ===== */
 @media(max-width:700px){
 
   #doubles .team-cell{
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
-    gap:9px !important;
-
+    gap:6px !important;
     flex-wrap:nowrap !important;
-
     width:100% !important;
     min-width:0 !important;
     margin:0 !important;
@@ -7371,11 +7369,9 @@ td{
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
-
-    gap:5px !important;
+    gap:3px !important;
     flex-wrap:nowrap !important;
-
-    min-width:0 !important;
+    flex:0 0 auto !important;
   }
 
   #doubles .team-member{
@@ -7384,64 +7380,66 @@ td{
     align-items:center !important;
     justify-content:center !important;
 
-    gap:3px !important;
-
-    width:52px !important;
-    min-width:52px !important;
+    width:46px !important;
+    min-width:46px !important;
   }
 
   #doubles .team-member .row-avatar{
-    width:40px !important;
-    height:40px !important;
-    min-width:40px !important;
-    min-height:40px !important;
+    width:36px !important;
+    height:36px !important;
+    min-width:36px !important;
+    min-height:36px !important;
   }
 
   #doubles .team-member span{
-    width:52px !important;
+    width:46px !important;
 
     color:#fff !important;
-    font-size:10px !important;
+    font-size:9.5px !important;
     font-weight:900 !important;
     line-height:1.05 !important;
-
-    text-align:center !important;
 
     white-space:nowrap !important;
     overflow:hidden !important;
     text-overflow:ellipsis !important;
+    text-align:center !important;
   }
 
   #doubles .team-plus{
-    margin:0 !important;
-
-    color:#aaa !important;
-    font-size:14px !important;
+    margin:0 1px !important;
+    font-size:12px !important;
     font-weight:900 !important;
   }
 
   #doubles .team-id-link{
+    position:static !important;
+    transform:none !important;
+
     flex:0 0 auto !important;
 
-    margin:0 !important;
+    margin:0 2px !important;
 
     color:#fff !important;
-    font-size:12px !important;
+    font-size:11px !important;
     font-weight:900 !important;
 
     white-space:nowrap !important;
   }
 
   #doubles .leaderboard-mobile-tier{
+    position:static !important;
+    transform:none !important;
+
     display:block !important;
 
-    width:32px !important;
-    height:32px !important;
-    min-width:32px !important;
+    width:28px !important;
+    height:28px !important;
+    min-width:28px !important;
+
+    flex:0 0 28px !important;
 
     margin:0 !important;
 
     object-fit:contain !important;
-    flex:0 0 32px !important;
   }
 }
