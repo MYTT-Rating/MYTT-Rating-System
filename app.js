@@ -185,7 +185,12 @@ function teamCellHTML(teamName,tierIconHtml=""){
     </div>
   `;
 }
-function makeRow(item){const db=findDbByName(item.name);const tr=document.createElement("tr");tr.className="rank-"+String(item.rank||"").trim();const mobileTierIcon=leaderboardTierIconHTML(item.rating);const nameHtml=item.type==="doubles"?teamCellHTML(item.name,mobileTierIcon):`<div class="player-cell">${avatarHTML(db,"row-avatar")}<div class="leaderboard-name-wrap"><span class="leaderboard-name-text">${item.name} ↗</span>${mobileTierIcon}</div></div>`;tr.innerHTML=`<td><span class="rank-badge">${rankLabel(item.rank)}</span></td><td class="name" ${item.type==="doubles"?"":`data-player="${encodeURIComponent(item.name)}"`}>${nameHtml}</td><td>${tierHTML(item.rating)}</td><td class="rating">${item.rating}</td><td>${item.record}</td><td>${item.winRate}</td><td>${item.peak}</td>`;return tr}
+function makeRow(item){const db=findDbByName(item.name);const tr=document.createElement("tr");tr.className="rank-"+String(item.rank||"").trim();const mobileTierIcon=leaderboardTierIconHTML(item.rating);const nameHtml=item.type==="doubles"?teamCellHTML(item.name,mobileTierIcon):`<div class="player-cell">${avatarHTML(db,"row-avatar")}<div class="leaderboard-name-wrap">
+<span class="leaderboard-name-text">${item.name} ↗</span>
+${item.type==="singles" && String(item.name||"").trim()==="Fan Zhendong"
+  ? `<span class="reference-badge">REFERENCE</span>`
+  : ""}
+${mobileTierIcon}</div></div>`;tr.innerHTML=`<td><span class="rank-badge">${rankLabel(item.rank)}</span></td><td class="name" ${item.type==="doubles"?"":`data-player="${encodeURIComponent(item.name)}"`}>${nameHtml}</td><td>${tierHTML(item.rating)}</td><td class="rating">${item.rating}</td><td>${item.record}</td><td>${item.winRate}</td><td>${item.peak}</td>`;return tr}
 const LEADERBOARD_INITIAL_COUNT=10;
 const LEADERBOARD_STEP=10;
 
