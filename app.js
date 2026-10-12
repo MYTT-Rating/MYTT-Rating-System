@@ -344,6 +344,67 @@ async function loadLeaderboard(csvUrl,bodyId,statusId,type,label){
 async function loadPlayerDb(){try{const rows=await fetchRows(config.playerDbCsv);const all=rows.map(rowToDb).filter(p=>p.name);playerDb=all.filter(p=>String(p.status).toLowerCase()==="approved");if(!playerDb.length)playerDb=all;renderPlayers()}catch(e){console.error(e);renderPlayers()}}
 function playerItem(name){const db=findDbByName(name);const lb=findLbByName(db?.name||name);return{db,lb,name:db?.name||name}}
 function openProfile(name){
+    const decodedName=decodeURIComponent(name||"");
+
+  if(decodedName==="Fan Zhendong"){
+    const lb=singlesPlayers.find(p=>
+      String(p.name||"").trim()==="Fan Zhendong"
+    ) || {
+      rating:"2300",
+      peak:"2300",
+      rank:"1",
+      record:"0-0",
+      winRate:"-"
+    };
+
+    document.getElementById("profileContent").innerHTML=`
+      <section class="profile-hero-pro">
+        <div class="profile-hero-bg"></div>
+
+        <div class="profile-hero-main">
+          <div class="profile-avatar profile-avatar-pro">★</div>
+
+          <div class="profile-identity">
+            <p class="profile-kicker">REFERENCE PLAYER</p>
+
+            <h3>Fan Zhendong</h3>
+
+            <div class="profile-badges">
+              <span class="id-pill">REFERENCE</span>
+              ${tierHTML(lb.rating)}
+              <span class="rank-pill">Rank #${lb.rank||"1"}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="profile-stats profile-stats-pro profile-stats-core">
+        ${profileStatCard("Reference Rating",lb.rating||"2300","📊")}
+        ${profileStatCard("Peak Rating",lb.peak||"2300","🚀")}
+        ${profileStatCard("Status","REFERENCE","⭐")}
+      </div>
+
+      <div class="profile-panel">
+        <h3>⭐ Reference Benchmark</h3>
+
+        <p style="line-height:1.7;margin:0;">
+          This player is included for rating comparison only and is not an official MYTT participant.
+        </p>
+      </div>
+
+      <div class="profile-panel">
+        <h3>🏓 Official MYTT Match History</h3>
+
+        <div class="equipment-row">
+          <small>Match History</small>
+          <strong>No official MYTT matches</strong>
+        </div>
+      </div>
+    `;
+
+    document.getElementById("profileModal").classList.remove("hidden");
+    return;
+  }
   const {db,lb,name:playerName}=playerItem(decodeURIComponent(name));
   const rec=parseRecord(lb.record);
   const matches=rec.wins+rec.losses;
