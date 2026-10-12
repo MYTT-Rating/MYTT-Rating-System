@@ -7583,17 +7583,15 @@ td{
   line-height:1;
   white-space:nowrap;
 }
-/* ===== MOBILE REFERENCE PLAYER INLINE ===== */
+/* ===== FAN ZHEN DONG MOBILE REFERENCE BELOW NAME ===== */
 @media(max-width:700px){
 
   #singles .leaderboard-name-wrap:has(.reference-badge){
     display:flex !important;
-    flex-direction:row !important;
-    align-items:center !important;
-    justify-content:flex-start !important;
-    flex-wrap:nowrap !important;
-    gap:5px !important;
-    width:auto !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    justify-content:center !important;
+    gap:3px !important;
     min-width:0 !important;
   }
 
@@ -7602,8 +7600,6 @@ td{
     font-size:15px !important;
     line-height:1 !important;
     white-space:nowrap !important;
-    word-break:normal !important;
-    overflow:visible !important;
   }
 
   #singles .reference-badge{
@@ -7611,28 +7607,15 @@ td{
     align-items:center !important;
     justify-content:center !important;
 
-    flex:0 0 auto !important;
-    width:auto !important;
-    min-width:0 !important;
-
     margin:0 !important;
-    padding:3px 6px !important;
+    padding:2px 5px !important;
 
-    font-size:7px !important;
+    font-size:6.5px !important;
     font-weight:900 !important;
     line-height:1 !important;
-    letter-spacing:.4px !important;
+    letter-spacing:.45px !important;
 
     white-space:nowrap !important;
-    word-break:normal !important;
-  }
-
-  #singles .leaderboard-name-wrap:has(.reference-badge)
-  .leaderboard-mobile-tier{
-    width:28px !important;
-    height:28px !important;
-    min-width:28px !important;
-    flex:0 0 28px !important;
-    margin-left:2px !important;
+    border-radius:999px !important;
   }
 }
