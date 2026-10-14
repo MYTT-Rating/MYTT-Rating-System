@@ -173,7 +173,9 @@ function teamCellHTML(teamName,tierIconHtml=""){
             <div class="team-member"
               data-player="${encodeURIComponent(member)}">
               ${avatarHTML(db,"row-avatar")}
-              <span>${member}</span>
+              <span style="font-size:15px!important;font-weight:900!important;line-height:1.1!important;white-space:nowrap!important;">
+  ${member}
+</span>
             </div>
           `;
         }).join('<span class="team-plus">+</span>')}
