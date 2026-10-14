@@ -484,11 +484,13 @@ function openProfile(name){
   `;
 
   document.getElementById("profileModal").classList.remove("hidden");
-}function openDoublesTeamProfile(teamId){
+}
+function openDoublesTeamProfile(teamId){
   const id=decodeURIComponent(teamId||"");
 
   const team=doublesTeamMaster.find(t=>
-    String(t.teamId||"").toUpperCase()===String(id).toUpperCase()
+    String(t.teamId||"").toUpperCase()===
+    String(id).toUpperCase()
   );
 
   if(!team){
@@ -502,10 +504,27 @@ function openProfile(name){
 
   const members=splitTeamName(team.name);
 
+  const currentRating=
+    lb?.rating ||
+    team.rating ||
+    "-";
+
+  const peakRating=
+    lb?.peak ||
+    team.peak ||
+    team.highestRating ||
+    currentRating;
+
+  const winRate=
+    lb?.winRate ||
+    "-";
+
   const history=doublesMatchResults
     .filter(m=>
-      String(m.teamAId||"").toUpperCase()===String(team.teamId).toUpperCase() ||
-      String(m.teamBId||"").toUpperCase()===String(team.teamId).toUpperCase()
+      String(m.teamAId||"").toUpperCase()===
+      String(team.teamId||"").toUpperCase() ||
+      String(m.teamBId||"").toUpperCase()===
+      String(team.teamId||"").toUpperCase()
     )
     .sort((a,b)=>{
       const da=new Date(a.matchDate||a.timestamp||0);
@@ -513,89 +532,108 @@ function openProfile(name){
       return db-da;
     });
 
-const historyHTML=history.length
-  ? history.map(match=>{
-      const isA=
-        String(match.teamAId||"").toUpperCase()===
-        String(team.teamId||"").toUpperCase();
+  const historyHTML=history.length
+    ? history.map(match=>{
 
-      const opponent=isA ? match.teamB : match.teamA;
-      const opponentId=isA ? match.teamBId : match.teamAId;
+        const isA=
+          String(match.teamAId||"").toUpperCase()===
+          String(team.teamId||"").toUpperCase();
 
-      const won=
-        String(match.winnerId||"").toUpperCase()===
-        String(team.teamId||"").toUpperCase();
+        const opponent=
+          isA ? match.teamB : match.teamA;
 
-      return `
-        <div class="equipment-row">
-          <small>${match.matchDate||"-"} · ${match.matchId||""}</small>
-          <strong>
-           <span class="match-result-badge ${won ? "win" : "loss"}">${won ? "W" : "L"}</span> · vs ${opponent}
-            ${opponentId ? ` (${opponentId})` : ""}
-            · ${match.score||"-"}
-          </strong>
-        </div>
-      `;
-    }).join("")
-  : `<div class="equipment-row"><small>Match History</small><strong>No matches yet</strong></div>`;
-const heroMembersHTML=members.map(member=>{
-  const db=findDbByName(member);
+        const opponentId=
+          isA ? match.teamBId : match.teamAId;
 
-  return `
-    <button
-      type="button"
-      class="doubles-hero-player"
-      data-player="${encodeURIComponent(member)}"
-    >
-      ${avatarHTML(db,"doubles-hero-avatar")}
-      <span>${member}</span>
-    </button>
-  `;
-}).join('<span class="doubles-hero-plus">+</span>');
+        const won=
+          String(match.winnerId||"").toUpperCase()===
+          String(team.teamId||"").toUpperCase();
+
+        return `
+          <div class="equipment-row">
+            <small>
+              ${match.matchDate||"-"} · ${match.matchId||""}
+            </small>
+
+            <strong>
+              <span class="match-result-badge ${won ? "win" : "loss"}">
+                ${won ? "W" : "L"}
+              </span>
+
+              · vs ${opponent}
+              ${opponentId ? ` (${opponentId})` : ""}
+              · ${match.score||"-"}
+            </strong>
+          </div>
+        `;
+      }).join("")
+    : `
+      <div class="equipment-row">
+        <small>Match History</small>
+        <strong>No matches yet</strong>
+      </div>
+    `;
+
   document.getElementById("profileContent").innerHTML=`
     <section class="profile-hero-pro">
       <div class="profile-hero-bg"></div>
 
       <div class="profile-hero-main">
         <div class="profile-identity">
-          <p class="profile-kicker">MYTT Doubles Team</p>
-<div class="doubles-hero-members">
-  ${members.map(member=>{
-    const db=findDbByName(member);
 
-    return '<button type="button" class="doubles-hero-player" data-player="' +
-      encodeURIComponent(member) +
-      '">' +
-      avatarHTML(db,"doubles-hero-avatar") +
-      '<span>' + member + '</span>' +
-      '</button>';
-  }).join('<span class="doubles-hero-plus">+</span>')}
-</div>
+          <p class="profile-kicker">
+            MYTT Doubles Team
+          </p>
+
+          <div class="doubles-hero-members">
+            ${members.map(member=>{
+              const db=findDbByName(member);
+
+              return `
+                <button
+                  type="button"
+                  class="doubles-hero-player"
+                  data-player="${encodeURIComponent(member)}"
+                >
+                  ${avatarHTML(db,"doubles-hero-avatar")}
+                  <span>${member}</span>
+                </button>
+              `;
+            }).join('<span class="doubles-hero-plus">+</span>')}
+          </div>
+
           <h3>${team.name}</h3>
 
-         <div class="profile-badges">
-  <span class="id-pill">${team.teamId}</span>
-  ${tierHTML(team.rating)}
-  <span class="rank-pill">Rank #${lb?.rank||"-"}</span>
-</div>
+          <div class="profile-badges">
+            <span class="id-pill">${team.teamId}</span>
+            ${tierHTML(currentRating)}
+            <span class="rank-pill">
+              Rank #${lb?.rank||"-"}
+            </span>
+          </div>
+
         </div>
       </div>
     </section>
 
-  <div class="profile-stats profile-stats-pro profile-stats-core">
-  ${profileStatCard("Current Rating",team.rating,"📊")}
-  ${profileStatCard("Peak Rating",team.peak,"🚀")}
-  ${profileStatCard("Win Rate",lb?.winRate||"-","🎯")}
-</div>
+    <div class="profile-stats profile-stats-pro profile-stats-core">
+      ${profileStatCard("Current Rating",currentRating,"📊")}
+      ${profileStatCard("Peak Rating",peakRating,"🚀")}
+      ${profileStatCard("Win Rate",winRate,"🎯")}
+    </div>
 
     <div class="profile-panel doubles-history-panel">
       <h3>🏓 Doubles Match History</h3>
       ${historyHTML}
     </div>
   `;
-document.getElementById("profileModal").classList.remove("hidden");
+
+  document
+    .getElementById("profileModal")
+    .classList.remove("hidden");
 }
-}function closeProfile(){
+
+function closeProfile(){
   const modal = document.getElementById("profileModal");
   if(modal) modal.classList.add("hidden");
   document.body.classList.remove("modal-open","profile-open","no-scroll");
