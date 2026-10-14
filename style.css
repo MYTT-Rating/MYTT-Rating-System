@@ -7780,3 +7780,32 @@ td{
     color:#fff !important;
   }
 }
+/* ===== MOBILE DOUBLES LEADERBOARD COMPACT CARD ===== */
+@media(max-width:700px){
+
+  /* 整张 doubles 排行榜卡片压扁 */
+  #doubles tbody tr{
+    min-height:0 !important;
+    height:auto !important;
+  }
+
+  #doubles tbody tr td{
+    padding-top:10px !important;
+    padding-bottom:10px !important;
+  }
+
+  /* 头像和名字靠近一点 */
+  #doubles .team-member{
+    gap:1px !important;
+  }
+
+  #doubles .team-member > span{
+    margin-top:1px !important;
+    line-height:1 !important;
+  }
+
+  /* 整个 team 内容稍微收紧 */
+  #doubles .team-cell{
+    gap:4px !important;
+  }
+}
