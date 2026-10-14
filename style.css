@@ -7825,3 +7825,37 @@ td{
     padding-bottom:2px !important;
   }
 }
+/* ===== MOBILE DOUBLES PROFILE HERO COMPACT ===== */
+@media(max-width:700px){
+
+  /* 整个头像资料框压矮 */
+  #profileContent .profile-hero-pro:has(.doubles-hero-members){
+    padding:12px 8px 10px !important;
+  }
+
+  /* MYTT DOUBLES TEAM 标题靠近头像 */
+  #profileContent .profile-hero-pro:has(.doubles-hero-members) .profile-kicker{
+    margin-bottom:4px !important;
+  }
+
+  /* 两个头像区域减少上下空位 */
+  #profileContent .doubles-hero-members{
+    margin:7px auto 8px !important;
+    gap:10px !important;
+  }
+
+  /* 名字更贴近头像 */
+  #profileContent .doubles-hero-player{
+    gap:2px !important;
+  }
+
+  /* + 不要撑高 */
+  #profileContent .doubles-hero-plus{
+    margin:0 3px 14px !important;
+  }
+
+  /* DT001 / Tier / Rank 靠近名字 */
+  #profileContent .profile-hero-pro:has(.doubles-hero-members) .profile-badges{
+    margin-top:5px !important;
+  }
+}
