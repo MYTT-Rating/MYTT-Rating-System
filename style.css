@@ -8096,3 +8096,15 @@ td{
     margin-top:2px !important;
   }
 }
+/* ===== HOME RANK SCORE CLOSER V5 ===== */
+@media(max-width:700px){
+
+  html body #home .homepage-rank-road .home-rank-node > small{
+    margin-top:-2px !important;
+    transform:translateY(-5px) !important;
+  }
+
+  html body #home .homepage-rank-road .you-marker{
+    transform:translateY(-7px) !important;
+  }
+}
