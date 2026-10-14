@@ -7928,3 +7928,32 @@ td{
     min-height:34px !important;
   }
 }
+
+/* ===== MOBILE HOME RANK JOURNEY COMPACT ===== */
+@media(max-width:700px){
+
+  /* Rank Journey 整个大框上下收紧 */
+  html body #home .hero-home-final
+  .hero-rank-card-v5.hero-rank-card-final{
+    padding-top:12px !important;
+    padding-bottom:12px !important;
+  }
+
+  /* 顶部 MYTT RANK JOURNEY / 1500 区域收紧 */
+  html body #home .hero-home-final .rank-card-head-v5{
+    margin-bottom:7px !important;
+  }
+
+  /* 等级徽章这一排减少上下空位 */
+  html body #home .hero-home-final .homepage-rank-road{
+    margin-top:5px !important;
+    margin-bottom:7px !important;
+  }
+
+  /* 最下面 Rookie → Challenger 进度框压矮 */
+  html body #home .hero-home-final .hero-progress-card{
+    margin-top:7px !important;
+    padding-top:9px !important;
+    padding-bottom:9px !important;
+  }
+}
