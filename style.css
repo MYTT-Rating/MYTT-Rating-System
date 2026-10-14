@@ -7748,3 +7748,9 @@ td{
     margin:0 2px !important;
   }
 }
+/* ===== HIDE DOUBLES TEAM ID ON MOBILE LEADERBOARD ===== */
+@media(max-width:700px){
+  #doubles .team-id-link{
+    display:none !important;
+  }
+}
