@@ -7902,3 +7902,29 @@ td{
     margin:0 !important;
   }
 }
+/* ===== MOBILE SINGLES NAME WIDTH FIX ===== */
+@media(max-width:700px){
+
+  #singles .player-cell{
+    grid-template-columns:50px minmax(0,1fr) 34px !important;
+    column-gap:6px !important;
+  }
+
+  #singles .leaderboard-name-wrap{
+    grid-template-columns:minmax(0,1fr) 34px !important;
+    column-gap:6px !important;
+  }
+
+  #singles .leaderboard-name-text{
+    white-space:nowrap !important;
+    font-size:17px !important;
+    line-height:1.05 !important;
+  }
+
+  #singles .leaderboard-mobile-tier{
+    width:34px !important;
+    height:34px !important;
+    min-width:34px !important;
+    min-height:34px !important;
+  }
+}
