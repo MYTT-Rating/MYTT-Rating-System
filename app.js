@@ -582,10 +582,10 @@ const heroMembersHTML=members.map(member=>{
       </div>
     </section>
 
-    <div class="profile-stats profile-stats-pro profile-stats-core">
+  <div class="profile-stats profile-stats-pro profile-stats-core">
   ${profileStatCard("Current Rating",team.rating,"📊")}
   ${profileStatCard("Peak Rating",team.peak,"🚀")}
-  ${profileStatCard("Win Rate",winRate,"🎯")}
+  ${profileStatCard("Win Rate",lb?.winRate||"-","🎯")}
 </div>
 
     <div class="profile-panel doubles-history-panel">
