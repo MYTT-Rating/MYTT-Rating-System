@@ -577,16 +577,16 @@ const heroMembersHTML=members.map(member=>{
   <span class="id-pill">${team.teamId}</span>
   ${tierHTML(team.rating)}
   <span class="rank-pill">Rank #${lb?.rank||"-"}</span>
-  <span class="rank-pill">Peak ${team.peak||"-"}</span>
 </div>
         </div>
       </div>
     </section>
 
     <div class="profile-stats profile-stats-pro profile-stats-core">
-     ${profileStatCard("Current Rating",team.rating,"📊")}
-${profileStatCard("Record",`${team.wins}-${team.losses}`,"🏓")}
-${profileStatCard("Win Rate",lb?.winRate||"-","🎯")}    </div>
+  ${profileStatCard("Current Rating",team.rating,"📊")}
+  ${profileStatCard("Peak Rating",team.peak,"🚀")}
+  ${profileStatCard("Win Rate",winRate,"🎯")}
+</div>
 
     <div class="profile-panel doubles-history-panel">
       <h3>🏓 Doubles Match History</h3>
