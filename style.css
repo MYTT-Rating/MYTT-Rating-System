@@ -8069,3 +8069,30 @@ td{
     margin-top:3px !important;
   }
 }
+/* ===== MOBILE HOME RANK NODE TIGHTER V4 ===== */
+@media(max-width:700px){
+
+  /* 徽章下面不要留太多空位 */
+  html body #home .homepage-rank-road .home-rank-orb{
+    margin:0 auto 2px !important;
+  }
+
+  /* Rookie / Challenger / Elite 靠近徽章 */
+  html body #home .homepage-rank-road .home-rank-node > span{
+    display:block !important;
+    margin:0 !important;
+    line-height:1 !important;
+  }
+
+  /* 1500 / 1600 / 1700 更靠近等级名称 */
+  html body #home .homepage-rank-road .home-rank-node > small{
+    display:block !important;
+    margin:3px 0 0 !important;
+    line-height:1 !important;
+  }
+
+  /* YOU ARE HERE 也稍微往上 */
+  html body #home .homepage-rank-road .you-marker{
+    margin-top:2px !important;
+  }
+}
