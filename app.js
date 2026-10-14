@@ -593,8 +593,8 @@ const heroMembersHTML=members.map(member=>{
       ${historyHTML}
     </div>
   `;
-
-  document.getElementById("profileModal").classList.remove("hidden");
+document.getElementById("profileModal").classList.remove("hidden");
+}
 }function closeProfile(){
   const modal = document.getElementById("profileModal");
   if(modal) modal.classList.add("hidden");
