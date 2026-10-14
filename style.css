@@ -8006,3 +8006,66 @@ td{
     margin-bottom:0 !important;
   }
 }
+
+/* ===== MOBILE HOME RANK JOURNEY COMPACT V3 ===== */
+@media(max-width:700px){
+
+  /* 整个大框进一步收紧 */
+  html body #home .hero-rank-card-v5.hero-rank-card-final{
+    padding-top:8px !important;
+    padding-bottom:8px !important;
+  }
+
+  /* 顶部标题 + Starting Rating 收紧 */
+  html body #home .rank-card-head-v5{
+    min-height:0 !important;
+    margin-bottom:3px !important;
+  }
+
+  html body #home .current-rating-v5{
+    padding:6px 10px !important;
+    min-height:0 !important;
+  }
+
+  /* 徽章从 50px 稍微缩到 44px */
+  html body #home .homepage-rank-road .home-rank-orb{
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    max-width:44px !important;
+    max-height:44px !important;
+  }
+
+  /* 连线跟着徽章中心 */
+  html body #home .homepage-rank-road .home-rank-line{
+    margin-top:19px !important;
+  }
+
+  /* 等级文字全部收紧 */
+  html body #home .homepage-rank-road .home-rank-node > span{
+    margin-top:1px !important;
+  }
+
+  html body #home .homepage-rank-road .home-rank-node > small{
+    margin-top:1px !important;
+  }
+
+  html body #home .homepage-rank-road .you-marker{
+    margin-top:1px !important;
+  }
+
+  /* 底下 progress 再压薄 */
+  html body #home .hero-progress-card{
+    margin-top:2px !important;
+    padding:6px 9px !important;
+  }
+
+  html body #home .hero-progress-head{
+    margin-bottom:3px !important;
+  }
+
+  html body #home .hero-progress-card p{
+    margin-top:3px !important;
+  }
+}
