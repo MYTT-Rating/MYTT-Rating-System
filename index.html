@@ -104,32 +104,68 @@ html body #home .hero-rank-card-v5 .rank-card-head-v5 p{
 html body #home .hero-rank-card-v5 .rank-card-head-v5 h2{
   display:none !important;
 }
-    /* ===== HOME ACTION CARDS COMPACT ===== */
+   /* ===== HOME ACTION CARDS COMPACT V2 ===== */
 
-  /* 四张卡之间距离缩小 */
-  html body #home .cta-grid-home-final{
-    gap:10px !important;
-    margin-top:10px !important;
-  }
+/* 四张卡之间距离 */
+html body #home .hero-home-final .cta-grid-home-final{
+  gap:7px !important;
+  margin-top:10px !important;
+}
 
-  /* 四张卡压矮一点 */
-  html body #home .cta-grid-home-final .cta{
-    min-height:74px !important;
-    padding:10px 14px !important;
-  }
+/* 四张卡真正变矮 */
+html body #home .hero-home-final .cta-grid-home-final .cta{
+  min-height:58px !important;
+  padding:7px 10px !important;
+  gap:7px !important;
+  border-radius:13px !important;
+}
 
-  /* 标题和下面说明文字靠近一点 */
-  html body #home .cta-grid-home-final .cta div{
-    gap:2px !important;
-  }
+/* Singles 图标 */
+html body #home #singlesSubmitCta > span{
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+}
 
-  html body #home .cta-grid-home-final .cta strong{
-    line-height:1.05 !important;
-  }
+/* Doubles 图标 */
+html body #home #doublesSubmitCta > span{
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+}
 
-  html body #home .cta-grid-home-final .cta small{
-    line-height:1.1 !important;
-  }
+/* Join MYTT 图标 */
+html body #home #joinMyttCta > span{
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+}
+
+/* View Players 图标 */
+html body #home .hero-home-final .cta-grid-home-final .cta:last-child > span{
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+}
+
+/* 标题 */
+html body #home .hero-home-final .cta-grid-home-final .cta strong{
+  line-height:1.05 !important;
+}
+
+/* 下面的小字 */
+html body #home .hero-home-final .cta-grid-home-final .cta small{
+  margin-top:2px !important;
+  line-height:1.05 !important;
+}
 }
 </style>
   
