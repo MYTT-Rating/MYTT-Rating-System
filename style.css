@@ -8108,3 +8108,22 @@ td{
     transform:translateY(-7px) !important;
   }
 }
+/* ===== HOME RANK SCORE FORCE UP V6 ===== */
+@media(max-width:700px){
+
+  /* 1500 / 1600 / 1700 ... 2300 强制靠近等级名称 */
+  html body #home .hero-home-final
+  .homepage-rank-road .home-rank-node > small{
+    position:relative !important;
+    top:-12px !important;
+    margin:0 !important;
+  }
+
+  /* Rookie 的 YOU ARE HERE 一起往上 */
+  html body #home .hero-home-final
+  .homepage-rank-road .you-marker{
+    position:relative !important;
+    top:-10px !important;
+    margin:0 !important;
+  }
+}
