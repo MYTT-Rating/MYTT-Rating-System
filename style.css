@@ -7748,9 +7748,35 @@ td{
     margin:0 2px !important;
   }
 }
-/* ===== HIDE DOUBLES TEAM ID ON MOBILE LEADERBOARD ===== */
+/* ===== MOBILE DOUBLES TEAM PROFILE ARROW ONLY ===== */
 @media(max-width:700px){
+
   #doubles .team-id-link{
-    display:none !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    width:24px !important;
+    height:24px !important;
+    min-width:24px !important;
+
+    margin:0 2px !important;
+    padding:0 !important;
+
+    font-size:0 !important;
+    line-height:1 !important;
+
+    color:#fff !important;
+    cursor:pointer !important;
+  }
+
+  #doubles .team-id-link::after{
+    content:"↗" !important;
+    display:block !important;
+
+    font-size:17px !important;
+    font-weight:900 !important;
+    line-height:1 !important;
+    color:#fff !important;
   }
 }
