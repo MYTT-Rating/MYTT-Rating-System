@@ -7957,3 +7957,52 @@ td{
     padding-bottom:9px !important;
   }
 }
+/* ===== MOBILE HOME RANK JOURNEY TIGHTER ===== */
+@media(max-width:700px){
+
+  /* 整条 Rank Journey 垂直收紧 */
+  html body #home .homepage-rank-road{
+    padding-top:2px !important;
+    padding-bottom:2px !important;
+    margin-top:2px !important;
+    margin-bottom:3px !important;
+  }
+
+  /* 等级名称靠近徽章 */
+  html body #home .homepage-rank-road .home-rank-node > span{
+    margin-top:2px !important;
+    line-height:1 !important;
+  }
+
+  /* 1500 / 1600 等数字靠近等级名称 */
+  html body #home .homepage-rank-road .home-rank-node > small{
+    margin-top:2px !important;
+    line-height:1 !important;
+  }
+
+  /* YOU ARE HERE 收紧 */
+  html body #home .homepage-rank-road .you-marker{
+    margin-top:3px !important;
+    line-height:1 !important;
+  }
+
+  html body #home .homepage-rank-road .you-marker em{
+    margin-top:1px !important;
+    line-height:1 !important;
+  }
+
+  /* 底部进度框再薄一点 */
+  html body #home .hero-progress-card{
+    margin-top:4px !important;
+    padding:7px 10px !important;
+  }
+
+  html body #home .hero-progress-head{
+    margin-bottom:5px !important;
+  }
+
+  html body #home .hero-progress-card p{
+    margin-top:5px !important;
+    margin-bottom:0 !important;
+  }
+}
