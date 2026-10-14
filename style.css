@@ -7712,4 +7712,21 @@ td{
     margin:0 4px 18px !important;
   }
 }
+/* ===== RESTORE MOBILE DOUBLES LEADERBOARD MEMBER NAMES ===== */
+@media(max-width:700px){
 
+  #doubles .team-cell .team-member > span{
+    width:54px !important;
+    max-width:54px !important;
+
+    font-size:9.5px !important;
+    font-weight:900 !important;
+    line-height:1.05 !important;
+
+    white-space:nowrap !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+
+    text-align:center !important;
+  }
+}
