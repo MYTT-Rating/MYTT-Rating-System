@@ -196,6 +196,46 @@ html body #home .hero-home-final .cta-grid-home-final .cta small{
   margin-top:2px !important;
   text-align:left !important;
 }
+  /* ===== HOME ACTION CARD ICON FIX ===== */
+
+/* View Players / Marketplace / Contact Admin 图标尺寸统一 */
+html body #home #viewPlayersCta > span,
+html body #home #marketplaceCta > span,
+html body #home #contactAdminCta > span{
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+}
+
+/* View Players 保留原本的专属图标 */
+html body #home #viewPlayersCta > span{
+  display:block !important;
+  background-image:url('assets/home-action-players.webp') !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+  background-size:88% !important;
+  color:transparent !important;
+  font-size:0 !important;
+  line-height:0 !important;
+}
+
+/* Marketplace + Contact Admin 使用新图标 */
+html body #home #marketplaceCta > span,
+html body #home #contactAdminCta > span{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background-image:none !important;
+  border-radius:50% !important;
+  background-color:rgba(255,255,255,.05) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  color:#fff !important;
+  font-size:21px !important;
+  line-height:1 !important;
+  text-shadow:none !important;
+}
 }
 </style>
   
@@ -393,13 +433,32 @@ html body #home .hero-home-final .cta-grid-home-final .cta small{
         </div>
       </a>
 
-      <a class="cta cta-dark" href="#players">
+      <a id="viewPlayersCta" class="cta cta-dark" href="#players">
         <span>🔍</span>
         <div>
           <strong>View Players</strong>
           <small>Search official profiles</small>
         </div>
       </a>
+      <a id="marketplaceCta" class="cta cta-dark" href="#market">
+  <span>🛒</span>
+  <div>
+    <strong>MYTT Marketplace</strong>
+    <small>Buy & sell table tennis gear</small>
+  </div>
+</a>
+
+<a id="contactAdminCta"
+   class="cta cta-dark"
+   href="https://wa.me/601128887750?text=Hi%20MYTT%20Admin%2C%20I%20need%20help%20with%20MYTT."
+   target="_blank"
+   rel="noopener noreferrer">
+  <span>💬</span>
+  <div>
+    <strong>Contact Admin</strong>
+    <small>Need help? Contact MYTT admin</small>
+  </div>
+</a>
     </div>
   </section>
 
