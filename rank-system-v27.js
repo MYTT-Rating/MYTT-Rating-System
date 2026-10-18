@@ -1,56 +1,39 @@
 (function () {
   "use strict";
 
-  /* FINAL APPROVED RANK ORDER + BADGE ARTWORK
-     1500 Rookie
-     1600 Challenger
-     1700 Elite
-     1800 Master
-     1900 Grandmaster
-     2000 MYTT Champion
-     2100 Legend
-     2200 Immortal
-     2300 Hall of Fame
-  */
+  /*
+   * Read the single official TIERS definition from app.js. The homepage uses
+   * the same names, thresholds and badge artwork as player profiles. Do not
+   * mutate TIERS here or create a competing rank table.
+   * This script is loaded after app.js on the home page.
+   */
+  const OFFICIAL_TIERS = typeof TIERS !== "undefined" && Array.isArray(TIERS)
+    ? TIERS
+    : [];
+  window.MYTT_FINAL_TIERS = OFFICIAL_TIERS;
 
-  if (typeof TIERS !== "undefined" && Array.isArray(TIERS)) {
-    const novice = TIERS.find(t => t.min === -Infinity) || {
-      min: -Infinity,
-      name: "Novice",
-      icon: "🌿",
-      cls: "tier-novice",
-      badge: "novice-standalone.webp",
-      next: 1500
-    };
-
-    const FINAL_TIERS = [
-      novice,
-      {min:1500,name:"Rookie",icon:"🌱",cls:"tier-rookie",badge:"1500-rookie-v64.webp",next:1600},
-      {min:1600,name:"Challenger",icon:"⚔️",cls:"tier-challenger",badge:"1600-challenger-v64.webp",next:1700},
-      {min:1700,name:"Elite",icon:"⭐",cls:"tier-elite",badge:"1700-elite-v64.webp",next:1800},
-      {min:1800,name:"Master",icon:"🔥",cls:"tier-master",badge:"1800-master-v64.webp",next:1900},
-      {min:1900,name:"Grandmaster",icon:"🔥",cls:"tier-grandmaster",badge:"1900-grandmaster-v64.webp",next:2000},
-      {min:2000,name:"MYTT Champion",icon:"🏆",cls:"tier-champion",badge:"2000-champion-v64.webp",next:2100},
-      {min:2100,name:"Legend",icon:"👑",cls:"tier-legend",badge:"2100-legend-v64.webp",next:2200},
-      {min:2200,name:"Immortal",icon:"🏆",cls:"tier-immortal",badge:"2200-immortal-v64.webp",next:2300},
-      {min:2300,name:"Hall of Fame",icon:"🌟",cls:"tier-hof",badge:"2300-hall-of-fame-v64.webp",next:null}
-    ];
-
-    TIERS.splice(0, TIERS.length, ...FINAL_TIERS);
-    window.MYTT_FINAL_TIERS = FINAL_TIERS;
-  }
-
-  const RANKS = [
-    {name:"Rookie",score:1500,badge:"1500-rookie-v64.webp",color:"#d8dde4",line:"line-red"},
-    {name:"Challenger",score:1600,badge:"1600-challenger-v64.webp",color:"#19f53a",line:"line-orange"},
-    {name:"Elite",score:1700,badge:"1700-elite-v64.webp",color:"#21c9ff",line:"line-gold"},
-    {name:"Master",score:1800,badge:"1800-master-v64.webp",color:"#b55cff",line:"line-yellow"},
-    {name:"Grandmaster",score:1900,badge:"1900-grandmaster-v64.webp",color:"#ff3131",line:"line-green"},
-    {name:"MYTT Champion",score:2000,badge:"2000-champion-v64.webp",color:"#ff2e8d",line:"line-cyan"},
-    {name:"Legend",score:2100,badge:"2100-legend-v64.webp",color:"#f0a81c",line:"line-purple"},
-    {name:"Immortal",score:2200,badge:"2200-immortal-v64.webp",color:"#ffd51c",line:"line-pink"},
-    {name:"Hall of Fame",score:2300,badge:"2300-hall-of-fame-v64.webp",color:"#ffd51c",line:null}
+  // Presentation-only metadata; these colors and connector classes are unchanged.
+  const RANK_PRESENTATION = [
+    {score:1500,color:"#d8dde4",line:"line-red"},
+    {score:1600,color:"#19f53a",line:"line-orange"},
+    {score:1700,color:"#21c9ff",line:"line-gold"},
+    {score:1800,color:"#b55cff",line:"line-yellow"},
+    {score:1900,color:"#ff3131",line:"line-green"},
+    {score:2000,color:"#ff2e8d",line:"line-cyan"},
+    {score:2100,color:"#f0a81c",line:"line-purple"},
+    {score:2200,color:"#ffd51c",line:"line-pink"},
+    {score:2300,color:"#ffd51c",line:null}
   ];
+  const RANKS = RANK_PRESENTATION.map(style => {
+    const tier = OFFICIAL_TIERS.find(t => t.min === style.score);
+    return tier ? {
+      name: tier.name,
+      score: tier.min,
+      badge: tier.badge,
+      color: style.color,
+      line: style.line
+    } : null;
+  }).filter(Boolean);
 
   function badgeUrl(file) {
     return `rank-badges/${file}?v=20260824-v64-custom-badges`;

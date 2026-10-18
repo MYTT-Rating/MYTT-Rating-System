@@ -1,15 +1,17 @@
 const config=window.MYTT;let singlesPlayers=[],doublesTeams=[],doublesTeamMaster=[],playerDb=[],matchResults=[],doublesMatchResults=[],activePlayers=[],activeDoublesTeams=[];let activePlayersLoaded=false,activePlayersError=false,activeDoublesTeamsLoaded=false,activeDoublesTeamsError=false;
+// MYTT official rank tiers (single source of truth for profiles and Rank Journey).
+// Keep this order and the existing badge filenames aligned with the published rank rules.
 const TIERS=[
   {min:-Infinity,name:"Novice",icon:"🌿",cls:"tier-novice",badge:"v22-novice.webp",next:1500},
-  {min:1500,name:"Rookie",icon:"🌱",cls:"tier-rookie",badge:"v22-novice.webp",next:1600},
-  {min:1600,name:"Challenger",icon:"⚔️",cls:"tier-challenger",badge:"v22-rookie.webp",next:1700},
-  {min:1700,name:"Elite",icon:"⭐",cls:"tier-elite",badge:"v22-challenger.webp",next:1800},
-  {min:1800,name:"Master",icon:"🔥",cls:"tier-master",badge:"v22-elite.webp",next:1900},
-  {min:1900,name:"Legend",icon:"👑",cls:"tier-legend",badge:"v22-expert.webp",next:2000},
-  {min:2000,name:"Grandmaster",icon:"💎",cls:"tier-grandmaster",badge:"v22-master.webp",next:2100},
-  {min:2100,name:"Immortal",icon:"⚡",cls:"tier-immortal",badge:"v22-grandmaster.webp",next:2200},
-  {min:2200,name:"MYTT Champion",icon:"🏆",cls:"tier-champion",badge:"v22-immortal.webp",next:2300},
-  {min:2300,name:"Hall of Fame",icon:"🌟",cls:"tier-hof",badge:"v22-hall-of-fame-mytt-final.webp",next:null}
+  {min:1500,name:"Rookie",icon:"🌱",cls:"tier-rookie",badge:"1500-rookie-v64.webp",next:1600},
+  {min:1600,name:"Challenger",icon:"⚔️",cls:"tier-challenger",badge:"1600-challenger-v64.webp",next:1700},
+  {min:1700,name:"Elite",icon:"⭐",cls:"tier-elite",badge:"1700-elite-v64.webp",next:1800},
+  {min:1800,name:"Master",icon:"🔥",cls:"tier-master",badge:"1800-master-v64.webp",next:1900},
+  {min:1900,name:"Grandmaster",icon:"🔥",cls:"tier-grandmaster",badge:"1900-grandmaster-v64.webp",next:2000},
+  {min:2000,name:"MYTT Champion",icon:"🏆",cls:"tier-champion",badge:"2000-champion-v64.webp",next:2100},
+  {min:2100,name:"Legend",icon:"👑",cls:"tier-legend",badge:"2100-legend-v64.webp",next:2200},
+  {min:2200,name:"Immortal",icon:"🏆",cls:"tier-immortal",badge:"2200-immortal-v64.webp",next:2300},
+  {min:2300,name:"Hall of Fame",icon:"🌟",cls:"tier-hof",badge:"2300-hall-of-fame-v64.webp",next:null}
 ];
 function getTier(r){const rating=Number(r)||0;let t=TIERS[0];for(const tier of TIERS){if(rating>=tier.min)t=tier}return t}
 function rankBadgeUrl(t){return `rank-badges/${t.badge}`}
@@ -348,7 +350,22 @@ async function loadLeaderboard(csvUrl,bodyId,statusId,type,label){
     if(controls)controls.innerHTML="";
   }
 }
-async function loadPlayerDb(){try{const rows=await fetchRows(config.playerDbCsv);const all=rows.map(rowToDb).filter(p=>p.name);playerDb=all.filter(p=>String(p.status).toLowerCase()==="approved");if(!playerDb.length)playerDb=all;renderPlayers()}catch(e){console.error(e);renderPlayers()}}
+async function loadPlayerDb(){
+  try{
+    const rows=await fetchRows(config.playerDbCsv);
+    // Never publish Pending, Rejected or unreviewed player profiles, even if
+    // there are temporarily no Approved rows (fail closed).
+    playerDb=rows.map(rowToDb).filter(p=>
+      p.name && String(p.status||"").trim().toLowerCase()==="approved"
+    );
+    renderPlayers();
+  }catch(e){
+    console.error(e);
+    // A failed refresh must not expose stale/unreviewed player data.
+    playerDb=[];
+    renderPlayers();
+  }
+}
 function playerItem(name){const db=findDbByName(name);const lb=findLbByName(db?.name||name);return{db,lb,name:db?.name||name}}
 function openProfile(name){
     const decodedName=decodeURIComponent(name||"");
