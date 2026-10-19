@@ -8127,3 +8127,11 @@ td{
     margin:0 !important;
   }
 }
+
+
+/* MYTT Doubles: spacing between RATING and score */
+@media (max-width: 700px) {
+  #doubles .board-card tbody tr td:nth-child(4) {
+    padding-top: 10px !important;
+  }
+}
