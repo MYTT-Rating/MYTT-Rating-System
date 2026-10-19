@@ -691,21 +691,29 @@ html body #home #viewPlayersCta > span{
 
     }
 
-    /* Fix MYTT event title wrapping */
-    #events .mytt-event-card-heading .me5-title {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      gap: 0 !important;
-    }
+   
+/* MYTT Events: mobile title alignment */
+@media (max-width: 768px) {
+  #events .mytt-event-card-heading .me5-title {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: baseline !important;
+    gap: 5px !important;
+    white-space: nowrap !important;
+  }
 
-    #events .mytt-event-card-heading .me5-title span,
-    #events .mytt-event-card-heading .me5-title strong {
-      display: block !important;
-      width: max-content !important;
-      max-width: 100% !important;
-      line-height: 0.95 !important;
-    }
+  #events .mytt-event-card-heading .me5-title span,
+  #events .mytt-event-card-heading .me5-title strong {
+    display: inline-block !important;
+    width: auto !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    line-height: 1 !important;
+  }
+}
+
     </style>
     </head>
   
