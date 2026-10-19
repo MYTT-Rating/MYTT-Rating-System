@@ -604,6 +604,91 @@ html body #home #viewPlayersCta > span{
     font-size: 10px !important;
   }
 }
+  
+/* MYTT compact card refinement */
+@media (max-width: 768px) {
+  #events .mytt-event-card-compact {
+    min-height: 0 !important;
+    padding: 10px !important;
+    gap: 5px !important;
+  }
+
+  #events .mytt-event-card-heading {
+    min-height: 28px !important;
+  }
+
+  #events .mytt-event-card-heading .me5-title {
+    width: calc(100% - 75px) !important;
+    max-width: calc(100% - 75px) !important;
+  }
+
+  #events .mytt-event-card-heading .me5-title span,
+  #events .mytt-event-card-heading .me5-title strong {
+    display: inline-block !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    margin: 0 4px 0 0 !important;
+  }
+
+  #events .mytt-event-card-heading .me5-art {
+    width: 80px !important;
+    height: 36px !important;
+  }
+
+  #events .mytt-event-card-description {
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+  }
+
+  #events .mytt-event-card-info {
+    gap: 4px !important;
+  }
+
+  #events .mytt-event-info-item {
+    padding: 4px 7px !important;
+  }
+
+  #events .mytt-event-info-item small {
+    margin-bottom: 2px !important;
+  }
+
+  #events .mytt-event-info-item strong {
+    font-size: 10px !important;
+  }
+
+  #events .mytt-event-card-footer {
+    gap: 6px !important;
+  }
+
+  #events .mytt-event-card-spots > strong {
+    font-size: 24px !important;
+  }
+
+  #events .mytt-event-card-footer .me5-register {
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    padding: 0 10px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    font-size: 10px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  #events .mytt-event-card-heading .me5-title span,
+  #events .mytt-event-card-heading .me5-title strong {
+    font-size: 16px !important;
+  }
+
+  #events .mytt-event-card-footer .me5-register {
+    padding: 0 8px !important;
+  }
+}
+
 </style>
  
 </head>
