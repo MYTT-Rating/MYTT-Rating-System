@@ -953,13 +953,14 @@
 .mytt-event-v5{display:none;}
 
 @media (max-width:768px){
-  /* Remove every legacy mobile event heading/card/detail block. */
-  #events > .section-head,
-  #events .events-section-head,
-  #events .target-event-shell > .target-event-hero,
-  #events .target-event-shell > .target-event-details{
-    display:none !important;
-  }
+ 
+#events:has(.mytt-event-v5) > .section-head,
+#events:has(.mytt-event-v5) .events-section-head,
+#events .target-event-shell > .target-event-hero,
+#events .target-event-shell > .target-event-details {
+  display: none !important;
+}
+
 
   #events{
     padding-top:22px !important;
