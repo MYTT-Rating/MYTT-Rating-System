@@ -2482,7 +2482,9 @@ function normalizePublishedEventDate(value){
 
   m=text.match(/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})$/);
   if(m){
-    const d=Number(m[1]),mo=Number(m[2]),y=Number(m[3]);
+  
+const mo=Number(m[1]),d=Number(m[2]),y=Number(m[3]);
+ 
     return `${y}-${String(mo).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
   }
 
@@ -2628,7 +2630,7 @@ function sanitizeCachedUpcomingEvents(events){
 
 function readCachedUpcomingEvents(){
   try{
-    const raw=localStorage.getItem("mytt_upcoming_events_cache_v1");
+    const raw=localStorage.getItem("mytt_upcoming_events_cache_v2");
     if(!raw)return[];
 
     const parsed=JSON.parse(raw);
@@ -2640,7 +2642,7 @@ function readCachedUpcomingEvents(){
     // even if the device remains offline.
     if(sanitized.length!==parsed.events.length){
       localStorage.setItem(
-        "mytt_upcoming_events_cache_v1",
+        "mytt_upcoming_events_cache_v2",
         JSON.stringify({
           savedAt:Date.now(),
           events:sanitized
@@ -2656,7 +2658,7 @@ function readCachedUpcomingEvents(){
 
 function cacheUpcomingEvents(events){
   try{
-    localStorage.setItem("mytt_upcoming_events_cache_v1",JSON.stringify({
+    localStorage.setItem("mytt_upcoming_events_cache_v2",JSON.stringify({
       savedAt:Date.now(),
       events:Array.isArray(events)?events:[]
     }));
