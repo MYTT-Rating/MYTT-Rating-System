@@ -3844,6 +3844,12 @@ document.addEventListener("click", function(e){
     window.addEventListener('hashchange',syncActive);
     window.addEventListener('popstate',syncActive);
     window.addEventListener('pageshow',syncActive);
+    
+document.addEventListener('click', event => {
+  if (event.target.closest('a[data-v14-target]')) {
+    requestAnimationFrame(syncActive);
+  }
+});
     syncActive();
   }
 
