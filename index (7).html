@@ -1,0 +1,2111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#050506">
+  <title>MYTT — Malaysia Table Tennis Rating System</title>
+
+  <meta name="description" content="Official Malaysia Table Tennis Rating System. Track player ratings, rankings, match history and statistics.">
+
+  <meta property="og:title" content="MYTT — Malaysia Table Tennis Rating System">
+  <meta property="og:description" content="Official Malaysia Table Tennis Rating System. Track player ratings, rankings, match history and statistics.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mytt.my">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://docs.google.com">
+  <link rel="preconnect" href="https://script.google.com">
+<link rel="stylesheet" href="style.css?v=20261014-home-rank-compact-v6">
+  <link rel="stylesheet" href="marketplace-base-v20-3.css?v=20260824-mobile-perf-v1">
+  <link rel="stylesheet" href="home-mobile-v20-4.css?v=20260824-mobile-perf-v1">
+  <link rel="stylesheet" href="home-rank-geometry.css?v=20260824-mobile-perf-v1">
+  <link rel="stylesheet" href="rank-badges-v22.css?v=20260824-mobile-perf-v1">
+  <link rel="stylesheet" href="marketplace.css?v=20260824-mobile-perf-v1">
+  <link rel="stylesheet" href="player-card-rank-badges-v1.css?v=20260824-mobile-perf-v1">
+  <link rel="stylesheet" href="site-overrides-v24.css?v=20260824-mobile-perf-v1">
+
+  <link rel="stylesheet" href="event-players-v1.css?v=20260829-action-icons-exact-v1">
+<link id="mytt-mobile-polish-v23-style" rel="stylesheet" href="mobile-polish-v23.css?v=20260824-mobile-perf-v1">
+  <link id="mytt-rank-system-v27-style" rel="stylesheet" href="rank-system-v27.css?v=20260824-mobile-perf-v1">
+  <link id="mytt-rank-effects-v31-style" rel="stylesheet" href="rank-effects-v31.css?v=20260824-mobile-perf-v1">
+  <link id="mytt-rank-mobile-polish-v47-style" rel="stylesheet" href="rank-mobile-polish-v47.css?v=20260824-mobile-perf-v1">
+  <link id="mytt-rank-gold-ring-v62-style" rel="stylesheet" href="rank-gold-ring-v62.css?v=20260824-mobile-perf-v1">
+<style>
+@media(max-width:700px){
+
+  /* Rank 名称与分数收紧 */
+  html body #home .hero-rank-card-v5 .home-rank-native-name{
+    min-height:14px !important;
+    margin-top:2px !important;
+    line-height:1 !important;
+  }
+
+  html body #home .hero-rank-card-v5 .home-rank-native-score{
+    margin-top:1px !important;
+    line-height:1 !important;
+  }
+
+  html body #home .hero-rank-card-v5 .home-rank-native-marker{
+    height:22px !important;
+    margin-top:2px !important;
+  }
+
+  /* SWIPE TO EXPLORE 小一点、淡一点 */
+  html body #home .hero-home-final .hero-rank-card-final::after{
+    font-size:7px !important;
+    padding:3px 6px !important;
+    letter-spacing:.05em !important;
+    color:rgba(255,255,255,.28) !important;
+    background:rgba(4,5,8,.42) !important;
+    border-color:rgba(255,255,255,.04) !important;
+    right:10px !important;
+    bottom:72px !important;
+  }
+  /* Rank Journey 顶部收紧 */
+  html body #home .hero-rank-card-v5 .rank-card-head-v5{
+    margin-bottom:-5px !important;
+  }
+
+  /* 徽章整排往上靠 */
+  html body #home .hero-rank-card-v5 .homepage-rank-road{
+    margin-top:0 !important;
+  }
+
+  /* Swipe 提高一点 */
+  html body #home .hero-home-final .hero-rank-card-final::after{
+    bottom:76px !important;
+  }
+  /* ===== CENTER RANK JOURNEY TITLE ===== */
+html body #home .hero-rank-card-v5 .rank-card-head-v5{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  width:100% !important;
+margin-bottom:2px !important;
+}
+
+html body #home .hero-rank-card-v5 .rank-card-head-v5 > div{
+  width:100% !important;
+  text-align:center !important;
+}
+
+html body #home .hero-rank-card-v5 .rank-card-head-v5 p{
+  margin:0 !important;
+  text-align:center !important;
+  font-size:12px !important;
+  font-weight:900 !important;
+  letter-spacing:2.4px !important;
+}
+
+html body #home .hero-rank-card-v5 .rank-card-head-v5 h2{
+  display:none !important;
+}
+   /* ===== HOME ACTION CARDS COMPACT V2 ===== */
+
+/* 四张卡之间距离 */
+html body #home .hero-home-final .cta-grid-home-final{
+  gap:7px !important;
+  margin-top:10px !important;
+}
+
+/* 四张卡真正变矮 */
+html body #home .hero-home-final .cta-grid-home-final .cta{
+  min-height:58px !important;
+  padding:7px 10px !important;
+  gap:7px !important;
+  border-radius:13px !important;
+}
+
+/* Singles 图标 */
+html body #home #singlesSubmitCta > span{
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+}
+
+/* Doubles 图标 */
+html body #home #doublesSubmitCta > span{
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+}
+
+/* Join MYTT 图标 */
+html body #home #joinMyttCta > span{
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+}
+
+/* View Players 图标 */
+html body #home .hero-home-final .cta-grid-home-final .cta:last-child > span{
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+}
+
+/* 标题 */
+html body #home .hero-home-final .cta-grid-home-final .cta strong{
+  line-height:1.05 !important;
+}
+
+/* 下面的小字 */
+html body #home .hero-home-final .cta-grid-home-final .cta small{
+  margin-top:2px !important;
+  line-height:1.05 !important;
+}
+  /* ===== HOME ACTION CARDS ALIGNMENT ===== */
+
+/* 图标和文字整体垂直居中 */
+html body #home .hero-home-final .cta-grid-home-final .cta{
+  align-items:center !important;
+}
+
+/* 四张卡的文字区域统一 */
+html body #home .hero-home-final .cta-grid-home-final .cta > div{
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  align-items:flex-start !important;
+  min-width:0 !important;
+  margin:0 !important;
+}
+
+/* 标题统一左对齐 */
+html body #home .hero-home-final .cta-grid-home-final .cta strong{
+  display:block !important;
+  margin:0 !important;
+  text-align:left !important;
+}
+
+/* 说明文字统一左对齐 */
+html body #home .hero-home-final .cta-grid-home-final .cta small{
+  display:block !important;
+  margin-top:2px !important;
+  text-align:left !important;
+}
+  /* ===== HOME ACTION CARD ICON FIX ===== */
+
+/* View Players / Marketplace / Contact Admin 图标尺寸统一 */
+html body #home #viewPlayersCta > span,
+html body #home #marketplaceCta > span,
+html body #home #contactAdminCta > span{
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+}
+
+/* View Players 保留原本的专属图标 */
+html body #home #viewPlayersCta > span{
+  display:block !important;
+  background-image:url('assets/home-action-players.webp') !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+  background-size:88% !important;
+  color:transparent !important;
+  font-size:0 !important;
+  line-height:0 !important;
+}
+
+/* Marketplace + Contact Admin 使用新图标 */
+html body #home #marketplaceCta > span,
+html body #home #contactAdminCta > span{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background-image:none !important;
+  border-radius:50% !important;
+  background-color:rgba(255,255,255,.05) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  color:#fff !important;
+  font-size:21px !important;
+  line-height:1 !important;
+  text-shadow:none !important;
+}
+  /* ===== JOIN MYTT PERSON + ICON ===== */
+
+html body #home #joinMyttCta > span{
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+
+  background-image:none !important;
+  background-color:rgba(255,255,255,.05) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  border-radius:50% !important;
+
+  color:#fff !important;
+  font-size:20px !important;
+  line-height:1 !important;
+  text-shadow:none !important;
+}
+
+html body #home #joinMyttCta > span::after{
+  content:"+" !important;
+  position:absolute !important;
+  right:2px !important;
+  bottom:1px !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  width:14px !important;
+  height:14px !important;
+  border-radius:50% !important;
+
+  background:#ff4d4d !important;
+  color:#fff !important;
+  font-size:12px !important;
+  font-weight:900 !important;
+  line-height:1 !important;
+}
+  /* ===== SINGLES CLEAN ROUND ICON ===== */
+
+html body #home #singlesSubmitCta > span{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+
+  background-image:none !important;
+  background-color:rgba(255,255,255,.05) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  border-radius:50% !important;
+
+  color:#fff !important;
+  font-size:21px !important;
+  line-height:1 !important;
+  text-shadow:none !important;
+}
+  /* ===== DOUBLES CLEAN ROUND ICON ===== */
+
+html body #home #doublesSubmitCta > span{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+
+  background-image:none !important;
+  background-color:rgba(255,255,255,.05) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  border-radius:50% !important;
+
+  color:#fff !important;
+  font-size:20px !important;
+  line-height:1 !important;
+  text-shadow:none !important;
+}
+  /* ===== VIEW PLAYERS CLEAN ROUND ICON ===== */
+
+html body #home #viewPlayersCta > span{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+
+  background-image:none !important;
+  background-color:rgba(255,255,255,.05) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  border-radius:50% !important;
+
+  color:#fff !important;
+  font-size:21px !important;
+  line-height:1 !important;
+  text-shadow:none !important;
+}
+}
+</style>
+ 
+<style id="mytt-event-compact-cards">
+@media (max-width: 768px) {
+  #events .mytt-event-v5 {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 0 12px !important;
+    padding: 0 !important;
+  }
+
+  #events .mytt-event-card-compact {
+    position: relative !important;
+    isolation: isolate !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-height: 265px !important;
+    padding: 13px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 65, 75, .78) !important;
+    border-radius: 17px !important;
+    background:
+      radial-gradient(circle at 95% 10%, rgba(255, 35, 45, .2), transparent 45%),
+      repeating-linear-gradient(135deg, transparent 0 15px, rgba(255, 60, 60, .035) 15px 16px),
+      linear-gradient(145deg, #141014, #070708 75%) !important;
+    box-shadow: 0 0 14px rgba(255, 30, 40, .12) !important;
+  }
+
+  #events .mytt-event-card-top {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+
+  #events .mytt-event-card-kicker {
+    color: #ff555d !important;
+    font-size: 10px !important;
+    font-weight: 900 !important;
+    letter-spacing: .16em !important;
+  }
+
+  #events .mytt-event-card-status {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    max-width: 58% !important;
+    padding: 5px 8px !important;
+    border: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 20px !important;
+    background: rgba(0,0,0,.35) !important;
+    color: #fff !important;
+    font-size: 9px !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+  }
+
+  #events .mytt-event-card-status i {
+    width: 7px !important;
+    height: 7px !important;
+    flex: 0 0 7px !important;
+    border-radius: 50% !important;
+    background: #38ed70 !important;
+    box-shadow: 0 0 7px rgba(56,237,112,.5) !important;
+  }
+
+  #events .mytt-event-card-status.full i,
+  #events .mytt-event-card-status.closed i {
+    background: #ff5058 !important;
+    box-shadow: 0 0 7px rgba(255,80,88,.4) !important;
+  }
+
+  #events .mytt-event-card-heading {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    min-height: 43px !important;
+  }
+
+  #events .mytt-event-card-heading .me5-title {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 2 !important;
+    display: block !important;
+    width: 78% !important;
+    max-width: 78% !important;
+    margin: 0 !important;
+    transform: none !important;
+    color: #fff !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,.8) !important;
+  }
+
+  #events .mytt-event-card-heading .me5-title span,
+  #events .mytt-event-card-heading .me5-title strong {
+    display: block !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    color: #fff !important;
+    font-size: 22px !important;
+    font-weight: 1000 !important;
+    font-style: italic !important;
+    line-height: 1.02 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  #events .mytt-event-card-heading .me5-art {
+    position: absolute !important;
+    inset: 0 0 0 auto !important;
+    z-index: 1 !important;
+    width: 100px !important;
+    height: 48px !important;
+    opacity: .4 !important;
+    pointer-events: none !important;
+    background-position: center !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+  }
+
+  #events .mytt-event-card-description {
+    position: relative !important;
+    margin: 0 !important;
+    color: rgba(255,255,255,.72) !important;
+    font-size: 10px !important;
+    line-height: 1.25 !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 1 !important;
+    overflow: hidden !important;
+  }
+
+  #events .mytt-event-card-info {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  #events .mytt-event-info-item {
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 6px 8px !important;
+    border: 1px solid rgba(255,75,80,.2) !important;
+    border-radius: 9px !important;
+    background: rgba(0,0,0,.38) !important;
+  }
+
+  #events .mytt-event-info-item small {
+    display: block !important;
+    margin-bottom: 3px !important;
+    color: #ff6269 !important;
+    font-size: 8px !important;
+    font-weight: 900 !important;
+    letter-spacing: .08em !important;
+  }
+
+  #events .mytt-event-info-item strong {
+    display: block !important;
+    color: #fff !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  #events .mytt-event-info-item span {
+    color: rgba(255,255,255,.68) !important;
+    font-size: 9px !important;
+  }
+
+  #events .mytt-event-card-footer {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    margin-top: auto !important;
+  }
+
+  #events .mytt-event-card-spots {
+    display: flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    min-width: 0 !important;
+  }
+
+  #events .mytt-event-card-spots > strong {
+    color: #ff555d !important;
+    font-size: 28px !important;
+    font-weight: 1000 !important;
+    line-height: 1 !important;
+  }
+
+  #events .mytt-event-card-spots span,
+  #events .mytt-event-card-spots small {
+    display: block !important;
+    color: #fff !important;
+    font-size: 8px !important;
+    font-weight: 800 !important;
+    line-height: 1.35 !important;
+  }
+
+  #events .mytt-event-card-spots small {
+    color: rgba(255,255,255,.6) !important;
+    font-weight: 500 !important;
+  }
+
+  #events .mytt-event-card-footer .me5-register-wrap {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 5 !important;
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  #events .mytt-event-card-footer .me5-register {
+    box-sizing: border-box !important;
+    width: auto !important;
+    min-width: 118px !important;
+    min-height: 40px !important;
+    padding: 0 12px !important;
+    border-radius: 9px !important;
+    font-size: 11px !important;
+  }
+
+  #events .me10-facts {
+    display: none !important;
+  }
+}
+
+@media (max-width: 390px) {
+  #events .mytt-event-card-compact {
+    padding: 11px !important;
+    gap: 7px !important;
+  }
+
+  #events .mytt-event-card-heading .me5-title span,
+  #events .mytt-event-card-heading .me5-title strong {
+    font-size: 20px !important;
+  }
+
+  #events .mytt-event-card-footer .me5-register {
+    min-width: 108px !important;
+    padding: 0 9px !important;
+    font-size: 10px !important;
+  }
+}
+  
+/* MYTT compact card refinement */
+@media (max-width: 768px) {
+  #events .mytt-event-card-compact {
+    min-height: 0 !important;
+    padding: 10px !important;
+    gap: 5px !important;
+  }
+
+  #events .mytt-event-card-heading {
+    min-height: 28px !important;
+  }
+
+  #events .mytt-event-card-heading .me5-title {
+    width: calc(100% - 75px) !important;
+    max-width: calc(100% - 75px) !important;
+  }
+
+  #events .mytt-event-card-heading .me5-title span,
+  #events .mytt-event-card-heading .me5-title strong {
+    display: inline-block !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    margin: 0 4px 0 0 !important;
+  }
+
+  #events .mytt-event-card-heading .me5-art {
+    width: 80px !important;
+    height: 36px !important;
+  }
+
+  #events .mytt-event-card-description {
+    font-size: 9px !important;
+    line-height: 1.1 !important;
+  }
+
+  #events .mytt-event-card-info {
+    gap: 4px !important;
+  }
+
+  #events .mytt-event-info-item {
+    padding: 4px 7px !important;
+  }
+
+  #events .mytt-event-info-item small {
+    margin-bottom: 2px !important;
+  }
+
+  #events .mytt-event-info-item strong {
+    font-size: 10px !important;
+  }
+
+  #events .mytt-event-card-footer {
+    gap: 6px !important;
+  }
+
+  #events .mytt-event-card-spots > strong {
+    font-size: 24px !important;
+  }
+
+  #events .mytt-event-card-footer .me5-register {
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    padding: 0 10px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    font-size: 10px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  #events .mytt-event-card-heading .me5-title span,
+  #events .mytt-event-card-heading .me5-title strong {
+    font-size: 16px !important;
+  }
+
+  #events .mytt-event-card-footer .me5-register {
+    padding: 0 8px !important;
+  }
+}
+
+/* MYTT Events: mobile title alignment */
+@media (max-width: 768px) {
+  #events .mytt-event-card-heading .me5-title {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: baseline !important;
+    gap: 5px !important;
+    white-space: nowrap !important;
+  }
+
+  #events .mytt-event-card-heading .me5-title span,
+  #events .mytt-event-card-heading .me5-title strong {
+    display: inline-block !important;
+    width: auto !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    line-height: 1 !important;
+  }
+}
+
+    </style>
+
+<style id="event-registration-player-picker-styles">
+  .event-registration-player-field { position: relative; }
+  .event-registration-player-label { display: block; margin-bottom: 8px; }
+  .event-registration-player-label span { display: inline-block; }
+  .event-registration-player-picker { position: relative; width: 100%; }
+  .event-registration-player-picker .result-player-search { width: 100%; }
+  .event-registration-player-picker .player-picker-menu {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+    z-index: 10050; max-height: min(320px, 44vh); overflow-y: auto;
+    border: 1px solid rgba(255,255,255,.14); border-radius: 14px;
+    background: #111319; box-shadow: 0 16px 40px rgba(0,0,0,.45);
+  }
+  .event-registration-player-picker .player-picker-label {
+    padding: 10px 13px 7px; color: rgba(255,255,255,.58);
+    font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  }
+  .event-registration-player-picker .player-picker-option {
+    display: flex; width: 100%; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 12px 14px; border: 0; border-top: 1px solid rgba(255,255,255,.06);
+    background: transparent; color: inherit; text-align: left; cursor: pointer;
+  }
+  .event-registration-player-picker .player-picker-option:hover,
+  .event-registration-player-picker .player-picker-option:focus-visible {
+    background: rgba(255,255,255,.08); outline: none;
+  }
+  .event-registration-player-picker .player-picker-option strong { font-size: 14px; font-weight: 750; }
+  .event-registration-player-picker .player-picker-option small {
+    flex: 0 0 auto; color: rgba(255,255,255,.56); font-size: 11px; font-weight: 650;
+  }
+  .event-registration-player-picker .player-picker-empty {
+    padding: 14px; color: rgba(255,255,255,.68); font-size: 13px;
+  }
+  .event-registration-player-selection { display: block; margin-top: 7px; color: rgba(255,255,255,.58); font-size: 12px; }
+  .event-registration-player-selection.is-selected { color: #72e0a4; }
+</style>
+
+<style id="event-registration-list-styles">
+  .event-registration-list {
+    margin: 14px 0 16px;
+    padding: 13px;
+    border: 1px solid rgba(255, 74, 83, .28);
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(255, 55, 65, .085), rgba(12, 13, 17, .96));
+    color: #f6f6f7;
+  }
+  .event-registration-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .event-registration-list-heading { min-width: 0; }
+  .event-registration-list-kicker {
+    margin: 0 0 4px;
+    color: #ff626b;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+  .event-registration-list-count {
+    margin: 0;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 850;
+    line-height: 1.25;
+  }
+  .event-registration-refresh {
+    flex: 0 0 auto;
+    border: 1px solid rgba(255, 95, 103, .35);
+    border-radius: 9px;
+    padding: 7px 9px;
+    background: rgba(255, 65, 75, .08);
+    color: #ff858b;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .event-registration-refresh:hover { background: rgba(255, 65, 75, .16); }
+  .event-registration-list-status {
+    margin: 0;
+    color: rgba(255,255,255,.62);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .event-registration-list-items {
+    display: grid;
+    gap: 6px;
+    max-height: 176px;
+    overflow-y: auto;
+    margin: 8px 0 0;
+    padding: 0 2px 0 0;
+    list-style: none;
+  }
+  .event-registration-list-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    padding: 8px 9px;
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 10px;
+    background: rgba(0,0,0,.28);
+  }
+  .event-registration-list-number {
+    display: flex;
+    flex: 0 0 25px;
+    width: 25px;
+    height: 25px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(255, 75, 83, .12);
+    color: #ff7c83;
+    font-size: 11px;
+    font-weight: 900;
+  }
+  .event-registration-list-player {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .event-registration-list-player strong {
+    display: block;
+    overflow-wrap: anywhere;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+  .event-registration-list-player small {
+    display: block;
+    margin-top: 2px;
+    color: rgba(255,255,255,.52);
+    font-size: 10px;
+    line-height: 1.2;
+  }
+  .event-registration-list-check {
+    flex: 0 0 auto;
+    color: #72e0a4;
+    font-size: 15px;
+    font-weight: 900;
+  }
+  .event-registration-list-empty {
+    margin: 8px 0 0;
+    padding: 11px 10px;
+    border: 1px dashed rgba(255,255,255,.13);
+    border-radius: 10px;
+    color: rgba(255,255,255,.62);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  #eventRegistrationListEmpty[hidden] {
+    display: none !important;
+  }
+  @media (max-width: 560px) {
+    .event-registration-list { margin: 12px 0 14px; padding: 11px; }
+    .event-registration-list-items { max-height: 150px; }
+  }
+</style>
+
+<!-- MYTT event-registration-layout-v3 20261021: compact CTA + enforced two-column registration list -->
+<style id="mytt-event-registration-layout-v3">
+  /* Registration-only layout polish. Explicitly enforce grid to resist global CSS overrides. */
+  #eventRegistrationForm .event-registration-submit-dock {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 7px !important;
+    margin-top: 8px !important;
+  }
+
+  #eventRegistrationSubmitButton.result-submit {
+    display: block !important;
+    box-sizing: border-box !important;
+    width: min(100%, 360px) !important;
+    min-height: 44px !important;
+    height: 44px !important;
+    padding: 9px 14px !important;
+    margin: 0 auto !important;
+    font-size: 14px !important;
+    line-height: 1.15 !important;
+    letter-spacing: .02em !important;
+    border-radius: 11px !important;
+    white-space: normal !important;
+  }
+
+  #eventRegistrationListItems.event-registration-list-items {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-flow: row !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+  }
+
+  #eventRegistrationListItems .event-registration-list-item {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    min-height: 56px !important;
+    padding: 8px 7px !important;
+  }
+
+  #eventRegistrationListItems .event-registration-list-number {
+    flex: 0 0 21px !important;
+    width: 21px !important;
+    height: 21px !important;
+    border-radius: 7px !important;
+    font-size: 10px !important;
+  }
+
+  #eventRegistrationListItems .event-registration-list-player {
+    display: block !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+  }
+
+  #eventRegistrationListItems .event-registration-list-player strong {
+    display: block !important;
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+  }
+
+  #eventRegistrationListItems .event-registration-list-player small {
+    display: block !important;
+    margin-top: 2px !important;
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  #eventRegistrationListItems .event-registration-list-check {
+    display: block !important;
+    flex: 0 0 auto !important;
+    font-size: 13px !important;
+  }
+
+  @media (max-width: 560px) {
+    #eventRegistrationSubmitButton.result-submit {
+      width: min(100%, 330px) !important;
+      min-height: 43px !important;
+      height: 43px !important;
+      padding: 8px 10px !important;
+      font-size: 14px !important;
+    }
+
+    #eventRegistrationListItems.event-registration-list-items {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 7px !important;
+      max-height: 300px !important;
+    }
+
+    #eventRegistrationListItems .event-registration-list-item {
+      gap: 4px !important;
+      padding: 7px 5px !important;
+    }
+
+    #eventRegistrationListItems .event-registration-list-number {
+      flex-basis: 19px !important;
+      width: 19px !important;
+      height: 19px !important;
+      font-size: 9px !important;
+    }
+
+    #eventRegistrationListItems .event-registration-list-player strong {
+      font-size: 10.5px !important;
+    }
+
+    #eventRegistrationListItems .event-registration-list-player small {
+      font-size: 8.5px !important;
+    }
+  }
+
+  @media (max-width: 360px) {
+    #eventRegistrationListItems .event-registration-list-item {
+      gap: 3px !important;
+      padding: 6px 4px !important;
+    }
+
+    #eventRegistrationListItems .event-registration-list-player strong {
+      font-size: 10px !important;
+    }
+
+    #eventRegistrationListItems .event-registration-list-player small {
+      font-size: 8px !important;
+    }
+  }
+</style>
+
+</head>
+<body>
+<header class="site-header premium-header">
+  <div class="premium-header-inner">
+
+    <a class="premium-brand" href="#home" data-target="home" aria-label="MYTT Home">
+      <div class="premium-brand-mark" aria-hidden="true">🏓</div>
+      <div class="premium-brand-copy">
+        <div class="premium-brand-name">MYTT</div>
+        <div class="premium-brand-sub">Malaysia Table Tennis Rating System</div>
+      </div>
+    </a>
+
+    <nav class="premium-nav" aria-label="Primary navigation">
+      <a href="#home" class="nav-link active" data-target="home">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10.5 12 3l8.5 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.5 21v-6h5v6"/></svg></span>
+        <span>Home</span>
+      </a>
+
+      <a href="#events" class="nav-link" data-target="events">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8v4a4 4 0 0 1-8 0V4Z"/><path d="M9 14h6"/><path d="M12 12v6"/><path d="M8 20h8"/><path d="M5 6H3v2a4 4 0 0 0 4 4"/><path d="M19 6h2v2a4 4 0 0 1-4 4"/></svg></span>
+        <span>Events</span>
+      </a>
+
+      <a href="#players" class="nav-link" data-target="players">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c.5-4 2.6-6 5.5-6s5 2 5.5 6"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 14.2c3.2.2 4.8 2 5 5.8"/></svg></span>
+        <span>Players</span>
+      </a>
+
+      <a href="#singles" class="nav-link" data-target="singles">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M9 7v10M12 7v10M15 7v10"/></svg></span>
+        <span>Singles</span>
+      </a>
+
+      <a href="#doubles" class="nav-link" data-target="doubles">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="7" height="14" rx="1.5"/><rect x="13" y="5" width="7" height="14" rx="1.5"/></svg></span>
+        <span>Doubles</span>
+      </a>
+
+      <a href="#market" class="nav-link" data-target="market">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></span>
+        <span>Market</span>
+      </a>
+
+      <a href="#submit" class="nav-link" data-target="submit">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+        <span>Join / Submit</span>
+      </a>
+    </nav>
+
+    <div class="premium-header-badge" aria-label="Official MYTT Platform">
+      <span class="premium-header-badge-dot"></span>
+      <div>
+        <strong>MYTT</strong>
+        <small>OFFICIAL PLATFORM</small>
+      </div>
+    </div>
+
+
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero hero-home-final mobile-nav-page" data-mobile-page="home">
+    <div class="hero-top-banner">
+      <p class="kicker kicker-centered">
+        <span aria-hidden="true"></span>
+        MYTT Official Platform
+        <span aria-hidden="true"></span>
+      </p>
+
+      <h1 class="hero-title-row">
+        <span>Play.</span>
+        <span>Compete.</span>
+        <span>Improve.</span>
+        <span class="rank-word">Rank.</span>
+      </h1>
+
+      <div class="hero-neon-divider" aria-hidden="true"></div>
+    </div>
+
+    
+
+
+
+<section class="hero-rank-card-v5 hero-rank-card-final">
+      <div class="rank-card-glow"></div>
+
+      <div class="rank-card-head-v5">
+        <div>
+          <p>MYTT Rank Journey</p>
+          <h2>Climb to the Top</h2>
+        </div>
+      </div>
+
+      <div class="homepage-rank-road">
+        <article class="home-rank-node active tier-rookie-home">
+          <div class="home-rank-orb">🌱</div>
+          <span>Rookie</span><small>1500</small>
+          <b class="you-marker">▲<em>You are here</em></b>
+        </article>
+
+        <i class="home-rank-line line-red"></i>
+
+        <article class="home-rank-node tier-challenger-home">
+          <div class="home-rank-orb">⚔️</div>
+          <span>Challenger</span><small>1600</small>
+        </article>
+
+        <i class="home-rank-line line-orange"></i>
+
+        <article class="home-rank-node tier-elite-home">
+          <div class="home-rank-orb">⭐</div>
+          <span>Elite</span><small>1700</small>
+        </article>
+
+        <i class="home-rank-line line-gold"></i>
+
+        <article class="home-rank-node tier-master-home">
+          <div class="home-rank-orb">🔥</div>
+          <span>Master</span><small>1800</small>
+        </article>
+
+        <i class="home-rank-line line-yellow"></i>
+
+        <article class="home-rank-node tier-grandmaster-home">
+          <div class="home-rank-orb">🔥</div>
+          <span>Grandmaster</span><small>1900</small>
+        </article>
+
+        <i class="home-rank-line line-green"></i>
+
+        <article class="home-rank-node tier-champion-home">
+          <div class="home-rank-orb">🏆</div>
+          <span>MYTT Champion</span><small>2000</small>
+        </article>
+
+        <i class="home-rank-line line-cyan"></i>
+
+        <article class="home-rank-node tier-legend-home">
+          <div class="home-rank-orb">👑</div>
+          <span>Legend</span><small>2100</small>
+        </article>
+
+        <i class="home-rank-line line-purple"></i>
+
+        <article class="home-rank-node tier-immortal-home">
+          <div class="home-rank-orb">🏆</div>
+          <span>Immortal</span><small>2200</small>
+        </article>
+
+        <i class="home-rank-line line-pink"></i>
+
+        <article class="home-rank-node tier-hof-home">
+          <div class="home-rank-orb" style="background-size:108%!important;">🌟</div>
+          <span>Hall of Fame</span><small>2300</small>
+        </article>
+      </div>
+
+      <div class="hero-progress-card">
+        <div class="hero-progress-head">
+          <strong>🌱 Rookie</strong>
+          <strong>⚔️ Challenger</strong>
+        </div>
+        <div class="hero-progress-track"><span style="width:0%"></span></div>
+        <p><b>1500</b> / 1600 · 100 pts to Challenger</p>
+      </div>
+    </section>
+
+    <div id="submit" class="cta-grid cta-grid-home-final">
+      <a id="singlesSubmitCta" class="cta cta-red" href="#submit" data-open-singles-form aria-haspopup="dialog">
+        <span>🏓</span>
+        <div>
+          <strong>Submit Singles Result</strong>
+          <small id="singlesSubmitCtaText">Checking active match session…</small>
+        </div>
+      </a>
+
+      <a id="doublesSubmitCta" class="cta cta-dark" href="#submit" data-open-doubles-form aria-haspopup="dialog">
+        <span>👥</span>
+        <div>
+          <strong>Submit Doubles Result</strong>
+          <small id="doublesSubmitCtaText">Checking active doubles session…</small>
+        </div>
+      </a>
+
+      <a id="joinMyttCta" class="cta cta-dark cta-join-highlight" href="#submit" data-open-join-form aria-haspopup="dialog">
+        <span>👤</span>
+        <div>
+          <strong>Join MYTT</strong>
+          <small>Register as an official MYTT player</small>
+        </div>
+      </a>
+
+      <a id="viewPlayersCta" class="cta cta-dark" href="#players">
+        <span>🔍</span>
+        <div>
+          <strong>View Players</strong>
+          <small>Search official profiles</small>
+        </div>
+      </a>
+      <a id="marketplaceCta" class="cta cta-dark" href="#market">
+  <span>🛒</span>
+  <div>
+    <strong>MYTT Marketplace</strong>
+    <small>Buy & sell table tennis gear</small>
+  </div>
+</a>
+
+<a id="contactAdminCta"
+   class="cta cta-dark"
+   href="https://wa.me/601128887750?text=Hi%20MYTT%20Admin%2C%20I%20need%20help%20with%20MYTT."
+   target="_blank"
+   rel="noopener noreferrer">
+  <span>💬</span>
+  <div>
+    <strong>Contact Admin</strong>
+    <small>Need help? Contact MYTT admin</small>
+  </div>
+</a>
+    </div>
+  </section>
+
+
+
+<section id="events" class="events-section mobile-nav-page" data-mobile-page="events">
+    <div class="section-head events-section-head">
+      <div>
+        <h2>Upcoming MYTT Events</h2>
+      </div>
+      <span id="eventsStatus" class="status">Checking events...</span>
+    </div>
+
+    <div id="eventsGrid" class="events-grid" aria-live="polite">
+      <div class="event-empty-state">
+        <span>🏓</span>
+        <strong>Loading upcoming MYTT events...</strong>
+      </div>
+    </div>
+  </section>
+
+  <section id="players" class="players-section mobile-nav-page" data-mobile-page="players">
+    <div class="section-head"><div><p class="kicker">Players</p><h2>Official Players</h2></div><span class="status">Official Profiles</span></div>
+    <div class="players-toolbar">
+      <input id="playersSearch" type="search" placeholder="Search official players or MYTT ID..." autocomplete="off">
+
+      <select id="playersFilter" aria-label="Filter players">
+        <option value="all">All Players</option>
+        <option value="approved">Approved Only</option>
+        <option value="leaderboard">Leaderboard Players</option>
+      </select>
+
+      <select id="playersSort" aria-label="Sort players">
+        <option value="name-asc" selected>Name: A–Z</option>
+        <option value="name-desc">Name: Z–A</option>
+        <option value="rating-desc">Rating: High to Low</option>
+        <option value="rating-asc">Rating: Low to High</option>
+        <option value="rank-asc">Leaderboard Rank</option>
+      </select>
+    </div>
+
+    <div id="playersGrid" class="players-grid"><p class="loading">Loading players...</p></div>
+    <div id="playersPagination" class="players-pagination" aria-label="Players pages"></div>
+  </section>
+
+  <section id="singles" class="board-section mobile-nav-page" data-mobile-page="singles">
+    <div class="section-head"><div><p class="kicker">Singles</p><h2>Singles Leaderboard</h2></div><span id="singlesStatus" class="status">Loading...</span></div>
+    <div class="board-card">
+      <div class="table-scroll"><table>
+        <thead><tr><th>Rank</th><th>Player</th><th>Tier</th><th>Rating</th><th>W-L</th><th>Win %</th><th>Peak</th></tr></thead>
+        <tbody id="singlesBody"><tr><td colspan="7" class="loading">Loading singles leaderboard...</td></tr></tbody>
+      </table></div>
+      <div id="singlesLeaderboardControls" class="leaderboard-expand-controls"></div>
+    </div>
+  </section>
+
+  <section id="doubles" class="board-section mobile-nav-page" data-mobile-page="doubles">
+    <div class="section-head"><div><p class="kicker">Doubles</p><h2>Doubles Leaderboard</h2></div><span id="doublesStatus" class="status">Loading...</span></div>
+    <div class="board-card">
+      <div class="table-scroll"><table>
+        <thead><tr><th>Rank</th><th>Team</th><th>Tier</th><th>Rating</th><th>W-L</th><th>Win %</th><th>Peak</th></tr></thead>
+        <tbody id="doublesBody"><tr><td colspan="7" class="loading">Loading doubles leaderboard...</td></tr></tbody>
+      </table></div>
+      <div id="doublesLeaderboardControls" class="leaderboard-expand-controls"></div>
+    </div>
+  </section>
+
+<section id="market" class="mytt-market-section mobile-nav-page" data-mobile-page="market">
+    <div class="mytt-market-hero">
+      <div class="mytt-market-hero-copy">
+        <p class="kicker">Community Marketplace</p>
+        <h2>MYTT Gear Market</h2>
+        <p class="mytt-market-subtitle">Buy &amp; sell table tennis equipment within the MYTT community.</p>
+      </div>
+
+      <div class="mytt-market-hero-action">
+        <span class="mytt-market-hero-icon">🏓</span>
+        <button id="myttMarketSellButton" class="mytt-market-sell-button" type="button">
+          + Sell Equipment
+        </button>
+      </div>
+    </div>
+
+    <div class="mytt-market-toolbar" aria-label="Marketplace filters">
+      <label class="mytt-market-search-wrap">
+        <span aria-hidden="true">⌕</span>
+        <input id="myttMarketSearch" type="search" placeholder="Search brand, model or equipment..." autocomplete="off">
+      </label>
+      <select id="myttMarketCategory" aria-label="Filter by category">
+        <option value="all">All Equipment</option>
+        <option value="Complete Racket">Complete Racket</option>
+        <option value="Blade">Blade</option>
+        <option value="Rubber">Rubber</option>
+        <option value="Shoes">Shoes</option>
+        <option value="Apparel">Apparel</option>
+        <option value="Bag">Bag</option>
+        <option value="Accessories">Accessories</option>
+        <option value="Other">Other</option>
+      </select>
+      <select id="myttMarketSort" aria-label="Sort marketplace listings">
+        <option value="newest">Newest First</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+      </select>
+    </div>
+
+    <div class="mytt-market-info-strip">
+      <span>✓ Admin reviewed listings</span>
+      <span>✓ Direct seller contact</span>
+    </div>
+
+    <div id="myttMarketStatus" class="mytt-market-status" aria-live="polite">Loading marketplace...</div>
+    <div id="myttMarketGrid" class="mytt-market-grid" aria-live="polite">
+      <div class="mytt-market-empty">
+        <span>🏓</span>
+        <strong>Loading equipment listings...</strong>
+      </div>
+    </div>
+
+    <p class="mytt-market-disclaimer">MYTT provides a community listing platform only. Buyers and sellers are responsible for checking item condition, payment and collection arrangements.</p>
+  </section>
+
+
+
+  <section id="submitPage" class="submit-hub-section mobile-nav-page" data-mobile-page="submit" aria-labelledby="submitPageTitle">
+    <div class="section-head submit-hub-head">
+      <div>
+        <p class="kicker">Join / Submit</p>
+        <h2 id="submitPageTitle">MYTT Actions</h2>
+      </div>
+      <span class="status">Official Forms</span>
+    </div>
+
+    <div class="submit-hub-grid">
+      <button class="submit-hub-card submit-hub-card-primary" type="button" data-open-singles-form>
+        <span class="submit-hub-icon">🏓</span>
+        <span class="submit-hub-copy">
+          <strong>Submit Singles Result</strong>
+          <small id="mobileSinglesSubmitText">Open current singles submission</small>
+        </span>
+        <b>→</b>
+      </button>
+
+      <button class="submit-hub-card" type="button" data-open-doubles-form>
+        <span class="submit-hub-icon">👥</span>
+        <span class="submit-hub-copy">
+          <strong>Submit Doubles Result</strong>
+          <small id="mobileDoublesSubmitText">Open current doubles submission</small>
+        </span>
+        <b>→</b>
+      </button>
+
+      <button class="submit-hub-card submit-hub-card-join" type="button" data-open-join-form>
+        <span class="submit-hub-icon">👤</span>
+        <span class="submit-hub-copy">
+          <strong>Join MYTT</strong>
+          <small>Register as an official MYTT player</small>
+        </span>
+        <b>→</b>
+      </button>
+    </div>
+
+    <div class="submit-hub-note">
+      <span>✓</span>
+      <p>Use the official MYTT forms above. Submissions are reviewed before they are accepted or published.</p>
+    </div>
+  </section>
+
+
+  <section id="notice" class="info-grid info-grid-single">
+  <article class="info-card rules-card">
+    <h3>📢 Competition Rules</h3>
+
+    <div class="rule-item">
+      <span class="icon">✅</span>
+      <span>Only one player or team needs to submit each match result.</span>
+    </div>
+
+    <div class="rule-item">
+      <span class="icon">⚡</span>
+      <span>Ratings and leaderboards update automatically after every valid submission.</span>
+    </div>
+
+    <div class="rule-item">
+      <span class="icon">⏳</span>
+      <span>A minimum interval of <strong>14 days</strong> is required before playing the same opponent in Singles or the same doubles team again.</span>
+    </div>
+
+    <div class="rule-item">
+      <span class="icon">🚫</span>
+      <span>Duplicate matches submitted within the <strong>14-day interval</strong> will be automatically rejected and will not affect the ratings.</span>
+    </div>
+
+    <div class="rule-item">
+      <span class="icon">🤝</span>
+      <span>Doubles uses <strong>fixed teams</strong>. Changing partners resets the team rating to <strong>1500</strong>.</span>
+    </div>
+
+    <div class="rule-item">
+      <span class="icon">📅</span>
+      <span>The 14-day interval is calculated from the submission time of the previous valid match result.</span>
+    </div>
+
+    <div class="rule-item">
+      <span class="icon">🏓</span>
+      <span>MYTT reserves the right to reject invalid, duplicate, or fraudulent match submissions to maintain a fair rating system.</span>
+    </div>
+
+    <div class="rule-item">
+      <span class="icon">💡</span>
+      <span>If you are unsure whether a match is eligible, please contact the MYTT organizer before submitting the result.</span>
+    </div>
+  </article>
+</section>
+</main>
+
+
+<div id="eventRegistrationModal" class="result-modal hidden" aria-hidden="true">
+  <div class="result-modal-backdrop" data-close-event-registration></div>
+
+  <section class="result-modal-card event-registration-modal-card"
+           role="dialog"
+           aria-modal="true"
+           aria-labelledby="eventRegistrationTitle">
+
+    <button class="result-modal-close"
+            type="button"
+            data-close-event-registration
+            aria-label="Close event registration">×</button>
+
+    <div class="result-form-head">
+      <p class="kicker">MYTT Event Registration</p>
+      <h2 id="eventRegistrationTitle">Register for Event</h2>
+      <p>Register for the selected MYTT event. Successful registrations are confirmed immediately.</p>
+    </div>
+
+    <div id="eventRegistrationSummary" class="event-registration-summary">
+      <div>
+        <small>Selected Event</small>
+        <strong id="eventRegistrationEventName">MYTT Event</strong>
+      </div>
+      <div class="event-registration-summary-meta">
+        <span id="eventRegistrationDate">📅 —</span>
+        <span id="eventRegistrationVenue">📍 —</span>
+      </div>
+    </div>
+
+    <form id="eventRegistrationForm"
+          class="result-form event-registration-form"
+          action="https://script.google.com/macros/s/AKfycbxFeSz9bn7LmnvcMDYIQnbsCdvD6dPnf3hEADE4JjWQ3UHzaTO_nVtjj3ABnGlz7fillA/exec"
+          method="POST"
+          target="eventRegistrationSubmitFrame"
+          novalidate>
+
+      <input id="eventRegistrationSubmissionId" type="hidden" name="submissionId">
+      <input id="eventRegistrationEventId" type="hidden" name="eventId">
+
+      <input id="eventRegistrationPlayerNameValue" type="hidden" name="playerName">
+      <input id="eventRegistrationMyttId" type="hidden" name="myttId">
+
+      <div class="result-field event-registration-player-field">
+        <label for="eventRegistrationPlayerName" class="event-registration-player-label">
+          <span>Player Name <em>Required</em></span>
+        </label>
+        <div class="player-picker event-registration-player-picker">
+          <input id="eventRegistrationPlayerName"
+                 class="result-player-search"
+                 type="search"
+                 placeholder="Search by player name or MYTT ID..."
+                 maxlength="100"
+                 autocomplete="off"
+                 aria-label="Search official MYTT players by name or MYTT ID"
+                 aria-autocomplete="list"
+                 aria-controls="eventRegistrationPlayerMenu"
+                 aria-expanded="false"
+                 role="combobox"
+                 required>
+          <div id="eventRegistrationPlayerMenu"
+               class="player-picker-menu hidden"
+               role="listbox"
+               aria-label="Official MYTT players"></div>
+          <datalist id="eventPlayerSuggestions" hidden></datalist>
+        </div>
+        <small id="eventRegistrationPlayerSelection" class="event-registration-player-selection">
+          Search and select your official player profile.
+        </small>
+      </div>
+
+      <div id="eventRegistrationFormStatus"
+           class="result-form-status"
+           aria-live="polite"></div>
+
+      <div class="event-registration-submit-dock">
+        <button id="eventRegistrationSubmitButton"
+                class="result-submit"
+                type="submit">Confirm Registration</button>
+        <p class="result-form-note">Successful registration confirms your place automatically. No admin approval is required.</p>
+      </div>
+    </form>
+
+    <section id="eventRegistrationList" class="event-registration-list" aria-labelledby="eventRegistrationCount">
+      <div class="event-registration-list-header">
+        <div class="event-registration-list-heading">
+          <p class="event-registration-list-kicker">ALREADY REGISTERED</p>
+          <h3 id="eventRegistrationCount" class="event-registration-list-count">0 PLAYERS</h3>
+        </div>
+        <button id="eventRegistrationRefreshButton" class="event-registration-refresh" type="button">↻ Refresh</button>
+      </div>
+      <p id="eventRegistrationListStatus" class="event-registration-list-status" aria-live="polite">Choose an event to view registrations.</p>
+      <ul id="eventRegistrationListItems" class="event-registration-list-items" aria-label="Confirmed registered players"></ul>
+      <p id="eventRegistrationListEmpty" class="event-registration-list-empty hidden" hidden>No confirmed registrations yet.</p>
+    </section>
+
+    <div id="eventRegistrationSuccessState" class="join-success-state hidden">
+      <div class="join-success-icon">✓</div>
+      <h3>Registration Confirmed</h3>
+      <p id="eventRegistrationSuccessText">
+        Your registration is confirmed and your place has been reserved for this event.
+      </p>
+    </div>
+
+    <iframe id="eventRegistrationSubmitFrame"
+            name="eventRegistrationSubmitFrame"
+            class="result-submit-frame"
+            title="MYTT event registration submission"></iframe>
+  </section>
+</div>
+
+
+<div id="singlesFormModal" class="result-modal hidden" aria-hidden="true">
+  <div class="result-modal-backdrop" data-close-singles-form></div>
+  <section class="result-modal-card" role="dialog" aria-modal="true" aria-labelledby="singlesFormTitle">
+    <button class="result-modal-close" type="button" data-close-singles-form aria-label="Close singles result form">×</button>
+
+    <div class="result-form-head">
+      <p class="kicker">MYTT Match Submission</p>
+      <h2 id="singlesFormTitle">Submit Singles Result</h2>
+      <p>Only players listed in the current MYTT Active Players session can submit a result. Choose both players, the winner and final score.</p>
+    </div>
+
+    <div id="singlesClosedState" class="result-session-state result-session-hidden" aria-live="polite">
+      <div class="result-session-lock">🔒</div>
+      <h3 id="singlesClosedTitle">Result Submission Closed</h3>
+      <p id="singlesClosedText">No active MYTT match session is currently available.</p>
+    </div>
+
+    <form id="singlesResultForm"
+          class="result-form"
+          action="https://script.google.com/macros/s/AKfycbz24rx6NLZ_FLRft5mUcGbRBbqiofs4Ai0tuU_S58ZgCK9LVf9Q3TT1aQSzDLA6YVDfbQ/exec"
+          method="POST"
+          target="singlesSubmitFrame"
+          novalidate>
+      <input id="singlesSubmissionId" type="hidden" name="submissionId">
+
+      <label class="result-field">
+        <span>Match Date</span>
+        <input id="singlesMatchDate" name="matchDate" type="date" required>
+      </label>
+
+      <div class="result-player-grid">
+        <div class="result-field">
+          <span>Player A</span>
+          <div class="player-picker" data-picker="A">
+            <input id="playerASearch" class="result-player-search" type="search" placeholder="Search player..." autocomplete="off" aria-autocomplete="list">
+            <input id="playerAValue" type="hidden" name="playerA">
+            <div id="playerAMenu" class="player-picker-menu hidden" role="listbox"></div>
+          </div>
+        </div>
+
+        <div class="result-field">
+          <span>Player B</span>
+          <div class="player-picker" data-picker="B">
+            <input id="playerBSearch" class="result-player-search" type="search" placeholder="Search opponent..." autocomplete="off" aria-autocomplete="list">
+            <input id="playerBValue" type="hidden" name="playerB">
+            <div id="playerBMenu" class="player-picker-menu hidden" role="listbox"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-field">
+        <span>Winner</span>
+        <input id="winnerValue" type="hidden" name="winner">
+        <div id="winnerChoices" class="choice-row winner-choices">
+          <p class="result-hint">Select Player A and Player B first.</p>
+        </div>
+      </div>
+
+      <div class="result-field">
+        <span>Final Score</span>
+        <input id="scoreValue" type="hidden" name="matchScore">
+        <div class="choice-row score-choices">
+          <button type="button" class="result-choice" data-score="3-0">3–0</button>
+          <button type="button" class="result-choice" data-score="3-1">3–1</button>
+          <button type="button" class="result-choice" data-score="3-2">3–2</button>
+        </div>
+      </div>
+
+      <div id="singlesFormStatus" class="result-form-status" aria-live="polite"></div>
+
+      <button id="singlesSubmitButton" class="result-submit" type="submit">Submit Result</button>
+      <p class="result-form-note">Only current Active Players are eligible. MYTT will confirm whether the result is accepted or rejected before showing the final status.</p>
+    </form>
+
+    <iframe id="singlesSubmitFrame" name="singlesSubmitFrame" class="result-submit-frame" title="Singles result submission"></iframe>
+  </section>
+</div>
+
+
+
+<div id="joinFormModal" class="result-modal hidden" aria-hidden="true">
+  <div class="result-modal-backdrop" data-close-join-form></div>
+  <section class="result-modal-card join-modal-card" role="dialog" aria-modal="true" aria-labelledby="joinFormTitle">
+    <button class="result-modal-close" data-close-join-form aria-label="Close Join MYTT form">×</button>
+
+    <div class="result-form-head">
+      <p class="kicker">MYTT Player Registration</p>
+      <h2 id="joinFormTitle">Join MYTT</h2>
+      <p>Register your player profile for MYTT. Your submission will be reviewed before your MYTT ID and public player profile are activated.</p>
+    </div>
+
+    <form id="joinMyttForm"
+          class="result-form join-form"
+          action="https://script.google.com/macros/s/AKfycbyMF13I7EuIuSExNl-mCgVgIAW1GQwa6o7gujC-eby0sgBphKxb2vrNTV5tlivDKU0faQ/exec"
+          method="POST"
+          target="joinSubmitFrame"
+          novalidate>
+      <input id="joinSubmissionId" type="hidden" name="submissionId">
+      <input id="joinPhotoData" type="hidden" name="photoData">
+      <input id="joinPhotoName" type="hidden" name="photoName">
+      <input id="joinPhotoType" type="hidden" name="photoType">
+
+      <label class="result-field">
+        <span>Player Name <em>Required</em></span>
+        <input id="joinPlayerName" name="playerName" type="text" placeholder="Enter your full real name" maxlength="80" autocomplete="name" required>
+        <small class="result-hint">Please enter your full real name for identification. Nicknames, initials, incomplete or fake names may be rejected.</small>
+      </label>
+
+      <div class="result-player-grid">
+        <div class="result-field">
+          <span>Grip Style <em>Required</em></span>
+          <select id="joinGripStyle" name="gripStyle" required>
+            <option value="">Select grip style</option>
+            <option value="Shakehand">Shakehand</option>
+            <option value="Penhold">Penhold</option>
+          </select>
+        </div>
+
+        <div class="result-field">
+          <span>Playing Hand <em>Required</em></span>
+          <select id="joinPlayingHand" name="playingHand" required>
+            <option value="">Select playing hand</option>
+            <option value="Right-handed">Right-handed</option>
+            <option value="Left-handed">Left-handed</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="join-section">
+        <div class="join-section-head">
+          <h3>Equipment</h3>
+          <p>Required — if you don’t know the exact model, simply enter the brand name.</p>
+        </div>
+
+        <label class="result-field">
+          <span>Blade <em>Required</em></span>
+          <input id="joinBlade" name="blade" type="text" placeholder="e.g. Butterfly Viscaria or Butterfly" maxlength="120" required>
+        </label>
+
+        <div class="result-player-grid">
+          <label class="result-field">
+            <span>Forehand Rubber <em>Required</em></span>
+            <input id="joinForehandRubber" name="forehandRubber" type="text" placeholder="e.g. Dignics 09C or Butterfly" maxlength="120" required>
+          </label>
+
+          <label class="result-field">
+            <span>Backhand Rubber <em>Required</em></span>
+            <input id="joinBackhandRubber" name="backhandRubber" type="text" placeholder="e.g. Dignics 05 or Butterfly" maxlength="120" required>
+          </label>
+        </div>
+      </div>
+
+      <div class="result-field">
+        <span>Profile Photo <em>Required</em></span>
+        <div class="join-photo-guideline" role="note" aria-label="Profile photo guidelines">
+          <span class="join-photo-guideline-icon" aria-hidden="true">!</span>
+          <span class="join-photo-guideline-copy">
+            <strong>A clear and authentic profile photo is required.</strong>
+            <em>Avatars, group photos, heavily filtered or unclear images will be automatically rejected.</em>
+          </span>
+        </div>
+        <label class="join-photo-picker" for="joinProfilePhoto">
+          <span class="join-photo-icon">📷</span>
+          <span class="join-photo-copy">
+            <strong id="joinPhotoLabel">Choose profile photo</strong>
+            <small>JPG, PNG or WebP · max 4 MB</small>
+          </span>
+        </label>
+        <input id="joinProfilePhoto" class="join-photo-input" type="file" accept="image/jpeg,image/png,image/webp" required>
+        <div id="joinPhotoPreviewWrap" class="join-photo-preview-wrap hidden">
+          <img id="joinPhotoPreview" class="join-photo-preview" alt="Profile photo preview">
+          <button id="joinRemovePhoto" class="join-remove-photo" type="button">Remove photo</button>
+        </div>
+      </div>
+
+      <label class="join-consent">
+        <input id="joinConsent" name="consent" type="checkbox" value="yes" required>
+        <span>I agree that MYTT may publish my player profile, rating, match statistics, profile photo and equipment information on the official MYTT website.</span>
+      </label>
+
+      <div id="joinFormStatus" class="result-form-status" aria-live="polite"></div>
+
+      <button id="joinSubmitButton" class="result-submit" type="submit">Submit Registration</button>
+
+      <p class="result-form-note">Submitting this form does not activate your profile immediately. MYTT will review the registration before assigning a MYTT ID and publishing the player profile.</p>
+    </form>
+
+    <div id="joinSuccessState" class="join-success-state hidden">
+      <div class="join-success-icon">✓</div>
+      <h3>Registration Received</h3>
+      <p>Your registration has been received and is now pending MYTT admin review and approval.</p>
+    </div>
+
+    <iframe id="joinSubmitFrame" name="joinSubmitFrame" class="result-submit-frame" title="Join MYTT registration submission"></iframe>
+  </section>
+</div>
+
+<div id="doublesFormModal" class="result-modal hidden" aria-hidden="true">
+  <div class="result-modal-backdrop" data-close-doubles-form></div>
+  <section class="result-modal-card" role="dialog" aria-modal="true" aria-labelledby="doublesFormTitle">
+    <button class="result-modal-close" data-close-doubles-form aria-label="Close doubles result form">×</button>
+
+    <div class="result-form-head">
+      <p class="kicker">MYTT Match Submission</p>
+      <h2 id="doublesFormTitle">Submit Doubles Result</h2>
+      <p>Only teams listed in the current MYTT Active Doubles Teams session can submit a result. Choose both teams, the winner and final score.</p>
+    </div>
+
+    <div id="doublesClosedState" class="result-session-state result-session-hidden" aria-live="polite">
+      <div class="result-session-lock">🔒</div>
+      <h3 id="doublesClosedTitle">Result Submission Closed</h3>
+      <p id="doublesClosedText">No active MYTT Doubles match session is currently available.</p>
+    </div>
+
+    <form id="doublesResultForm"
+          class="result-form"
+          action="https://script.google.com/macros/s/AKfycbyZpeTiK4R31KME890Xh29TbGnbSZ5ACl8XYaWNiUPLvtjjEBSs43eSUwfq3VMdKPnK7A/exec"
+          method="POST"
+          target="doublesSubmitFrame"
+          novalidate>
+      <input id="doublesSubmissionId" type="hidden" name="submissionId">
+
+      <label class="result-field">
+        <span>Match Date</span>
+        <input id="doublesMatchDate" name="matchDate" type="date" required>
+      </label>
+
+      <div class="result-player-grid">
+        <div class="result-field">
+          <span>Team A</span>
+          <div class="player-picker">
+            <input id="teamASearch" class="result-player-search" type="search" placeholder="Search active team..." autocomplete="off" aria-autocomplete="list">
+            <input id="teamAValue" type="hidden" name="teamA">
+            <div id="teamAMenu" class="player-picker-menu hidden" role="listbox"></div>
+          </div>
+        </div>
+
+        <div class="result-field">
+          <span>Team B</span>
+          <div class="player-picker">
+            <input id="teamBSearch" class="result-player-search" type="search" placeholder="Search opponent team..." autocomplete="off" aria-autocomplete="list">
+            <input id="teamBValue" type="hidden" name="teamB">
+            <div id="teamBMenu" class="player-picker-menu hidden" role="listbox"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-field">
+        <span>Winner</span>
+        <input id="doublesWinnerValue" type="hidden" name="winner">
+        <div id="doublesWinnerChoices" class="choice-row winner-choices">
+          <p class="result-hint">Select Team A and Team B first.</p>
+        </div>
+      </div>
+
+      <div class="result-field">
+        <span>Final Score</span>
+        <input id="doublesScoreValue" type="hidden" name="matchScore">
+        <div class="choice-row score-choices">
+          <button type="button" class="result-choice" data-doubles-score="3-0">3–0</button>
+          <button type="button" class="result-choice" data-doubles-score="3-1">3–1</button>
+          <button type="button" class="result-choice" data-doubles-score="3-2">3–2</button>
+        </div>
+      </div>
+
+      <div id="doublesFormStatus" class="result-form-status" aria-live="polite"></div>
+
+      <button id="doublesSubmitButton" class="result-submit" type="submit">Submit Result</button>
+      <p class="result-form-note">Only current Active Doubles Teams are eligible. MYTT will confirm whether the result is accepted or rejected before showing the final status.</p>
+    </form>
+
+    <iframe id="doublesSubmitFrame" name="doublesSubmitFrame" class="result-submit-frame" title="Doubles result submission"></iframe>
+  </section>
+</div>
+
+<div id="myttMarketSellModal" class="mytt-market-modal hidden" aria-hidden="true">
+  <div class="mytt-market-modal-backdrop" data-close-market-sell></div>
+  <section class="mytt-market-modal-card" role="dialog" aria-modal="true" aria-labelledby="myttMarketSellTitle">
+    <button class="mytt-market-modal-close" type="button" data-close-market-sell aria-label="Close sell equipment form">×</button>
+
+    <div class="mytt-market-modal-head">
+      <p class="kicker">MYTT Gear Market</p>
+      <h2 id="myttMarketSellTitle">Sell Equipment</h2>
+      <p>Listings are reviewed by MYTT before they appear publicly. Only registered MYTT players should submit equipment for sale.</p>
+    </div>
+
+    <form id="myttMarketSellForm" class="mytt-market-form" method="POST" target="myttMarketSubmitFrame" novalidate>
+      <input id="myttMarketSubmissionId" name="submissionId" type="hidden">
+      <input id="myttMarketPhotoCount" name="photoCount" type="hidden" value="0">
+      <input id="myttMarketPhotoData" name="photoData" type="hidden">
+      <input id="myttMarketPhotoName" name="photoName" type="hidden">
+      <input id="myttMarketPhotoType" name="photoType" type="hidden">
+      <input id="myttMarketPhotoData2" name="photoData2" type="hidden">
+      <input id="myttMarketPhotoName2" name="photoName2" type="hidden">
+      <input id="myttMarketPhotoType2" name="photoType2" type="hidden">
+      <input id="myttMarketPhotoData3" name="photoData3" type="hidden">
+      <input id="myttMarketPhotoName3" name="photoName3" type="hidden">
+      <input id="myttMarketPhotoType3" name="photoType3" type="hidden">
+      <input id="myttMarketPhotoData4" name="photoData4" type="hidden">
+      <input id="myttMarketPhotoName4" name="photoName4" type="hidden">
+      <input id="myttMarketPhotoType4" name="photoType4" type="hidden">
+      <input id="myttMarketPhotoData5" name="photoData5" type="hidden">
+      <input id="myttMarketPhotoName5" name="photoName5" type="hidden">
+      <input id="myttMarketPhotoType5" name="photoType5" type="hidden">
+
+      <div class="mytt-market-field-grid two">
+        <label class="mytt-market-field">
+          <span>MYTT ID <em>Required</em></span>
+          <input id="myttMarketSellerId" name="myttId" type="text" placeholder="e.g. MYTT0001" maxlength="20" autocomplete="off" required>
+        </label>
+        <label class="mytt-market-field">
+          <span>Seller Name <em>Required</em></span>
+          <input id="myttMarketSellerName" name="sellerName" type="text" placeholder="Name shown on your MYTT profile" maxlength="80" autocomplete="name" required>
+        </label>
+      </div>
+
+      <div class="mytt-market-field-grid two">
+        <label class="mytt-market-field">
+          <span>Category <em>Required</em></span>
+          <select id="myttMarketSellCategory" name="category" required>
+            <option value="">Select category</option>
+            <option value="Complete Racket">Complete Racket</option>
+            <option value="Blade">Blade</option>
+            <option value="Rubber">Rubber</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Apparel">Apparel</option>
+            <option value="Bag">Bag</option>
+            <option value="Accessories">Accessories</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+        <label class="mytt-market-field">
+          <span>Condition <em>Required</em></span>
+          <select id="myttMarketCondition" name="condition" required>
+            <option value="">Select condition</option>
+            <option value="New">New</option>
+            <option value="Like New">Like New</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="mytt-market-field-grid two">
+        <label class="mytt-market-field">
+          <span>Brand <em>Required</em></span>
+          <input id="myttMarketBrand" name="brand" type="text" placeholder="e.g. Butterfly" maxlength="60" required>
+        </label>
+        <label class="mytt-market-field">
+          <span>Model / Item Name <em>Required</em></span>
+          <input id="myttMarketModel" name="model" type="text" placeholder="e.g. Viscaria" maxlength="100" required>
+        </label>
+      </div>
+
+      <div class="mytt-market-field-grid two">
+        <label class="mytt-market-field">
+          <span>Price (RM) <em>Required</em></span>
+          <input id="myttMarketPrice" name="price" type="number" min="1" max="99999" step="1" placeholder="e.g. 450" required>
+        </label>
+        <label class="mytt-market-field">
+          <span>Location <em>Required</em></span>
+          <input id="myttMarketLocation" name="location" type="text" placeholder="e.g. Kuala Lumpur" maxlength="80" required>
+        </label>
+      </div>
+
+      <label class="mytt-market-field">
+        <span>Description <em>Required</em></span>
+        <textarea id="myttMarketDescription" name="description" rows="4" maxlength="800" placeholder="Condition details, age, reason for selling, included items, etc." required></textarea>
+      </label>
+
+      <label class="mytt-market-field">
+        <span>WhatsApp / Contact Number <em>Required</em></span>
+        <input id="myttMarketContact" name="contact" type="tel" placeholder="e.g. +60123456789" maxlength="30" autocomplete="tel" required>
+        <small>Your number is used to create the Contact Seller button on approved listings.</small>
+      </label>
+
+      <div class="mytt-market-field">
+        <span>Item Photos <em>Required</em></span>
+        <div class="mytt-market-photo-note">
+          <strong>Upload 1–5 clear photos of the actual item.</strong>
+          <small>The first photo becomes the listing cover. Show both sides and any wear or damage clearly. Stock photos, unrelated images or unclear photos may be rejected.</small>
+        </div>
+        <label class="mytt-market-photo-picker" for="myttMarketPhoto">
+          <span>📷</span>
+          <span>
+            <strong id="myttMarketPhotoLabel">Choose up to 5 item photos</strong>
+            <small>JPG, PNG or WebP · up to 5 photos · max 8 MB each</small>
+          </span>
+        </label>
+        <input id="myttMarketPhoto" class="mytt-market-photo-input" type="file" accept="image/jpeg,image/png,image/webp" multiple required>
+        <div id="myttMarketPhotoPreviewWrap" class="mytt-market-photo-preview-wrap hidden">
+          <div id="myttMarketPhotoPreviewGrid" class="mytt-market-photo-preview-grid"></div>
+          <div class="mytt-market-photo-preview-actions">
+            <small>Photo 1 is the cover image.</small>
+            <button id="myttMarketRemovePhoto" type="button">Remove all photos</button>
+          </div>
+        </div>
+      </div>
+
+      <label class="mytt-market-consent">
+        <input id="myttMarketConsent" name="consent" type="checkbox" value="yes" required>
+        <span>I confirm that this listing is accurate and I agree that MYTT may publish the listing, seller name, MYTT ID and contact button on the MYTT website.</span>
+      </label>
+
+      <div id="myttMarketFormStatus" class="mytt-market-form-status" aria-live="polite"></div>
+      <button id="myttMarketSubmitButton" class="mytt-market-submit" type="submit">Submit Listing for Review</button>
+      <p class="mytt-market-form-note">Submitting a listing does not publish it immediately. MYTT admin approval is required first.</p>
+    </form>
+
+    <div id="myttMarketSuccess" class="mytt-market-success hidden">
+      <div>✓</div>
+      <h3>Listing Received</h3>
+      <p>Your equipment listing is pending MYTT admin review.</p>
+    </div>
+
+    <iframe id="myttMarketSubmitFrame" name="myttMarketSubmitFrame" class="mytt-market-submit-frame" title="Marketplace listing submission"></iframe>
+  </section>
+</div>
+
+
+
+<div id="myttMarketDetailModal" class="mytt-market-modal hidden" aria-hidden="true">
+  <div class="mytt-market-modal-backdrop" data-close-market-detail></div>
+  <section class="mytt-market-modal-card mytt-market-detail-card" role="dialog" aria-modal="true" aria-labelledby="myttMarketDetailTitle">
+    <button class="mytt-market-modal-close" type="button" data-close-market-detail aria-label="Close equipment details">×</button>
+    <div id="myttMarketDetailContent"></div>
+  </section>
+</div>
+
+
+
+<div id="profileModal" class="modal hidden">
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-card">
+    <button class="modal-close" data-close-modal aria-label="Close profile">×</button>
+    <div id="profileContent"></div>
+  </div>
+</div>
+
+<script>
+window.MYTT = {
+  singlesCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSXGQ-Pfqt9eY3wGYsSdbvEUtzhi3CeeBvGe06j3e5jXOkucz2vTtaQ7SbQTJu_qdwRfBYxNoqmi6R2/pub?gid=0&single=true&output=csv",
+  doublesCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSluDdRh-2MZW7emwK5wqPgFH-DUEgtWHbLcoZbThrl4rCEJOD25ztXK15S7_MPibRKNee5W0Y9GCY0/pub?gid=20383104&single=true&output=csv",
+  doublesMatchResultsCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSluDdRh-2MZW7emwK5wqPgFH-DUEgtWHbLcoZbThrl4rCEJOD25ztXK15S7_MPibRKNee5W0Y9GCY0/pub?gid=468763763&single=true&output=csv",
+  doublesTeamsCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSluDdRh-2MZW7emwK5wqPgFH-DUEgtWHbLcoZbThrl4rCEJOD25ztXK15S7_MPibRKNee5W0Y9GCY0/pub?gid=2039710288&single=true&output=csv",
+  playerDbCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQVFMviJw4bvH24DESoH7oOsBgk5xHNSZ5PMrW--UPOwFilVx8PDlq06khW70NHjPzEwYXDKe2D5OKB/pub?gid=508447017&single=true&output=csv",
+  matchResultsCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSXGQ-Pfqt9eY3wGYsSdbvEUtzhi3CeeBvGe06j3e5jXOkucz2vTtaQ7SbQTJu_qdwRfBYxNoqmi6R2/pub?gid=909390526&single=true&output=csv",
+  activePlayersCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSXGQ-Pfqt9eY3wGYsSdbvEUtzhi3CeeBvGe06j3e5jXOkucz2vTtaQ7SbQTJu_qdwRfBYxNoqmi6R2/pub?gid=1293054635&single=true&output=csv",
+  activeDoublesTeamsCsv: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSluDdRh-2MZW7emwK5wqPgFH-DUEgtWHbLcoZbThrl4rCEJOD25ztXK15S7_MPibRKNee5W0Y9GCY0/pub?gid=642146116&single=true&output=csv",
+  singlesWebAppUrl: "https://script.google.com/macros/s/AKfycbz24rx6NLZ_FLRft5mUcGbRBbqiofs4Ai0tuU_S58ZgCK9LVf9Q3TT1aQSzDLA6YVDfbQ/exec",
+  doublesWebAppUrl: "https://script.google.com/macros/s/AKfycbyZpeTiK4R31KME890Xh29TbGnbSZ5ACl8XYaWNiUPLvtjjEBSs43eSUwfq3VMdKPnK7A/exec",
+  joinWebAppUrl: "https://script.google.com/macros/s/AKfycbyMF13I7EuIuSExNl-mCgVgIAW1GQwa6o7gujC-eby0sgBphKxb2vrNTV5tlivDKU0faQ/exec",
+  eventsCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vS1_V7xQmPWSbB-slp4q_aYqBiVZLqEMQiakRBSRSbU1SG18eX8ahkpvcQTVk7qlPqCL7Ggd8bKiZpe/pub?gid=935869480&single=true&output=csv",
+  eventsGvizUrl: "https://docs.google.com/spreadsheets/d/1WFX7yzKVeu4qVx86MFl6LPPo7yf075tHmsZldO9Rpsk/gviz/tq?gid=935869480",
+  // Same-origin page fallback data. This is only used if both live Google sources fail.
+  // It is still passed through the normal event-date/status logic, so it will expire naturally.
+  eventsFallbackRows: [],
+  eventsWebAppUrl: "https://script.google.com/macros/s/AKfycbxFeSz9bn7LmnvcMDYIQnbsCdvD6dPnf3hEADE4JjWQ3UHzaTO_nVtjj3ABnGlz7fillA/exec",
+  marketplaceWebAppUrl: "https://script.google.com/macros/s/AKfycbzsbA7txcX5n7i-my-hVKbX79BQvF--DeU58E-638P6U-HaUaaGRi2P-igQK3UwfNdtaw/exec"
+};
+</script>
+<script src="data-resilience-v1.js?v=20260829-mobile-stability-v1"></script>
+<script defer src="app.js?v=20261021-registered-player-list-v3"></script>
+  <script defer src="event-players-v1.js?v=20260829-event-players-v1"></script>
+<script defer src="rank-system-v27.js?v=20261018-rank-unified-v1"></script>
+<script defer src="marketplace-core-v23.js?v=20260824-mobile-perf-v1"></script>
+<script defer src="mobile-polish-v23.js?v=20260824-profile-observer-1"></script>
+<footer class="mytt-footer">
+  <div class="mytt-footer-inner">
+    <div class="mytt-footer-brand">
+      <div class="mytt-footer-mark">🏓</div>
+      <div>
+        <strong>MYTT</strong>
+        <span>Malaysia Table Tennis Rating System</span>
+      </div>
+    </div>
+    <nav class="mytt-footer-nav" aria-label="Footer navigation">
+      <a href="#home">Home</a>
+      <a href="#events">Events</a>
+      <a href="#players">Players</a>
+      <a href="#market">Market</a>
+    </nav>
+    <div class="mytt-footer-meta">
+      <span>MYTT Official Platform</span>
+      <span>mytt.my</span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- MYTT Mobile Bottom Navigation V14 — isolated from Event hero -->
+<nav class="v14-bottom-nav" aria-label="Mobile bottom navigation">
+  <a href="#home" class="v14-bottom-item" data-v14-target="home" aria-label="Home">
+    <span class="v14-bottom-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M3.5 10.5 12 3l8.5 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.5 21v-6h5v6"/></svg>
+    </span>
+    <span class="v14-bottom-label">Home</span>
+  </a>
+
+  <a href="#singles" class="v14-bottom-item" data-v14-target="singles" aria-label="Singles">
+    <span class="v14-bottom-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="8" cy="6.8" r="2.3"/><path d="M9.7 8.4 13 10.3M10.2 10.6l-1.4 5.7M13 10.3l4.2-4.1M9 16.3l4.6 4.2"/><circle cx="18.3" cy="5.2" r="1.1"/></svg>
+    </span>
+    <span class="v14-bottom-label">Singles</span>
+  </a>
+
+  <a href="#events" class="v14-bottom-item v14-bottom-events" data-v14-target="events" aria-label="Events">
+    <span class="v14-bottom-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M7 4h10v3.1c0 3-2.2 5.4-5 5.4s-5-2.4-5-5.4V4Z"/><path d="M9 13.5h6M12 12.5V19M8.5 20h7"/><path d="M7 6H4v1.4c0 2.6 1.5 4.3 4 4.6M17 6h3v1.4c0 2.6-1.5 4.3-4 4.6"/></svg>
+    </span>
+    <span class="v14-bottom-label">Events</span>
+  </a>
+
+  <a href="#doubles" class="v14-bottom-item" data-v14-target="doubles" aria-label="Doubles">
+    <span class="v14-bottom-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="7.5" cy="7.2" r="2.2"/><circle cx="16.2" cy="7.2" r="2.2"/><path d="M3.8 18.5c.5-3.3 2.1-5 4.7-5s4.2 1.7 4.7 5M11.3 18.5c.5-3.3 2.1-5 4.7-5 1.6 0 2.9.6 3.7 1.8"/></svg>
+    </span>
+    <span class="v14-bottom-label">Doubles</span>
+  </a>
+
+  <button type="button" class="v14-bottom-item v14-bottom-more" data-v14-target="more" aria-label="More" aria-expanded="false">
+    <span class="v14-bottom-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></svg>
+    </span>
+    <span class="v14-bottom-label">More</span>
+  </button>
+</nav>
+
+<div id="v14MoreBackdrop" class="v14-more-backdrop" hidden></div>
+<section id="v14MoreSheet" class="v14-more-sheet" hidden aria-label="More navigation">
+  <div class="v14-more-handle" aria-hidden="true"></div>
+  <div class="v14-more-head">
+    <div><small>MYTT</small><strong>More</strong></div>
+    <button type="button" class="v14-more-close" aria-label="Close">×</button>
+  </div>
+  <div class="v14-more-grid">
+    <a href="#players" data-v14-target="players">
+      <span class="v14-more-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3"/><path d="M6 19c1.3-3 3.5-4.5 6-4.5s4.7 1.5 6 4.5"/></svg></span>
+      <strong>Players</strong><small>Official profiles</small>
+    </a>
+    <a href="#submit" data-v14-target="submit">
+      <span class="v14-more-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
+      <strong>Join / Submit</strong><small>Official forms</small>
+    </a>
+  </div>
+</section>
+
+</body>
+</html>
