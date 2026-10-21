@@ -689,6 +689,9 @@ html body #home #viewPlayersCta > span{
   }
 }
 
+    }
+
+   
 /* MYTT Events: mobile title alignment */
 @media (max-width: 768px) {
   #events .mytt-event-card-heading .me5-title {
@@ -712,43 +715,10 @@ html body #home #viewPlayersCta > span{
 }
 
     </style>
-
-<style id="event-registration-player-picker-styles">
-  .event-registration-player-field { position: relative; }
-  .event-registration-player-label { display: block; margin-bottom: 8px; }
-  .event-registration-player-label span { display: inline-block; }
-  .event-registration-player-picker { position: relative; width: 100%; }
-  .event-registration-player-picker .result-player-search { width: 100%; }
-  .event-registration-player-picker .player-picker-menu {
-    position: absolute; top: calc(100% + 6px); left: 0; right: 0;
-    z-index: 10050; max-height: min(320px, 44vh); overflow-y: auto;
-    border: 1px solid rgba(255,255,255,.14); border-radius: 14px;
-    background: #111319; box-shadow: 0 16px 40px rgba(0,0,0,.45);
-  }
-  .event-registration-player-picker .player-picker-label {
-    padding: 10px 13px 7px; color: rgba(255,255,255,.58);
-    font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
-  }
-  .event-registration-player-picker .player-picker-option {
-    display: flex; width: 100%; align-items: center; justify-content: space-between;
-    gap: 12px; padding: 12px 14px; border: 0; border-top: 1px solid rgba(255,255,255,.06);
-    background: transparent; color: inherit; text-align: left; cursor: pointer;
-  }
-  .event-registration-player-picker .player-picker-option:hover,
-  .event-registration-player-picker .player-picker-option:focus-visible {
-    background: rgba(255,255,255,.08); outline: none;
-  }
-  .event-registration-player-picker .player-picker-option strong { font-size: 14px; font-weight: 750; }
-  .event-registration-player-picker .player-picker-option small {
-    flex: 0 0 auto; color: rgba(255,255,255,.56); font-size: 11px; font-weight: 650;
-  }
-  .event-registration-player-picker .player-picker-empty {
-    padding: 14px; color: rgba(255,255,255,.68); font-size: 13px;
-  }
-  .event-registration-player-selection { display: block; margin-top: 7px; color: rgba(255,255,255,.58); font-size: 12px; }
-  .event-registration-player-selection.is-selected { color: #72e0a4; }
+    </head>
+  
 </style>
-
+ 
 </head>
 <body>
 <header class="site-header premium-header">
@@ -1226,36 +1196,60 @@ html body #home #viewPlayersCta > span{
       <input id="eventRegistrationSubmissionId" type="hidden" name="submissionId">
       <input id="eventRegistrationEventId" type="hidden" name="eventId">
 
-      <input id="eventRegistrationPlayerNameValue" type="hidden" name="playerName">
-      <input id="eventRegistrationMyttId" type="hidden" name="myttId">
-
-      <div class="result-field event-registration-player-field">
-        <label for="eventRegistrationPlayerName" class="event-registration-player-label">
+      <div class="result-player-grid">
+        <label class="result-field">
           <span>Player Name <em>Required</em></span>
-        </label>
-        <div class="player-picker event-registration-player-picker">
           <input id="eventRegistrationPlayerName"
-                 class="result-player-search"
-                 type="search"
-                 placeholder="Search by player name or MYTT ID..."
-                 maxlength="100"
-                 autocomplete="off"
-                 aria-label="Search official MYTT players by name or MYTT ID"
-                 aria-autocomplete="list"
-                 aria-controls="eventRegistrationPlayerMenu"
-                 aria-expanded="false"
-                 role="combobox"
+                 name="playerName"
+                 type="text"
+                 list="eventPlayerSuggestions"
+                 placeholder="Your player name"
+                 maxlength="80"
+                 autocomplete="name"
                  required>
-          <div id="eventRegistrationPlayerMenu"
-               class="player-picker-menu hidden"
-               role="listbox"
-               aria-label="Official MYTT players"></div>
-          <datalist id="eventPlayerSuggestions" hidden></datalist>
-        </div>
-        <small id="eventRegistrationPlayerSelection" class="event-registration-player-selection">
-          Search and select your official player profile.
-        </small>
+          <datalist id="eventPlayerSuggestions"></datalist>
+        </label>
+
+        <label class="result-field">
+          <span>MYTT ID <small>Optional</small></span>
+          <input id="eventRegistrationMyttId"
+                 name="myttId"
+                 type="text"
+                 placeholder="e.g. MYTT0001"
+                 maxlength="40"
+                 autocomplete="off">
+        </label>
       </div>
+
+      <div class="result-player-grid">
+        <label id="eventCategoryField" class="result-field">
+          <span>Category <small>Optional</small></span>
+          <select id="eventRegistrationCategory" name="category">
+            <option value="">Select category</option>
+          </select>
+        </label>
+
+        <label id="eventDoublesPartnerField" class="result-field hidden">
+          <span>Doubles Partner <small>Optional</small></span>
+          <input id="eventRegistrationDoublesPartner"
+                 name="doublesPartner"
+                 type="text"
+                 list="eventPlayerSuggestions"
+                 placeholder="Partner name"
+                 maxlength="80"
+                 autocomplete="off">
+        </label>
+      </div>
+
+      <label class="result-field">
+        <span>Contact Number <small>Optional</small></span>
+        <input id="eventRegistrationContact"
+               name="contactNumber"
+               type="tel"
+               placeholder="e.g. 012-3456789"
+               maxlength="40"
+               autocomplete="tel">
+      </label>
 
       <details id="eventRegistrationNotesDetails" class="event-notes-details">
         <summary>＋ Add a note <small>Optional</small></summary>
@@ -1759,7 +1753,7 @@ window.MYTT = {
 };
 </script>
 <script src="data-resilience-v1.js?v=20260829-mobile-stability-v1"></script>
-<script defer src="app.js?v=20261020-events-date-fix-v4"></script>
+<script defer src="app.js?v=20261021-category-optional-v2"></script>
   <script defer src="event-players-v1.js?v=20260829-event-players-v1"></script>
 <script defer src="rank-system-v27.js?v=20261018-rank-unified-v1"></script>
 <script defer src="marketplace-core-v23.js?v=20260824-mobile-perf-v1"></script>
