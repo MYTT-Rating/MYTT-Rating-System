@@ -2178,8 +2178,6 @@ function eventFormEls(){
     playerMenu:document.getElementById("eventRegistrationPlayerMenu"),
     playerSelection:document.getElementById("eventRegistrationPlayerSelection"),
     myttId:document.getElementById("eventRegistrationMyttId"),
-    notesDetails:document.getElementById("eventRegistrationNotesDetails"),
-    notes:document.getElementById("eventRegistrationNotes"),
     status:document.getElementById("eventRegistrationFormStatus"),
     submit:document.getElementById("eventRegistrationSubmitButton"),
     success:document.getElementById("eventRegistrationSuccessState"),
@@ -2995,7 +2993,6 @@ function resetEventRegistrationForm(){
     e.submit.disabled=false;
     e.submit.textContent="Confirm Registration";
   }
-  e.notesDetails?.removeAttribute("open");
   e.form.classList.remove("hidden");
   e.success?.classList.add("hidden");
 }
