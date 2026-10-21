@@ -751,25 +751,25 @@ html body #home #viewPlayersCta > span{
 
 <style id="event-registration-list-styles">
   .event-registration-list {
-    margin: 14px 0 16px;
-    padding: 13px;
-    border: 1px solid rgba(255, 74, 83, .28);
-    border-radius: 14px;
-    background: linear-gradient(145deg, rgba(255, 55, 65, .085), rgba(12, 13, 17, .96));
+    margin: 10px 0 12px;
+    padding: 10px;
+    border: 1px solid rgba(255, 74, 83, .42);
+    border-radius: 13px;
+    background: linear-gradient(145deg, rgba(255, 55, 65, .075), rgba(12, 13, 17, .96));
     color: #f6f6f7;
   }
   .event-registration-list-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 8px;
+    gap: 8px;
+    margin-bottom: 5px;
   }
   .event-registration-list-heading { min-width: 0; }
   .event-registration-list-kicker {
-    margin: 0 0 4px;
+    margin: 0 0 2px;
     color: #ff626b;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 900;
     letter-spacing: .13em;
     text-transform: uppercase;
@@ -779,17 +779,17 @@ html body #home #viewPlayersCta > span{
     color: #fff;
     font-size: 14px;
     font-weight: 850;
-    line-height: 1.25;
+    line-height: 1.15;
   }
   .event-registration-refresh {
     flex: 0 0 auto;
     border: 1px solid rgba(255, 95, 103, .35);
-    border-radius: 9px;
-    padding: 7px 9px;
+    border-radius: 8px;
+    padding: 6px 8px;
     background: rgba(255, 65, 75, .08);
     color: #ff858b;
     font: inherit;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 800;
     cursor: pointer;
   }
@@ -797,88 +797,103 @@ html body #home #viewPlayersCta > span{
   .event-registration-list-status {
     margin: 0;
     color: rgba(255,255,255,.62);
-    font-size: 12px;
-    line-height: 1.45;
+    font-size: 11px;
+    line-height: 1.35;
   }
   .event-registration-list-items {
     display: grid;
-    gap: 6px;
-    max-height: 176px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+    max-height: 220px;
     overflow-y: auto;
-    margin: 8px 0 0;
-    padding: 0 2px 0 0;
+    margin: 6px 0 0;
+    padding: 0 1px 0 0;
     list-style: none;
   }
   .event-registration-list-item {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 9px;
+    gap: 5px;
+    box-sizing: border-box;
     min-width: 0;
-    padding: 8px 9px;
-    border: 1px solid rgba(255,255,255,.07);
-    border-radius: 10px;
-    background: rgba(0,0,0,.28);
+    min-height: 0;
+    padding: 5px 6px;
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 9px;
+    background: linear-gradient(135deg, rgba(34, 25, 31, .88), rgba(9, 10, 14, .96));
   }
   .event-registration-list-number {
     display: flex;
-    flex: 0 0 25px;
-    width: 25px;
-    height: 25px;
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    background: rgba(255, 75, 83, .12);
+    border-radius: 6px;
+    background: rgba(255, 75, 83, .16);
     color: #ff7c83;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 900;
+    line-height: 1;
   }
   .event-registration-list-player {
     display: block;
-    flex: 1 1 auto;
+    flex: 1 1 0;
     min-width: 0;
   }
   .event-registration-list-player strong {
     display: block;
     overflow-wrap: anywhere;
+    word-break: normal;
     color: #fff;
-    font-size: 13px;
-    font-weight: 800;
-    line-height: 1.25;
+    font-size: 10.5px;
+    font-weight: 850;
+    line-height: 1.12;
   }
   .event-registration-list-player small {
     display: block;
     margin-top: 2px;
-    color: rgba(255,255,255,.52);
-    font-size: 10px;
-    line-height: 1.2;
+    color: rgba(220,220,230,.58);
+    font-size: 8.5px;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
   }
   .event-registration-list-check {
     flex: 0 0 auto;
     color: #72e0a4;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 900;
+    line-height: 1;
   }
   .event-registration-list-empty {
-    margin: 8px 0 0;
-    padding: 11px 10px;
+    margin: 6px 0 0;
+    padding: 9px 8px;
     border: 1px dashed rgba(255,255,255,.13);
-    border-radius: 10px;
+    border-radius: 9px;
     color: rgba(255,255,255,.62);
-    font-size: 12px;
-    line-height: 1.45;
+    font-size: 11px;
+    line-height: 1.35;
   }
-  #eventRegistrationListEmpty[hidden] {
-    display: none !important;
-  }
+  #eventRegistrationListEmpty[hidden] { display: none !important; }
   @media (max-width: 560px) {
-    .event-registration-list { margin: 12px 0 14px; padding: 11px; }
-    .event-registration-list-items { max-height: 150px; }
+    .event-registration-list { margin: 9px 0 10px; padding: 9px; }
+    .event-registration-list-items { max-height: 200px; }
+    .event-registration-list-item { gap: 4px; padding: 4px 4px; }
+    .event-registration-list-number { flex-basis: 19px; width: 19px; height: 19px; font-size: 9px; }
+    .event-registration-list-player strong { font-size: 10px; }
+    .event-registration-list-player small { font-size: 8px; }
+  }
+  @media (max-width: 360px) {
+    .event-registration-list-item { gap: 3px; padding: 4px 3px; }
+    .event-registration-list-player strong { font-size: 9.5px; }
+    .event-registration-list-player small { font-size: 7.5px; }
   }
 </style>
 
 <!-- MYTT event-registration-layout-v3 20261021: compact CTA + enforced two-column registration list -->
 <style id="mytt-event-registration-layout-v3">
-  /* Registration-only layout polish. Explicitly enforce grid to resist global CSS overrides. */
+  /* Compact registration button and two-column player list. CSS only; form logic is unchanged. */
   #eventRegistrationForm .event-registration-submit-dock {
     display: flex !important;
     flex-direction: column !important;
@@ -886,7 +901,6 @@ html body #home #viewPlayersCta > span{
     gap: 7px !important;
     margin-top: 8px !important;
   }
-
   #eventRegistrationSubmitButton.result-submit {
     display: block !important;
     box-sizing: border-box !important;
@@ -901,169 +915,17 @@ html body #home #viewPlayersCta > span{
     border-radius: 11px !important;
     white-space: normal !important;
   }
-
   #eventRegistrationListItems.event-registration-list-items {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     grid-auto-flow: row !important;
     align-items: stretch !important;
-    gap: 8px !important;
-    max-height: 300px !important;
-    overflow-y: auto !important;
-  }
-
-  #eventRegistrationListItems .event-registration-list-item {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 6px !important;
-    box-sizing: border-box !important;
-    min-width: 0 !important;
-    min-height: 56px !important;
-    padding: 8px 7px !important;
-  }
-
-  #eventRegistrationListItems .event-registration-list-number {
-    flex: 0 0 21px !important;
-    width: 21px !important;
-    height: 21px !important;
-    border-radius: 7px !important;
-    font-size: 10px !important;
-  }
-
-  #eventRegistrationListItems .event-registration-list-player {
-    display: block !important;
-    flex: 1 1 0 !important;
-    min-width: 0 !important;
-  }
-
-  #eventRegistrationListItems .event-registration-list-player strong {
-    display: block !important;
-    font-size: 11px !important;
-    line-height: 1.2 !important;
-    overflow-wrap: anywhere !important;
-    word-break: normal !important;
-  }
-
-  #eventRegistrationListItems .event-registration-list-player small {
-    display: block !important;
-    margin-top: 2px !important;
-    font-size: 9px !important;
-    line-height: 1.2 !important;
-    overflow-wrap: anywhere !important;
-  }
-
-  #eventRegistrationListItems .event-registration-list-check {
-    display: block !important;
-    flex: 0 0 auto !important;
-    font-size: 13px !important;
-  }
-
-  @media (max-width: 560px) {
-    #eventRegistrationSubmitButton.result-submit {
-      width: min(100%, 330px) !important;
-      min-height: 43px !important;
-      height: 43px !important;
-      padding: 8px 10px !important;
-      font-size: 14px !important;
-    }
-
-    #eventRegistrationListItems.event-registration-list-items {
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      gap: 7px !important;
-      max-height: 300px !important;
-    }
-
-    #eventRegistrationListItems .event-registration-list-item {
-      gap: 4px !important;
-      padding: 7px 5px !important;
-    }
-
-    #eventRegistrationListItems .event-registration-list-number {
-      flex-basis: 19px !important;
-      width: 19px !important;
-      height: 19px !important;
-      font-size: 9px !important;
-    }
-
-    #eventRegistrationListItems .event-registration-list-player strong {
-      font-size: 10.5px !important;
-    }
-
-    #eventRegistrationListItems .event-registration-list-player small {
-      font-size: 8.5px !important;
-    }
-  }
-
-  @media (max-width: 360px) {
-    #eventRegistrationListItems .event-registration-list-item {
-      gap: 3px !important;
-      padding: 6px 4px !important;
-    }
-
-    #eventRegistrationListItems .event-registration-list-player strong {
-      font-size: 10px !important;
-    }
-
-    #eventRegistrationListItems .event-registration-list-player small {
-      font-size: 8px !important;
-    }
-  }
-</style>
-
-
-<style id="mytt-event-registration-compact-v4">
-  /* Compact, polished registered-player list; registration logic remains unchanged. */
-  #eventRegistrationList.event-registration-list {
-    margin: 10px 0 12px !important;
-    padding: 10px !important;
-    border: 1px solid rgba(255, 74, 83, .48) !important;
-    border-radius: 13px !important;
-    background:
-      radial-gradient(circle at 100% 0%, rgba(255, 55, 70, .10), transparent 42%),
-      linear-gradient(145deg, rgba(255, 55, 65, .07), rgba(12, 13, 17, .97)) !important;
-    box-shadow: 0 0 12px rgba(255, 35, 50, .07) !important;
-  }
-
-  #eventRegistrationList .event-registration-list-header {
-    margin-bottom: 5px !important;
-    gap: 8px !important;
-  }
-
-  #eventRegistrationList .event-registration-list-kicker {
-    margin-bottom: 2px !important;
-    font-size: 9px !important;
-    letter-spacing: .14em !important;
-  }
-
-  #eventRegistrationList .event-registration-list-count {
-    font-size: 14px !important;
-    line-height: 1.15 !important;
-  }
-
-  #eventRegistrationList .event-registration-refresh {
-    padding: 6px 8px !important;
-    font-size: 10px !important;
-  }
-
-  #eventRegistrationList #eventRegistrationListStatus {
-    font-size: 11px !important;
-    line-height: 1.3 !important;
-  }
-
-  #eventRegistrationListItems.event-registration-list-items {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    grid-auto-flow: row !important;
-    align-items: stretch !important;
-    align-content: start !important;
     gap: 5px !important;
-    max-height: 230px !important;
+    max-height: 220px !important;
     overflow-y: auto !important;
     margin: 6px 0 0 !important;
     padding: 0 1px 0 0 !important;
   }
-
   #eventRegistrationListItems .event-registration-list-item {
     display: flex !important;
     flex-direction: row !important;
@@ -1073,98 +935,73 @@ html body #home #viewPlayersCta > span{
     min-width: 0 !important;
     min-height: 0 !important;
     padding: 5px 6px !important;
-    border: 1px solid rgba(255, 255, 255, .10) !important;
-    border-radius: 9px !important;
-    background: linear-gradient(135deg, rgba(34, 25, 31, .94), rgba(9, 10, 14, .96)) !important;
   }
-
   #eventRegistrationListItems .event-registration-list-number {
     flex: 0 0 20px !important;
     width: 20px !important;
     height: 20px !important;
     border-radius: 6px !important;
-    background: linear-gradient(145deg, rgba(255, 72, 86, .25), rgba(95, 25, 37, .48)) !important;
-    border: 1px solid rgba(255, 100, 112, .13) !important;
-    font-size: 9px !important;
-    line-height: 1 !important;
+    font-size: 10px !important;
   }
-
   #eventRegistrationListItems .event-registration-list-player {
     display: block !important;
     flex: 1 1 0 !important;
     min-width: 0 !important;
   }
-
   #eventRegistrationListItems .event-registration-list-player strong {
     display: block !important;
-    margin: 0 !important;
-    color: #fff !important;
     font-size: 10.5px !important;
-    font-weight: 850 !important;
     line-height: 1.12 !important;
     overflow-wrap: anywhere !important;
     word-break: normal !important;
   }
-
   #eventRegistrationListItems .event-registration-list-player small {
     display: block !important;
     margin-top: 2px !important;
-    color: rgba(220, 220, 230, .58) !important;
-    font-size: 8px !important;
+    font-size: 8.5px !important;
     line-height: 1.1 !important;
     overflow-wrap: anywhere !important;
   }
-
   #eventRegistrationListItems .event-registration-list-check {
+    display: block !important;
     flex: 0 0 auto !important;
-    color: #70e2a4 !important;
     font-size: 12px !important;
-    line-height: 1 !important;
   }
-
   @media (max-width: 560px) {
-    #eventRegistrationList.event-registration-list {
-      margin: 9px 0 10px !important;
-      padding: 9px !important;
+    #eventRegistrationSubmitButton.result-submit {
+      width: min(100%, 330px) !important;
+      min-height: 43px !important;
+      height: 43px !important;
+      padding: 8px 10px !important;
+      font-size: 14px !important;
     }
-
     #eventRegistrationListItems.event-registration-list-items {
       grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      gap: 5px !important;
-      max-height: 220px !important;
+      gap: 4px !important;
+      max-height: 200px !important;
     }
-
     #eventRegistrationListItems .event-registration-list-item {
       gap: 4px !important;
-      padding: 5px 4px !important;
+      min-height: 0 !important;
+      padding: 4px 4px !important;
     }
-
     #eventRegistrationListItems .event-registration-list-number {
       flex-basis: 19px !important;
       width: 19px !important;
       height: 19px !important;
       font-size: 9px !important;
     }
-
-    #eventRegistrationListItems .event-registration-list-player strong {
-      font-size: 10px !important;
-      line-height: 1.1 !important;
-    }
-
-    #eventRegistrationListItems .event-registration-list-player small {
-      font-size: 8px !important;
-    }
+    #eventRegistrationListItems .event-registration-list-player strong { font-size: 10px !important; }
+    #eventRegistrationListItems .event-registration-list-player small { font-size: 8px !important; }
   }
-
   @media (max-width: 360px) {
     #eventRegistrationListItems .event-registration-list-item {
       gap: 3px !important;
+      min-height: 0 !important;
       padding: 4px 3px !important;
     }
-
-    #eventRegistrationListItems .event-registration-list-player strong {
-      font-size: 9.5px !important;
-    }
+    #eventRegistrationListItems .event-registration-list-player strong { font-size: 9.5px !important; }
+    #eventRegistrationListItems .event-registration-list-player small { font-size: 7.5px !important; }
   }
 </style>
 
@@ -2179,7 +2016,7 @@ window.MYTT = {
 };
 </script>
 <script src="data-resilience-v1.js?v=20260829-mobile-stability-v1"></script>
-<script defer src="app.js?v=20261021-registered-player-list-v3"></script>
+<script defer src="app.js?v=20261021-player-search-on-type-v1"></script>
   <script defer src="event-players-v1.js?v=20260829-event-players-v1"></script>
 <script defer src="rank-system-v27.js?v=20261018-rank-unified-v1"></script>
 <script defer src="marketplace-core-v23.js?v=20260824-mobile-perf-v1"></script>

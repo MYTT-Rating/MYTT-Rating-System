@@ -2897,6 +2897,11 @@ function renderEventRegistrationPlayerPicker(forceOpen=false){
   if(!forceOpen&&document.activeElement!==e.playerName)return;
 
   const query=String(e.playerName.value||"").trim();
+  // Keep the player list hidden until the user has entered at least one character.
+  if(!query){
+    closeEventRegistrationPlayerPicker();
+    return;
+  }
   const querySlug=slug(query);
   let list=eventRegistrationPlayerRecords();
   if(query){
@@ -2957,7 +2962,13 @@ function selectEventRegistrationPlayer(name,id){
 }
 
 function renderEventPlayerSuggestions(){
-  // Kept as the existing entry point, now backed by the searchable player picker.
+  // Do not open the list on page load or when the registration modal first opens.
+  // Re-render only when a non-empty query is still focused in the event player field.
+  const e=eventFormEls();
+  if(!e.playerName||document.activeElement!==e.playerName||!String(e.playerName.value||"").trim()){
+    closeEventRegistrationPlayerPicker();
+    return;
+  }
   renderEventRegistrationPlayerPicker(true);
 }
 
@@ -3160,14 +3171,14 @@ function openEventRegistration(eventId){
   e.date.textContent="📅 "+[event.dateDisplay||event.date||"TBA",event.time||""].filter(Boolean).join(" · ");
   e.venue.textContent="📍 "+String(event.venue||"Venue TBA");
 
-  renderEventPlayerSuggestions();
+  // Open the form without showing player suggestions or auto-opening the mobile keyboard.
+  closeEventRegistrationPlayerPicker();
 
   e.modal.classList.remove("hidden");
   e.modal.setAttribute("aria-hidden","false");
   document.body.classList.add("result-modal-open");
 
   loadEventRegistrationList(event.eventId);
-  setTimeout(()=>e.playerName?.focus(),80);
 }
 
 function closeEventRegistration(){
