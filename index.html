@@ -1257,6 +1257,18 @@ html body #home #viewPlayersCta > span{
         </small>
       </div>
 
+      <details id="eventRegistrationNotesDetails" class="event-notes-details">
+        <summary>＋ Add a note <small>Optional</small></summary>
+        <label class="result-field event-notes-field">
+          <span>Notes <small>Optional</small></span>
+          <textarea id="eventRegistrationNotes"
+                    name="notes"
+                    rows="2"
+                    maxlength="500"
+                    placeholder="Anything MYTT should know?"></textarea>
+        </label>
+      </details>
+
       <div id="eventRegistrationFormStatus"
            class="result-form-status"
            aria-live="polite"></div>
@@ -1747,7 +1759,7 @@ window.MYTT = {
 };
 </script>
 <script src="data-resilience-v1.js?v=20260829-mobile-stability-v1"></script>
-<script defer src="app.js?v=20261021-no-registration-note-v1"></script>
+<script defer src="app.js?v=20261020-events-date-fix-v4"></script>
   <script defer src="event-players-v1.js?v=20260829-event-players-v1"></script>
 <script defer src="rank-system-v27.js?v=20261018-rank-unified-v1"></script>
 <script defer src="marketplace-core-v23.js?v=20260824-mobile-perf-v1"></script>
