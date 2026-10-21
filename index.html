@@ -867,6 +867,9 @@ html body #home #viewPlayersCta > span{
     font-size: 12px;
     line-height: 1.45;
   }
+  #eventRegistrationListEmpty[hidden] {
+    display: none !important;
+  }
   @media (max-width: 560px) {
     .event-registration-list { margin: 12px 0 14px; padding: 11px; }
     .event-registration-list-items { max-height: 150px; }
@@ -1403,7 +1406,7 @@ html body #home #viewPlayersCta > span{
       </div>
       <p id="eventRegistrationListStatus" class="event-registration-list-status" aria-live="polite">Choose an event to view registrations.</p>
       <ul id="eventRegistrationListItems" class="event-registration-list-items" aria-label="Confirmed registered players"></ul>
-      <p id="eventRegistrationListEmpty" class="event-registration-list-empty hidden">No confirmed registrations yet.</p>
+      <p id="eventRegistrationListEmpty" class="event-registration-list-empty hidden" hidden>No confirmed registrations yet.</p>
     </section>
 
     <div id="eventRegistrationSuccessState" class="join-success-state hidden">
@@ -1884,7 +1887,7 @@ window.MYTT = {
 };
 </script>
 <script src="data-resilience-v1.js?v=20260829-mobile-stability-v1"></script>
-<script defer src="app.js?v=20261021-registered-player-list-v2"></script>
+<script defer src="app.js?v=20261021-registered-player-list-v3"></script>
   <script defer src="event-players-v1.js?v=20260829-event-players-v1"></script>
 <script defer src="rank-system-v27.js?v=20261018-rank-unified-v1"></script>
 <script defer src="marketplace-core-v23.js?v=20260824-mobile-perf-v1"></script>

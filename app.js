@@ -2986,7 +2986,11 @@ function resetEventRegistrationList(message="Choose an event to view registratio
     e.registrationListStatus.classList.remove("hidden","error");
   }
   if(e.registrationListItems)e.registrationListItems.innerHTML="";
-  e.registrationListEmpty?.classList.add("hidden");
+  if(e.registrationListEmpty){
+    e.registrationListEmpty.classList.add("hidden");
+    e.registrationListEmpty.hidden=true;
+    e.registrationListEmpty.style.display="none";
+  }
 }
 
 function renderEventRegistrationList(registrations){
@@ -3021,7 +3025,12 @@ function renderEventRegistrationList(registrations){
     }).join("");
   }
 
-  e.registrationListEmpty?.classList.toggle("hidden",rows.length>0);
+  if(e.registrationListEmpty){
+    const hasRows=rows.length>0;
+    e.registrationListEmpty.classList.toggle("hidden",hasRows);
+    e.registrationListEmpty.hidden=hasRows;
+    e.registrationListEmpty.style.display=hasRows?"none":"block";
+  }
 }
 
 function loadEventRegistrationList(eventId){
@@ -3031,7 +3040,11 @@ function loadEventRegistrationList(eventId){
 
   const requestNo=++eventRegistrationListRequestNo;
   e.registrationListItems.innerHTML="";
-  e.registrationListEmpty?.classList.add("hidden");
+  if(e.registrationListEmpty){
+    e.registrationListEmpty.classList.add("hidden");
+    e.registrationListEmpty.hidden=true;
+    e.registrationListEmpty.style.display="none";
+  }
   if(e.registrationCount)e.registrationCount.textContent="— PLAYERS";
   if(e.registrationListStatus){
     e.registrationListStatus.textContent="Loading registered players…";
