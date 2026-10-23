@@ -285,8 +285,17 @@ function renderLeaderboardRows(type){
     items.length
   );
 
-  items.slice(0,visible).forEach(item=>{
-    body.appendChild(makeRow(item));
+  items.slice(0,visible).forEach((item,index)=>{
+    const row=makeRow(item);
+    body.appendChild(row);
+
+    // Prioritize avatars in the first 10 visible rows
+    if(index<10){
+      row.querySelectorAll("img").forEach(img=>{
+        img.loading="eager";
+        img.fetchPriority="high";
+      });
+    }
   });
 
   renderLeaderboardControls(type);
