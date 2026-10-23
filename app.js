@@ -71,11 +71,16 @@ function ratingHistoryHTML(name){const list=playerMatches(name);let points=[];li
 function headToHeadHTML(name){const map={};playerMatches(name).forEach(m=>{const opp=opponentOf(m,name);if(!opp)return;const key=slug(opp);if(!map[key])map[key]={opp,w:0,l:0,total:0};if(isWin(m,name))map[key].w++;else map[key].l++;map[key].total++});const rows=Object.values(map).sort((a,b)=>b.total-a.total).slice(0,6);if(!rows.length)return`<div class="profile-panel"><h3>🤝 Head to Head</h3><p class="muted">No head-to-head data yet.</p></div>`;return`<div class="profile-panel"><h3>🤝 Head to Head</h3><div class="h2h-list">${rows.map(r=>`<div class="h2h-row"><span data-player="${encodeURIComponent(r.opp)}">${r.opp}</span><strong>${r.w}-${r.l}</strong><small>${r.total} matches</small></div>`).join("")}</div></div>`}
 function rankLabel(rank){const v=String(rank||"").trim();if(v=="1")return"🥇 1";if(v=="2")return"🥈 2";if(v=="3")return"🥉 3";return v||"-"}
 function avatarUrl(db){if(!db?.id)return"";return `avatars/${db.id}.jpg`}
-function avatarHTML(db,cls="avatar"){const src=avatarUrl(db);const kind=String(cls||"");const profile=kind.includes("profile-avatar");const leaderboard=kind.includes("row-avatar");const loading=(profile||leaderboard)?"eager":"lazy";const priority=profile?"high":leaderboard?"auto":"low";return `<div class="${cls}">${src?`<img src="${src}" alt="${db?.name||"Player"}" loading="${loading}" decoding="async" fetchpriority="${priority}" onerror="this.parentElement.textContent='👤'">`:"👤"}</div>`}
+function avatarHTML(db,cls="avatar"){
+  const src=avatarUrl(db);
+  const kind=String(cls||"");
+  const profile=kind.includes("profile-avatar");
+  const loading=profile?"eager":"lazy";
+  const priority=profile?"high":"low";
+  return `<div class="${cls}">${src?`<img src="${src}" alt="${db?.name||"Player"}" loading="${loading}" decoding="async" fetchpriority="${priority}" onerror="this.parentElement.textContent='👤'">`:"👤"}</div>`;
+}
 function findDbByName(name){const s=slug(name);return playerDb.find(p=>slug(p.name)===s)||playerDb.find(p=>slug(p.name).includes(s)||s.includes(slug(p.name)))}
 function findLbByName(name){const s=slug(name);return singlesPlayers.find(p=>slug(p.name)===s)||singlesPlayers.find(p=>slug(p.name).includes(s)||s.includes(slug(p.name)))||{rating:"1500",peak:"1500",rank:"-",record:"0-0",winRate:"-"}}
-
-
 function parseRecord(record){
   const m=String(record||"0-0").match(/(\d+)\s*-\s*(\d+)/);
   return {wins:m?Number(m[1]):0, losses:m?Number(m[2]):0};
