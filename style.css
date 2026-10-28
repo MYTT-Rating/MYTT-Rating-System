@@ -8135,3 +8135,39 @@ td{
     padding-top: 10px !important;
   }
 }
+
+/* MYTT: Fix long doubles names on mobile only */
+@media screen and (max-width: 600px) {
+  .team-cell {
+    min-width: 0 !important;
+  }
+
+  .team-members {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    gap: 6px !important;
+  }
+
+  .team-member {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    gap: 5px !important;
+  }
+
+  .team-member .row-avatar {
+    flex: 0 0 34px !important;
+  }
+
+  .team-member .team-player-name {
+    display: block !important;
+    flex: 1 1 0 !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 70px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+}
