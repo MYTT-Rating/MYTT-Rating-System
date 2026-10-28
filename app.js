@@ -632,10 +632,9 @@ function openDoublesTeamProfile(teamId){
                   data-player="${encodeURIComponent(member)}"
                 >
                   ${avatarHTML(db,"doubles-hero-avatar")}
-                  <span style="font-size:15px!important;font-weight:900!important;line-height:1.1!important;white-space:nowrap!important;">
+                 <span class="team-player-name" title="${member}" style="font-size:15px!important;font-weight:900!important;line-height:1.1!important;white-space:nowrap!important;">
   ${member}
-</span>
-                </button>
+</span>                </button>
               `;
             }).join('<span class="doubles-hero-plus">+</span>')}
           </div>
