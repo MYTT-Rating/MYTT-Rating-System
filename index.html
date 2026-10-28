@@ -1005,14 +1005,44 @@ html body #home #viewPlayersCta > span{
   }
 </style>
 
+
 <style id="mytt-mobile-hide-leaderboard-kicker">
 @media screen and (max-width: 600px) {
+
+  /* Hide the red small labels */
   #singles .section-head .kicker,
   #doubles .section-head .kicker {
     display: none !important;
   }
+
+  /* Keep the title and status aligned */
+  #singles .section-head > div,
+  #doubles .section-head > div {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  /* Force the white title onto one line */
+  #singles .section-head h2,
+  #doubles .section-head h2 {
+    white-space: nowrap !important;
+    font-size: clamp(16px, 5vw, 21px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.6px !important;
+    margin: 0 !important;
+  }
+
+  /* Keep the Updated badge compact */
+  #singles .section-head .status,
+  #doubles .section-head .status {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    font-size: 10px !important;
+    padding: 6px 8px !important;
+  }
 }
 </style>
+
 </head>
 <body>
 <header class="site-header premium-header">
