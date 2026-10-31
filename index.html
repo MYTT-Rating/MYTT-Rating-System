@@ -2554,27 +2554,35 @@ window.MYTT = {
   </div>
 </section>
 
-<style id="mytt-mobile-community-handshake">
 
+<style id="mytt-mobile-community-handshake">
 @media screen and (max-width: 700px) {
 
-  /* MYTT Community: Handshake icon on mobile only */
-
-  #contactAdminCta > span:first-child {
+  html body #home #contactAdminCta > span:first-child {
+    background-image: none !important;
     font-size: 0 !important;
+    color: transparent !important;
+  }
+
+  html body #home #contactAdminCta > span:first-child > * {
+    display: none !important;
+  }
+
+  html body #home #contactAdminCta > span:first-child::before {
+    content: "🤝" !important;
+    display: block !important;
+    font-size: 28px !important;
     line-height: 1 !important;
+    color: #ffffff !important;
   }
 
-  #contactAdminCta > span:first-child::before {
-    content: "🤝";
-    display: inline-block;
-    font-size: 30px;
-    line-height: 1;
+  html body #home #contactAdminCta > span:first-child::after {
+    content: none !important;
+    display: none !important;
   }
-
 }
-
 </style>
+
 
 </body>
 </html>
