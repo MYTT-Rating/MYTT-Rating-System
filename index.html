@@ -1252,15 +1252,15 @@ html body #home #viewPlayersCta > span{
   </div>
 </a>
 
+
 <a id="contactAdminCta"
    class="cta cta-dark"
-   href="https://wa.me/601128887750?text=Hi%20MYTT%20Admin%2C%20I%20need%20help%20with%20MYTT."
-   target="_blank"
-   rel="noopener noreferrer">
-  <span>💬</span>
+   href="#community"
+   aria-label="Open MYTT Community">
+  <span>👥</span>
   <div>
-    <strong>Contact Admin</strong>
-    <small>Need help? Contact MYTT admin</small>
+    <strong>MYTT Community</strong>
+    <small>Join our community &amp; follow us</small>
   </div>
 </a>
     </div>
@@ -1387,6 +1387,208 @@ html body #home #viewPlayersCta > span{
 
 
 
+<style id="mytt-community-page-v1">
+.mytt-community-section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 34px 20px 48px;
+}
+
+.mytt-community-intro {
+  max-width: 680px;
+  color: rgba(255,255,255,.68);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-top: 10px;
+}
+
+.mytt-community-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 14px;
+  margin-top: 25px;
+}
+
+.mytt-community-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 90px;
+  padding: 17px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 17px;
+  background: linear-gradient(145deg,
+    rgba(255,255,255,.07),
+    rgba(255,255,255,.025));
+  color: inherit;
+  text-decoration: none;
+  transition: .2s ease;
+}
+
+.mytt-community-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,75,75,.5);
+  background: rgba(255,255,255,.09);
+}
+
+.mytt-community-icon {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(255,255,255,.08);
+  font-size: 23px;
+}
+
+.mytt-community-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.mytt-community-copy strong {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.mytt-community-copy small {
+  color: rgba(255,255,255,.58);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.mytt-community-arrow {
+  margin-left: auto;
+  font-size: 21px;
+  color: #ff5555;
+}
+
+.mytt-community-help {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  background: rgba(255,255,255,.035);
+}
+
+.mytt-community-help p {
+  color: rgba(255,255,255,.65);
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.mytt-community-help a {
+  color: #ff6262;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+@media(max-width:600px) {
+  .mytt-community-section {
+    padding: 24px 14px 38px;
+  }
+
+  .mytt-community-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .mytt-community-card {
+    min-height: 78px;
+    padding: 13px;
+  }
+}
+</style>
+
+<section id="community"
+ class="mytt-community-section mobile-nav-page"
+ data-mobile-page="community">
+
+  <div class="section-head">
+    <div>
+      <p class="kicker">MYTT Community</p>
+      <h2>Connect. Compete. Grow.</h2>
+      <p class="mytt-community-intro">
+        Welcome to the MYTT Community Hub.
+        Explore tournaments, discover players,
+        follow rankings and connect with the
+        Malaysian table tennis community.
+      </p>
+    </div>
+    <span class="status">Community Hub</span>
+  </div>
+
+  <div class="mytt-community-grid">
+
+    <a href="#events" class="mytt-community-card">
+      <span class="mytt-community-icon">🏆</span>
+      <span class="mytt-community-copy">
+        <strong>Upcoming Events</strong>
+        <small>Discover tournaments and register to compete.</small>
+      </span>
+      <b class="mytt-community-arrow">→</b>
+    </a>
+
+    <a href="#players" class="mytt-community-card">
+      <span class="mytt-community-icon">👥</span>
+      <span class="mytt-community-copy">
+        <strong>Player Directory</strong>
+        <small>Discover and search official MYTT players.</small>
+      </span>
+      <b class="mytt-community-arrow">→</b>
+    </a>
+
+    <a href="#singles" class="mytt-community-card">
+      <span class="mytt-community-icon">🏓</span>
+      <span class="mytt-community-copy">
+        <strong>Singles Rankings</strong>
+        <small>Explore individual player ratings.</small>
+      </span>
+      <b class="mytt-community-arrow">→</b>
+    </a>
+
+    <a href="#doubles" class="mytt-community-card">
+      <span class="mytt-community-icon">🤝</span>
+      <span class="mytt-community-copy">
+        <strong>Doubles Rankings</strong>
+        <small>Explore team rankings and ratings.</small>
+      </span>
+      <b class="mytt-community-arrow">→</b>
+    </a>
+
+    <a href="#market" class="mytt-community-card">
+      <span class="mytt-community-icon">🛒</span>
+      <span class="mytt-community-copy">
+        <strong>MYTT Marketplace</strong>
+        <small>Buy and sell table tennis equipment.</small>
+      </span>
+      <b class="mytt-community-arrow">→</b>
+    </a>
+
+    <a href="#submit" class="mytt-community-card">
+      <span class="mytt-community-icon">⭐</span>
+      <span class="mytt-community-copy">
+        <strong>Join MYTT</strong>
+        <small>Become an official MYTT player.</small>
+      </span>
+      <b class="mytt-community-arrow">→</b>
+    </a>
+
+  </div>
+
+  <div class="mytt-community-help">
+    <p>Need assistance with MYTT?</p>
+    <a href="https://wa.me/601128887750?text=Hi%20MYTT%20Admin%2C%20I%20need%20help%20with%20MYTT."
+       target="_blank"
+       rel="noopener noreferrer">
+      Contact MYTT Admin →
+    </a>
+  </div>
+
+</section>
   <section id="submitPage" class="submit-hub-section mobile-nav-page" data-mobile-page="submit" aria-labelledby="submitPageTitle">
     <div class="section-head submit-hub-head">
       <div>
