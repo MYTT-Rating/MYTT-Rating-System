@@ -3906,7 +3906,7 @@ document.addEventListener("click", function(e){
    ========================================================= */
 (function initMobilePageMode(){
   const MOBILE_BREAKPOINT=860;
-  const PAGE_TARGETS=new Set(["home","events","players","singles","doubles","market","submit"]);
+ const PAGE_TARGETS=new Set(["home","events","players","singles","doubles","market","submit","community"]);
 
   function isMobile(){
     return window.innerWidth<=MOBILE_BREAKPOINT;
@@ -4044,7 +4044,7 @@ document.addEventListener("click", function(e){
     nav.dataset.v15Ready='true';
 
     const directTargets=new Set(['home','singles','events','doubles']);
-    const moreTargets=new Set(['players','market','submit']);
+   const moreTargets=new Set(['players','market','submit','community']);
 
     function currentTarget(){
       const raw=String(location.hash||'#home').replace(/^#/,'');
