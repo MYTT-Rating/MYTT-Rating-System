@@ -2115,6 +2115,22 @@ html body #home #viewPlayersCta > span{
         <small class="result-hint">Please enter your full real name for identification. Nicknames, initials, incomplete or fake names may be rejected.</small>
       </label>
 
+<label class="result-field">
+  <span>Email Address <em>Required</em></span>
+  <input
+    id="joinEmail"
+    name="email"
+    type="email"
+    placeholder="Enter your email address"
+    maxlength="254"
+    autocomplete="email"
+    required>
+  <small class="result-hint">
+    Your email will be used for MYTT registration
+    confirmation and status notifications.
+    It will not appear on your public player profile.
+  </small>
+</label>
       <div class="result-player-grid">
         <div class="result-field">
           <span>Grip Style <em>Required</em></span>
@@ -2197,7 +2213,10 @@ html body #home #viewPlayersCta > span{
     <div id="joinSuccessState" class="join-success-state hidden">
       <div class="join-success-icon">✓</div>
       <h3>Registration Received</h3>
-      <p>Your registration has been received and is now pending MYTT admin review and approval.</p>
+<p id="joinSuccessText">
+  Your registration has been received and is now pending
+  MYTT admin review and approval.
+</p>
     </div>
 
     <iframe id="joinSubmitFrame" name="joinSubmitFrame" class="result-submit-frame" title="Join MYTT registration submission"></iframe>
