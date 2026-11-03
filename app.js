@@ -1397,6 +1397,7 @@ function joinFormEls(){
     modal:document.getElementById("joinFormModal"),
     form:document.getElementById("joinMyttForm"),
     name:document.getElementById("joinPlayerName"),
+    email:document.getElementById("joinEmail"),
     grip:document.getElementById("joinGripStyle"),
     hand:document.getElementById("joinPlayingHand"),
     blade:document.getElementById("joinBlade"),
@@ -1415,6 +1416,7 @@ function joinFormEls(){
     status:document.getElementById("joinFormStatus"),
     submit:document.getElementById("joinSubmitButton"),
     success:document.getElementById("joinSuccessState"),
+    successText:document.getElementById("joinSuccessText"),
     another:null
   };
 }
@@ -1474,19 +1476,43 @@ function validateJoinForm(){
   const e=joinFormEls();
   let msg="";
 
-  if(!e.name?.value.trim())msg="Please enter your Player Name.";
-  else if(!e.grip?.value)msg="Please select your Grip Style.";
-  else if(!e.hand?.value)msg="Please select your Playing Hand.";
-  else if(!e.blade?.value.trim())msg="Please enter your Blade. If you don’t know the exact model, enter the brand name.";
-  else if(!e.fh?.value.trim())msg="Please enter your Forehand Rubber. If you don’t know the exact model, enter the brand name.";
-  else if(!e.bh?.value.trim())msg="Please enter your Backhand Rubber. If you don’t know the exact model, enter the brand name.";
-  else if(!e.photoData?.value)msg="Please upload a clear and authentic Profile Photo.";
-  else if(!e.consent?.checked)msg="Please agree to the MYTT publication consent before submitting.";
+  const email=String(e.email?.value||"").trim();
+
+  if(!e.name?.value.trim())
+    msg="Please enter your Player Name.";
+
+  else if(!email)
+    msg="Please enter your Email Address.";
+
+  else if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email))
+    msg="Please enter a valid Email Address.";
+
+  else if(!e.grip?.value)
+    msg="Please select your Grip Style.";
+
+  else if(!e.hand?.value)
+    msg="Please select your Playing Hand.";
+
+  else if(!e.blade?.value.trim())
+    msg="Please enter your Blade. If you don't know the exact model, enter the brand name.";
+
+  else if(!e.fh?.value.trim())
+    msg="Please enter your Forehand Rubber. If you don't know the exact model, enter the brand name.";
+
+  else if(!e.bh?.value.trim())
+    msg="Please enter your Backhand Rubber. If you don't know the exact model, enter the brand name.";
+
+  else if(!e.photoData?.value)
+    msg="Please upload a clear and authentic Profile Photo.";
+
+  else if(!e.consent?.checked)
+    msg="Please agree to the MYTT publication consent before submitting.";
 
   if(e.status){
     e.status.classList.remove("success","error","rejected","closed");
     e.status.textContent=msg;
   }
+
   return !msg;
 }
 
