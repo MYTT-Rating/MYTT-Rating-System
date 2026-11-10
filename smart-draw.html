@@ -520,38 +520,86 @@ async function pollBatchStatus(id,attempt){
  }catch(error){/* A temporary polling failure is retried without resubmitting the POST. */}
  setTimeout(()=>pollBatchStatus(id,attempt+1),2000);
 }
-window.addEventListener('message',event=>{
- const payload=event.data;
- if(!payload||payload.source!=='MYTT_SINGLES_WEB_APP')return;
 
- if(event.source===$('smartDrawAuthFrame').contentWindow){
-  if(payload.action==='smartDrawLogin'&&payload.requestId===authRequestId){
-   authRequestId='';
-   $('adminLoginBtn').disabled=false;
-   $('adminPassword').value='';
-   if(payload.status==='authenticated'&&payload.token&&Number(payload.expiresAt)>Date.now()){
-    unlockAdminUi(payload.token,Number(payload.expiresAt));
-    toast('MYTT Smart Draw admin access granted.');
-   }else{
-    setAdminLoginMessage(payload.message||'Administrator login failed.',false);
-   }
+function isTrustedMyttAppsScriptOrigin(origin) {
+  try {
+    const url = new URL(origin);
+    const host = url.hostname.toLowerCase();
+
+    return url.protocol === 'https:' &&
+      (
+        host === 'script.googleusercontent.com' ||
+        host.endsWith('.script.googleusercontent.com')
+      );
+  } catch (error) {
+    return false;
   }
-  return;
- }
+}
 
- if(event.source===$('smartDrawDataFrame').contentWindow){
-  if(payload.action==='smartDrawActivePlayers'&&payload.requestId===activePlayersRequestId){
-   activePlayersRequestId='';
-   $('importActiveBtn').disabled=['submitting','unknown','accepted','partial'].includes(submissionState);
-   handleActivePlayersResponse(payload);
+window.addEventListener('message', event => {
+  if (!isTrustedMyttAppsScriptOrigin(event.origin)) return;
+
+  const payload = event.data;
+
+  if (
+    !payload ||
+    payload.source !== 'MYTT_SINGLES_WEB_APP'
+  ) return;
+
+  // Administrator login response
+  if (
+    payload.action === 'smartDrawLogin' &&
+    payload.requestId === authRequestId
+  ) {
+    authRequestId = '';
+    $('adminLoginBtn').disabled = false;
+    $('adminPassword').value = '';
+
+    if (
+      payload.status === 'authenticated' &&
+      payload.token &&
+      Number(payload.expiresAt) > Date.now()
+    ) {
+      unlockAdminUi(
+        payload.token,
+        Number(payload.expiresAt)
+      );
+
+      toast('MYTT Smart Draw admin access granted.');
+    } else {
+      setAdminLoginMessage(
+        payload.message || 'Administrator login failed.',
+        false
+      );
+    }
+
+    return;
   }
-  return;
- }
 
- if(event.source===$('smartDrawSubmitFrame').contentWindow&&payload.submissionId===submissionId){
-  finishBatchResponse(payload);
- }
+  // Active Players response
+  if (
+    payload.action === 'smartDrawActivePlayers' &&
+    payload.requestId === activePlayersRequestId
+  ) {
+    activePlayersRequestId = '';
+
+    $('importActiveBtn').disabled =
+      ['submitting', 'unknown', 'accepted', 'partial']
+        .includes(submissionState);
+
+    handleActivePlayersResponse(payload);
+    return;
+  }
+
+  // Final batch submission response
+  if (
+    payload.submissionId &&
+    payload.submissionId === submissionId
+  ) {
+    finishBatchResponse(payload);
+  }
 });
+
 function confirmBatchSubmit(){
  const data=collectBatch();
  if(data.issues.length){closeReview();toast('Please complete and correct every match before submission.');return;}
