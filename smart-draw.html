@@ -524,13 +524,14 @@ async function pollBatchStatus(id,attempt){
 function isTrustedMyttAppsScriptOrigin(origin) {
   try {
     const url = new URL(origin);
-    const host = url.hostname.toLowerCase();
 
     return url.protocol === 'https:' &&
       (
-        host === 'script.googleusercontent.com' ||
-        host.endsWith('.script.googleusercontent.com')
+        url.hostname === 'script.google.com' ||
+        url.hostname === 'script.googleusercontent.com' ||
+        /^[a-z0-9-]+-script\.googleusercontent\.com$/i.test(url.hostname)
       );
+
   } catch (error) {
     return false;
   }
@@ -541,14 +542,24 @@ window.addEventListener('message', event => {
 
   const payload = event.data;
 
-  if (
-    !payload ||
-    payload.source !== 'MYTT_SINGLES_WEB_APP'
-  ) return;
+console.log('SMART DRAW LOGIN DIAGNOSTIC:', {
+  origin: event.origin,
+  source: payload && payload.source,
+  action: payload && payload.action,
+  receivedRequestId: payload && payload.requestId,
+  expectedRequestId: authRequestId,
+  requestMatches: !!payload &&
+    payload.requestId === authRequestId,
+  status: payload && payload.status,
+  hasToken: !!(payload && payload.token),
+  hasExpiry: !!(payload && payload.expiresAt)
+});
 
+  if (!payload ||payload.source !== 'MYTT_SINGLES_WEB_APP'
+  ) return;
+if (!isTrustedMyttAppsScriptOrigin(event.origin)) return;
   // Administrator login response
-  if (
-    payload.action === 'smartDrawLogin' &&
+  if (payload.action === 'smartDrawLogin' &&
     payload.requestId === authRequestId
   ) {
     authRequestId = '';
