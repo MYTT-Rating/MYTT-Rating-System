@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b10"><title>MYTT Smart Draw — MYTT Singles Integrated</title>
+<style>
+:root{--bg:#090b10;--panel:#151d29;--line:#2c394c;--text:#f4f6fb;--muted:#9ba8ba;--red:#ed465b;--pink:#ff7786;--gold:#e8c77b;--green:#5ad6a3}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(900px 440px at 90% -10%,#72203336,transparent 60%),var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.shell{width:min(1120px,calc(100% - 28px));margin:auto;padding:18px 0 50px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:5px 2px 20px}.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:.12em}.mark{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(140deg,#ff6475,#b92240);font-size:22px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.16em}.pill{padding:7px 11px;border-radius:99px;border:1px solid #58313b;background:#29151c;color:#ffabb5;font-size:10px;font-weight:900;letter-spacing:.1em}
+.hero{padding:20px 0 16px}.kicker{color:var(--pink);font-size:11px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}h1{font-size:clamp(31px,5vw,49px);line-height:1.03;letter-spacing:-.045em;margin:9px 0 11px}.hero p{margin:0;color:var(--muted);max-width:720px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:17px 0}.stat{background:linear-gradient(145deg,#192230,#111721);border:1px solid var(--line);border-radius:15px;padding:13px}.stat span{display:block;color:var(--muted);font-size:10px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.stat b{display:block;font-size:23px;margin-top:4px}
+.panel{margin-top:14px;padding:19px;background:linear-gradient(155deg,#171f2c,#111720);border:1px solid var(--line);border-radius:17px;box-shadow:0 18px 45px #0005}.panelhead{display:flex;align-items:center;gap:10px;margin-bottom:16px}.step{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#3a1d27;color:#ffabb5;font-size:12px;font-weight:900}h2{margin:0;font-size:18px}.sub{color:var(--muted);font-size:12px;margin-top:3px}
+.settings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-bottom:17px}.field label{display:block;color:#aeb9c9;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}.field input{width:100%;background:#0b111a;color:var(--text);border:1px solid #354258;border-radius:11px;padding:11px 12px;outline:none;font-weight:750}.field input:focus,textarea:focus{border-color:var(--pink);box-shadow:0 0 0 3px #ed465b20}.field small{display:block;color:#8190a5;font-size:10px;margin-top:5px}
+textarea{display:block;width:100%;min-height:185px;resize:vertical;background:#0b111a;color:var(--text);border:1px solid #354258;border-radius:13px;padding:14px;outline:none;font:13px/1.7 ui-monospace,monospace}textarea::placeholder{color:#718096}.meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin-top:8px}.meta strong{color:#ffabb5}
+.actions,.tools{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.btn{border:1px solid #3c485d;background:#202b3b;color:var(--text);border-radius:11px;padding:11px 15px;font-size:12px;font-weight:900}.btn:hover{border-color:#71819b}.btn.primary{background:linear-gradient(135deg,#f05266,#c52b48);border-color:#f05266;box-shadow:0 8px 20px #ed465b2a}.btn.ghost{background:transparent}.hint{color:var(--muted);font-size:11px;margin:12px 0 0}.hidden{display:none!important}
+.resulthead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.status{display:flex;align-items:center;gap:9px}.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px #5ad6a31b}.tools{margin:0;gap:7px}.tools .btn{padding:9px 11px}
+.roundsection{margin-top:16px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0d141e}.roundtitle{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#172130;padding:12px 14px;border-bottom:1px solid var(--line)}.roundtitle b{font-size:14px}.roundtitle span{font-size:10px;color:var(--muted);font-weight:850}
+.groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:12px}.groupcard{border:1px solid #354258;border-radius:12px;background:#111a26;overflow:hidden;break-inside:avoid}.grouphead{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;background:#1b2737;border-bottom:1px solid #354258}.grouphead b{font-size:12px}.grouphead span{font-size:10px;color:#c1ccda}.chips{padding:9px 11px 3px;display:flex;flex-wrap:wrap;gap:5px}.chip{border:1px solid #3b4b60;border-radius:99px;padding:4px 7px;font-size:10px;color:#e5ebf3}.matchlist{padding:5px 11px 9px}.match{display:grid;grid-template-columns:52px minmax(0,180px) 24px 24px 24px minmax(0,180px) minmax(140px,1fr);column-gap:4px;align-items:center;padding:6px 0;border-bottom:1px solid #222d3c}.match:last-child{border-bottom:0}.referee-cell{justify-self:end;text-align:right;min-width:0;max-width:100%;font-size:8px;line-height:1.15;color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.referee-cell strong{display:inline;color:#f1d99b;font-size:9px}.no{font-size:9px;color:#7e8ba0;font-weight:900}.player{font-size:10px;font-weight:800;overflow-wrap:anywhere;min-width:0;text-align:right}.right{text-align:left}.vs{justify-self:center;text-align:center;color:#7e8ba0;font-size:9px;font-weight:900}.score-box{justify-self:center;align-self:center;width:22px;height:22px;min-width:0;padding:0;text-align:center;background:#0a1018;color:var(--text);border:1px solid #53627a;border-radius:5px;font-size:11px;font-weight:900;outline:none;font-variant-numeric:tabular-nums}.score-box:focus{border-color:var(--pink);box-shadow:0 0 0 2px #ed465b30}.score-box::-webkit-inner-spin-button,.score-box::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.score-box[type=number]{-moz-appearance:textfield}
+.import-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 8px}.import-status{font-size:11px;color:var(--muted)}.match-meta{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0}.format-select{width:48px;max-width:100%;padding:2px 1px;border:1px solid #59677d;border-radius:5px;background:#0a1018;color:#e9edf5;font-size:8px;font-weight:900;line-height:1.2;text-align:center;outline:none}.format-select:focus{border-color:var(--pink)}.format-select:disabled,.score-box:disabled{opacity:.7}
+.submit-panel{margin:16px 0 18px;padding:14px;border:1px solid #59404a;border-radius:14px;background:linear-gradient(145deg,#241923,#141923)}.submit-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}.submit-head h3{margin:0;font-size:15px}.submit-head p{margin:4px 0 0;color:var(--muted);font-size:11px}.submit-state{border:1px solid #4b5668;border-radius:99px;padding:5px 9px;font-size:9px;font-weight:900;letter-spacing:.08em;color:#cbd5e1}.submit-state.accepted{border-color:#286b52;color:#7ee0b6;background:#143326}.submit-state.partial{border-color:#865b2d;color:#ffd18b;background:#352719}.submit-controls{display:grid;grid-template-columns:minmax(160px,220px) 1fr auto;align-items:end;gap:12px;margin-top:13px}.submit-progress{padding:7px 0}.submit-progress b{display:block;font-size:13px}.submit-progress small{display:block;color:var(--muted);font-size:10px;margin-top:3px}.submit-controls .field input{width:100%;background:#0b111a;color:var(--text);border:1px solid #354258;border-radius:10px;padding:10px}.submit-note{margin:10px 0 0;color:var(--muted);font-size:10px}
+.review-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px}.review-backdrop{position:absolute;inset:0;background:#02050bd9;backdrop-filter:blur(5px)}.review-card{position:relative;width:min(560px,100%);max-height:min(82vh,760px);overflow:auto;padding:20px;border:1px solid #455166;border-radius:18px;background:#151d29;box-shadow:0 24px 80px #000b}.review-card h2{font-size:20px}.review-card>p{color:var(--muted);font-size:12px}.review-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.review-stat{padding:10px;border:1px solid #354258;border-radius:10px;background:#0e1520}.review-stat span{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;font-weight:900}.review-stat b{display:block;margin-top:3px;font-size:19px}.review-table-wrap{max-height:260px;overflow:auto;border:1px solid #354258;border-radius:10px;margin:12px 0}.review-table-wrap table{min-width:620px}.review-table-wrap th,.review-table-wrap td{padding:8px 9px;font-size:10px}.review-issues{margin:10px 0;padding-left:19px;color:#ffc1c8;font-size:11px;line-height:1.6}.review-ok{padding:11px;border:1px solid #286b52;border-radius:10px;background:#143326;color:#a6f0d0;font-size:12px}.review-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:18px}.review-actions .btn:disabled{opacity:.45;cursor:not-allowed}
+
+.tabs{display:flex;gap:5px;overflow-x:auto;background:#0b111a;border:1px solid var(--line);padding:5px;border-radius:12px;margin:18px 0 15px}.tab{white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:8px;padding:10px 12px;font-size:11px;font-weight:900}.tab.active{background:#3a202a;color:#ffb1ba}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse;min-width:680px;background:#0d141e}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid #202a39;font-size:11px}th{background:#172130;color:#aeb9c9;font-size:10px;letter-spacing:.08em;text-transform:uppercase}tr:last-child td{border-bottom:0}
+.focus{max-width:380px;margin-bottom:12px}.focus select{width:100%;background:#0b111a;color:var(--text);border:1px solid #354258;border-radius:10px;padding:10px}.playerrounds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.ordercard{background:#0d141e;border:1px solid var(--line);border-radius:11px;padding:12px}.ordercard span{font-size:10px;color:var(--muted);font-weight:850;letter-spacing:.08em}.ordercard b{display:block;font-size:13px;margin-top:4px}.ordercard small{display:block;color:#a3afbf;font-size:10px;margin-top:4px;line-height:1.5}
+.footer{text-align:center;color:#687589;font-size:10px;letter-spacing:.05em;margin-top:24px}.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,15px);opacity:0;pointer-events:none;background:#eafaf3;color:#123c2c;padding:10px 15px;border-radius:99px;font-size:12px;font-weight:900;transition:.2s;z-index:10}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:420px){.match{grid-template-columns:45px minmax(0,105px) 23px 23px 23px minmax(0,105px) minmax(75px,1fr);column-gap:3px;padding:5px 0}.player{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.score-box{width:21px;height:21px}.referee-cell{max-width:100%;font-size:7px}.referee-cell strong{font-size:8px}}@media(max-width:760px){.submit-controls{grid-template-columns:1fr}.submit-controls .btn{width:100%}.shell{width:calc(100% - 20px);padding-top:11px}.hero{padding:16px 0 12px}.stats{grid-template-columns:repeat(2,1fr);gap:8px}.stat{padding:11px}.stat b{font-size:21px}.panel{padding:14px}.settings{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.groups{grid-template-columns:1fr}.playerrounds{grid-template-columns:1fr}.tools{width:100%}.tools .btn{flex:1}}
+@page{size:A4 landscape;margin:10mm}
+@media print{
+ body{background:#fff!important;color:#111!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .shell{width:100%;max-width:none;margin:0;padding:0}
+ header,.hero,.stats,#setupPanel,.tools,.tabs,.footer,.toast,.submit-panel,.review-modal,#drawOrder,#allView,#playerView{display:none!important}
+ #resultsPanel{display:block!important;margin:0;padding:0;background:#fff!important;color:#111!important;border:0;box-shadow:none}
+ #roundsView{display:block!important}
+ .roundsection{display:block!important;break-after:page;page-break-after:always;margin:0 0 0 0;border:0;border-radius:0;overflow:visible;background:#fff!important}
+ .roundsection:last-child{break-after:auto;page-break-after:auto}
+ .roundtitle{background:#eee!important;color:#111!important;border:1px solid #bbb;padding:8px 10px}
+ .roundtitle b,.roundtitle span{color:#111!important}
+ .groups{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:8px 0}
+ .groupcard{background:#fff!important;color:#111!important;border:1px solid #aaa;break-inside:avoid;page-break-inside:avoid}
+ .grouphead{background:#eee!important;color:#111!important;border-bottom:1px solid #bbb;padding:7px 9px}
+ .grouphead b,.grouphead span{color:#111!important}
+ .chips{padding:6px 8px 2px}
+ .chip{color:#111!important;border-color:#aaa;padding:3px 6px}
+ .matchlist{padding:3px 8px 6px}
+ .match{border-color:#ddd!important;break-inside:avoid;page-break-inside:avoid}
+ .player,.no,td{color:#111!important}
+ .vs{color:#333!important}
+ .referee-cell,.referee-cell strong{color:#604500!important}
+ .score-box{background:#fff!important;color:#111!important;border:1px solid #555!important}
+ th{background:#eee!important;color:#111!important}
+}
+
+/* Admin-only login gate */
+body.admin-locked .shell{visibility:hidden;pointer-events:none;user-select:none}
+.admin-login-gate{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:18px;background:radial-gradient(900px 440px at 90% -10%,#72203355,transparent 60%),#090b10}
+.admin-login-card{width:min(430px,100%);padding:25px;border:1px solid #46536a;border-radius:20px;background:linear-gradient(155deg,#171f2c,#111720);box-shadow:0 25px 80px #000b}
+.admin-login-brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.admin-login-brand .mark{flex:0 0 42px}
+.admin-login-card h1{font-size:27px;margin:0 0 7px}
+.admin-login-card p{color:var(--muted);font-size:12px;margin:0 0 18px}
+.admin-login-card label{display:block;color:#aeb9c9;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.admin-login-card input{width:100%;background:#0b111a;color:var(--text);border:1px solid #354258;border-radius:11px;padding:13px 12px;outline:none}
+.admin-login-card input:focus{border-color:var(--pink);box-shadow:0 0 0 3px #ed465b20}
+.admin-login-card button{width:100%;margin-top:12px}
+.admin-login-status{min-height:18px;margin-top:12px!important;color:#ffabb5!important;font-size:11px!important}
+.admin-login-status.success{color:#7ee0b6!important}
+.header-tools{display:flex;align-items:center;gap:8px}
+body:not(.admin-locked) .admin-login-gate{display:none}
+@media(max-width:480px){.admin-login-card{padding:20px}.admin-login-card h1{font-size:24px}.header-tools{gap:5px}.header-tools .btn{padding:8px 9px;font-size:10px}}
+</style></head>
+<body class="admin-locked">
+<div id="adminLoginGate" class="admin-login-gate">
+  <form id="adminLoginForm" class="admin-login-card" autocomplete="on">
+    <div class="admin-login-brand">
+      <div class="mark">🏓</div>
+      <div><strong>MYTT SMART DRAW</strong><small style="display:block;color:var(--muted);font-size:10px;letter-spacing:.14em">ADMINISTRATOR ACCESS</small></div>
+    </div>
+    <h1>Admin Login</h1>
+    <p>This tournament management tool is restricted to authorised MYTT administrators.</p>
+    <label for="adminPassword">Administrator password</label>
+    <input id="adminPassword" type="password" autocomplete="current-password" required>
+    <button class="btn primary" id="adminLoginBtn" type="submit">Unlock Smart Draw</button>
+    <p class="admin-login-status" id="adminLoginStatus" aria-live="polite"></p>
+  </form>
+</div>
+<main class="shell" id="smartDrawApp">
+<header><div class="brand"><div class="mark">🏓</div><div>MYTT SMART DRAW<small>FLEXIBLE ROUND ROBIN</small></div></div><div class="header-tools"><div class="pill">ADMIN ONLY</div><button class="btn ghost hidden" id="adminLogoutBtn" type="button">Log out</button></div></header>
+<section class="hero"><div class="kicker">Flexible tournament setup</div><h1>MYTT <span style="color:var(--pink)">Smart Draw.</span></h1><p>Set the player count, available tables, players per table and number of rounds. Each group completes its own round robin before that round is considered complete.</p></section>
+<section class="stats"><div class="stat"><span>Players</span><b id="statPlayers">0</b></div><div class="stat"><span>Tables / wave</span><b id="statTables">—</b></div><div class="stat"><span>Groups / round</span><b id="statGroups">—</b></div><div class="stat"><span>Rounds</span><b id="statRounds">—</b></div></section>
+<section class="panel" id="setupPanel">
+<div class="panelhead"><div class="step">01</div><div><h2>Match Settings</h2><div class="sub">All four settings are editable for each event.</div></div></div>
+<div class="settings">
+<div class="field"><label for="playerCount">Number of players</label><input id="playerCount" type="number" min="2" max="128" step="1" value="16"><small>Must match pasted names</small></div>
+<div class="field"><label for="tableCount">Number of tables</label><input id="tableCount" type="number" min="1" max="32" step="1" value="4"><small>Available tables per wave</small></div>
+<div class="field"><label for="groupSize">Players per table / group</label><input id="groupSize" type="number" min="3" max="16" step="1" value="4"><small>Each group plays single round robin; at least 3 for rotating referees</small></div>
+<div class="field"><label for="roundCount">Number of rounds</label><input id="roundCount" type="number" min="1" max="50" step="1" value="4"><small>Number of group rotations</small></div>
+</div>
+<label for="playerList" style="display:block;color:#aeb9c9;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px">Player list</label>
+<div class="import-row"><button class="btn" id="importActiveBtn" type="button">↻ Import MYTT Active Players</button><span class="import-status" id="activeImportStatus">Load the current Singles session directly from MYTT.</span></div>
+<textarea id="playerList" spellcheck="false" placeholder="Paste all player names here — one per line&#10;&#10;Alex Tan&#10;John Lee&#10;Maria Wong&#10;David Lim"></textarea>
+<div class="meta"><strong id="detectedCount">0 names detected</strong><span>Paste from Excel / Google Sheets / WhatsApp</span></div>
+<div class="actions"><button class="btn primary" id="generateBtn">✦ Generate Draw</button><button class="btn" id="redrawBtn">↻ Shuffle & Redraw</button><button class="btn ghost" id="clearBtn">Clear List</button></div>
+<p class="hint">One group is assigned to one table. If there are more groups than available tables, groups run in multiple waves. A round is complete only after every group in that round has finished all its matches. The system tries to avoid repeat opponents and rotate players across different tables. Every match also has a referee selected from the same group who is not playing that match; referee duties are balanced as evenly as possible.</p>
+</section>
+<section class="panel hidden" id="resultsPanel">
+<div class="resulthead"><div class="status"><span class="dot"></span><div><h2>Generated Round Robin Draw</h2><div class="sub" id="generatedMeta">Group rotation schedule</div></div></div><div class="tools"><button class="btn" id="printBtn">Print</button><button class="btn" id="csvBtn">Export CSV</button><button class="btn" id="copyBtn">Copy Match Order</button></div></div>
+<section class="submit-panel" aria-label="MYTT Singles batch submission"><div class="submit-head"><div><h3>MYTT Singles · Batch Result Submission</h3><p>Scores remain as a local draft. No MYTT rating changes happen until the final confirmation.</p></div><span class="submit-state" id="submissionStatus">DRAFT · NOT SUBMITTED</span></div><div class="submit-controls"><div class="field"><label for="matchDate">Match date</label><input id="matchDate" type="date" required></div><div class="submit-progress"><b id="submitProgress">0 / 0 results ready</b><small id="submitProgressNote">Enter every match score and select BO3 or BO5 for each match.</small></div><button class="btn primary" id="reviewSubmitBtn" type="button">Review All Results</button></div><p class="submit-note">Mixed format is selected per match. BO3 must finish 2–0 or 2–1; BO5 must finish 3–0, 3–1 or 3–2.</p></section>
+<div class="sub" style="margin-top:14px">RANDOM DRAW ORDER</div><div class="draw-order" id="drawOrder"></div>
+<nav class="tabs"><button class="tab active" data-view="rounds">Round Schedule</button><button class="tab" data-view="all">All Match Order</button><button class="tab" data-view="player">Player All Round Order</button><button class="tab" data-view="standings">Standings</button></nav>
+<div id="roundsView"></div><div id="allView" class="hidden"><div class="tablewrap"><table><thead><tr><th>Round</th><th>Wave</th><th>Table</th><th>Group</th><th>Match</th><th>Format</th><th>Player 1</th><th>Score 1</th><th>Score 2</th><th>Player 2</th><th>Referee</th></tr></thead><tbody id="allBody"></tbody></table></div></div>
+<div id="playerView" class="hidden"><div class="focus"><label for="playerSelect">Choose player</label><select id="playerSelect"></select></div><div class="playerrounds" id="playerOrders"></div></div>
+<div id="standingsView" class="hidden"><p class="hint standings-note">Live ranking · Most wins first. Ties are broken by points difference, then points scored. Only matches with two entered, unequal scores count as completed.</p><div class="tablewrap"><table><thead><tr><th>Rank</th><th>Player</th><th>Played</th><th>Wins</th><th>Losses</th><th>Points For</th><th>Points Against</th><th>Difference</th></tr></thead><tbody id="standingsBody"></tbody></table></div></div>
+</section>
+<div class="review-modal hidden" id="reviewModal" aria-hidden="true">
+ <div class="review-backdrop" data-close-review></div>
+ <section class="review-card" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
+  <h2 id="reviewTitle">Final Review · MYTT Singles</h2>
+  <p>Check the match date and every result. Once confirmed, the batch will be sent to MYTT Singles and the rating system will process the results.</p>
+  <div class="review-summary" id="reviewSummary"></div>
+  <div id="reviewOk" class="review-ok hidden">All matches passed the local checks and are ready for final submission.</div>
+  <div class="review-table-wrap"><table><thead><tr><th>Round</th><th>Match</th><th>Players</th><th>Format</th><th>Game score</th><th>Referee</th><th>Check</th></tr></thead><tbody id="reviewMatchesBody"></tbody></table></div>
+  <ul class="review-issues" id="reviewIssues"></ul>
+  <div class="review-actions"><button class="btn ghost" id="cancelReviewBtn" type="button">Back to Draw</button><button class="btn primary" id="confirmSubmitBtn" type="button" disabled>Confirm & Submit All Results</button></div>
+ </section>
+</div>
+<iframe id="smartDrawAuthFrame" name="smartDrawAuthFrame" title="MYTT Smart Draw administrator authentication" style="display:none"></iframe>
+<iframe id="smartDrawDataFrame" name="smartDrawDataFrame" title="MYTT Smart Draw protected player import" style="display:none"></iframe>
+<iframe id="smartDrawSubmitFrame" name="smartDrawSubmitFrame" title="MYTT Singles batch submission" style="display:none"></iframe>
+<footer class="footer">MYTT SMART DRAW · MYTT SINGLES INTEGRATION</footer></main><div class="toast" id="toast"></div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),input=$('playerList'),ids=['playerCount','tableCount','groupSize','roundCount'];
+const SINGLES_API_URL='https://script.google.com/macros/s/AKfycbz24rx6NLZ_FLRft5mUcGbRBbqiofs4Ai0tuU_S58ZgCK9LVf9Q3TT1aQSzDLA6YVDfbQ/exec';
+const ADMIN_SESSION_STORAGE_KEY='mytt-smart-draw-admin-session-v1';
+let draw=null,timer,submissionState='draft',submissionId='',submissionResponseHandled=false;
+let adminSessionToken='',adminSessionExpiresAt=0,authRequestId='',activePlayersRequestId='';
+function namesFrom(text){let s=String(text||'').replace(/\r/g,'\n').trim();if(!s)return[];let a;if(!s.includes('\n'))a=s.includes('\t')?s.split('\t'):s.includes(';')?s.split(';'):s.includes(',')?s.split(','):[s];else a=s.split('\n').flatMap(x=>x.includes('\t')?x.split('\t'):[x]);return a.map(x=>x.trim().replace(/^\s*(?:(?:\d+)[.)\-:]\s*|[-*•]\s*)/,'').trim()).filter(Boolean)}
+function toast(s){let t=$('toast');t.textContent=s;t.classList.add('show');clearTimeout(timer);timer=setTimeout(()=>t.classList.remove('show'),2400)}
+function settings(){return{n:+$('playerCount').value,t:+$('tableCount').value,g:+$('groupSize').value,r:+$('roundCount').value}}
+function summary(){let n=namesFrom(input.value).length,s=settings();$('detectedCount').textContent=n+' names detected';$('statPlayers').textContent=n;$('statTables').textContent=s.t||'—';$('statGroups').textContent=s.g?Math.ceil((s.n||n)/s.g):'—';$('statRounds').textContent=s.r||'—'}
+function save(){
+  try{
+    localStorage.setItem('mytt-flex-rr-v2',JSON.stringify({
+      list:input.value,
+      s:settings(),
+      draw:draw,
+      submissionState:submissionState,
+      submissionId:submissionId,
+      matchDate:$('matchDate').value
+    }));
+  }catch(e){
+    console.warn('MYTT Smart Draw could not save locally:',e);
+  }
+}
+function localDateString(){
+ const d=new Date(),y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');
+ return `${y}-${m}-${day}`;
+}
+function load(){
+  $('matchDate').value=localDateString();
+  try{
+    let x=JSON.parse(localStorage.getItem('mytt-flex-rr-v2')||'null');
+    if(x){
+      input.value=x.list||'';
+      if(x.s)ids.forEach((id,i)=>$(id).value=[x.s.n,x.s.t,x.s.g,x.s.r][i]??$(id).value);
+      if(x.matchDate)$('matchDate').value=x.matchDate;
+      submissionState=x.submissionState||'draft';
+      submissionId=x.submissionId||'';
+      const savedDraw=x.draw;
+      if(savedDraw && Array.isArray(savedDraw.order) && savedDraw.s &&
+         Array.isArray(savedDraw.rounds) &&
+         savedDraw.rounds.every(rd=>Array.isArray(rd.groups)&&Array.isArray(rd.matches))){
+        draw=savedDraw;
+        draw.rounds.forEach(rd=>rd.groups.forEach(g=>g.matches.forEach(m=>{if(!m.format)m.format='BO3';})));
+        render();
+        $('resultsPanel').classList.remove('hidden');
+      }
+    }
+  }catch(e){
+    console.warn('MYTT Smart Draw could not restore the saved draw:',e);
+  }
+  summary();
+  updateSubmissionSummary();
+  applySubmissionLock();
+  if(submissionState==='submitting'||submissionState==='unknown'){
+    submissionState='submitting';
+    updateSubmissionStatus();
+    pollBatchStatus(submissionId,0);
+  }
+}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){let j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+const pair=(a,b)=>[a,b].sort((x,y)=>x.localeCompare(y)).join('\u0001');
+function partition(players,gsize,tables,round,pairs,tbls){
+ let best=null,bestScore=Infinity,groupsN=Math.ceil(players.length/gsize);
+ for(let trial=0;trial<Math.min(100,Math.max(35,players.length*3));trial++){
+  let rem=shuffle(players),groups=[],score=0;
+  while(rem.length){let gi=groups.length,table=(gi+round-1)%tables+1,wave=Math.floor(gi/tables)+1,group=[rem.shift()];
+   while(group.length<gsize&&rem.length){let bi=0,bs=Infinity;for(let i=0;i<rem.length;i++){let c=rem[i],v=0;for(let m of group)v+=(pairs.get(pair(c,m))||0)*100;v+=(tbls.get(c+'|'+table)||0)*14;v+=Math.random()*5;if(v<bs){bs=v;bi=i}}let c=rem.splice(bi,1)[0];for(let m of group)score+=(pairs.get(pair(c,m))||0)*100;score+=(tbls.get(c+'|'+table)||0)*14;group.push(c)}
+   groups.push({groupNo:gi+1,table,wave,players:group})
+  }
+  for(let g of groups)for(let i=0;i<g.players.length;i++)for(let j=i+1;j<g.players.length;j++)score+=(pairs.get(pair(g.players[i],g.players[j]))||0)*20;
+  if(score<bestScore){bestScore=score;best=groups}
+ }
+ return best
+}
+function groupMatches(players,round,group){let ring=players.slice();if(ring.length%2)ring.push(null);let matches=[],no=1,n=ring.length;for(let r=0;r<n-1;r++){for(let i=0;i<n/2;i++){let a=ring[i],b=ring[n-1-i];if(a==null||b==null)continue;let flip=(r+round+group)%2===1;matches.push({localNo:no++,p1:flip?b:a,p2:flip?a:b})}let fixed=ring[0],tail=ring.slice(1);tail.unshift(tail.pop());ring.splice(0,ring.length,fixed,...tail)}return matches}
+function assignReferees(matches,players){
+ // Try several rotations and keep the fairest referee workload distribution.
+ let bestRefs=null,bestScore=null;
+ const trials=Math.min(500,Math.max(120,matches.length*12));
+ for(let trial=0;trial<trials;trial++){
+  const counts=new Map(players.map(p=>[p,0]));
+  const refs=new Array(matches.length);
+  const order=matches.map((_,i)=>i).sort(()=>Math.random()-.5);
+  for(const index of order){
+   const m=matches[index];
+   const eligible=players.filter(p=>p!==m.p1&&p!==m.p2);
+   if(!eligible.length){refs[index]='External referee required';continue}
+   const least=Math.min(...eligible.map(p=>counts.get(p)||0));
+   const candidates=eligible.filter(p=>(counts.get(p)||0)===least);
+   const chosen=candidates[Math.floor(Math.random()*candidates.length)];
+   refs[index]=chosen;
+   counts.set(chosen,(counts.get(chosen)||0)+1);
+  }
+  const workloads=players.map(p=>counts.get(p)||0);
+  const score=[Math.max(...workloads)-Math.min(...workloads),workloads.reduce((sum,n)=>sum+n*n,0)];
+  if(!bestScore||score[0]<bestScore[0]||(score[0]===bestScore[0]&&score[1]<bestScore[1])){
+   bestScore=score;bestRefs=refs;
+   if(score[0]===0)break;
+  }
+ }
+ matches.forEach((m,i)=>m.referee=bestRefs[i]);
+}
+function generate(){
+ if(['submitting','unknown','accepted','partial'].includes(submissionState)){toast('This submission is locked. Clear the completed session only after checking its final status.');return}
+ let s=settings(),names=namesFrom(input.value);
+ if(!Number.isInteger(s.n)||s.n<2||s.n>128){toast('Player count must be 2–128.');return}
+ if(!Number.isInteger(s.t)||s.t<1||s.t>32){toast('Table count must be 1–32.');return}
+ if(!Number.isInteger(s.g)||s.g<3||s.g>16){toast('Players per group must be 3–16.');return}
+ if(!Number.isInteger(s.r)||s.r<1||s.r>50){toast('Round count must be 1–50.');return}
+ if(names.length!==s.n){toast(`Settings say ${s.n} players, but ${names.length} names were pasted.`);return}
+ let seen=new Set();for(let n of names){let k=n.toLocaleLowerCase();if(seen.has(k)){toast('Duplicate name: '+n);return}seen.add(k)}
+ let order=shuffle(names),pairs=new Map(),tbls=new Map(),rounds=[],global=1;
+ for(let r=1;r<=s.r;r++){let gs=partition(order,s.g,s.t,r,pairs,tbls),rd={roundNo:r,groups:[],matches:[]};for(let g of gs){g.matches=groupMatches(g.players,r,g.groupNo);assignReferees(g.matches,g.players);for(let m of g.matches){Object.assign(m,{matchNo:global++,roundNo:r,wave:g.wave,table:g.table,groupNo:g.groupNo});rd.matches.push(m)}for(let i=0;i<g.players.length;i++)for(let j=i+1;j<g.players.length;j++){let k=pair(g.players[i],g.players[j]);pairs.set(k,(pairs.get(k)||0)+1)}for(let p of g.players)tbls.set(p+'|'+g.table,(tbls.get(p+'|'+g.table)||0)+1);rd.groups.push(g)}rounds.push(rd)}
+ draw={order,s,rounds};submissionState='draft';submissionId='';save();render();$('resultsPanel').classList.remove('hidden');$('resultsPanel').scrollIntoView({behavior:'smooth',block:'start'})
+}
+function el(tag,cls,text){let n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
+function scoreInput(match,side){
+ const input=el('input','score-box');
+ input.type='number';input.min='0';input.step='1';input.inputMode='numeric';
+ input.dataset.matchNo=String(match.matchNo);
+ input.dataset.side=String(side);
+ input.setAttribute('aria-label',`Score for ${side===1?match.p1:match.p2}`);
+ input.title=`${side===1?match.p1:match.p2} game wins`;
+ input.value=side===1?(match.score1??''):(match.score2??'');
+ input.addEventListener('input',()=>{
+  const value=input.value;
+  if(side===1)match.score1=value;else match.score2=value;
+  document.querySelectorAll(`.score-box[data-match-no="${match.matchNo}"][data-side="${side}"]`).forEach(box=>{if(box!==input)box.value=value;});
+  save();updateSubmissionSummary();
+  if(!$('standingsView').classList.contains('hidden'))renderStandings();
+ });
+ return input;
+}
+function formatSelect(match){
+ if(!match.format)match.format='BO3';
+ const select=el('select','format-select');
+ select.dataset.matchNo=String(match.matchNo);
+ select.setAttribute('aria-label',`Match ${match.matchNo} format`);
+ [['BO3','BO3'],['BO5','BO5']].forEach(([value,label])=>{const option=el('option','',label);option.value=value;select.append(option)});
+ select.value=match.format;
+ select.addEventListener('change',()=>{
+  match.format=select.value;
+  document.querySelectorAll(`.format-select[data-match-no="${match.matchNo}"]`).forEach(box=>{if(box!==select)box.value=match.format;});
+  save();updateSubmissionSummary();
+  if(!$('standingsView').classList.contains('hidden'))renderStandings();
+ });
+ return select;
+}
+function matchMeta(match){
+ const wrap=el('div','match-meta');
+ wrap.append(el('span','no','#'+String(match.localNo).padStart(2,'0')),formatSelect(match));
+ return wrap;
+}
+function validateMatchScore(match){
+ const raw1=match.score1,raw2=match.score2;
+ if(raw1===undefined||raw1===null||String(raw1).trim()===''||raw2===undefined||raw2===null||String(raw2).trim()==='')return{valid:false,reason:'Missing one or both scores'};
+ const s1=Number(raw1),s2=Number(raw2);
+ if(!Number.isInteger(s1)||!Number.isInteger(s2)||s1<0||s2<0)return{valid:false,reason:'Scores must be non-negative whole numbers'};
+ if(s1===s2)return{valid:false,reason:'A match cannot finish level'};
+ const winner=Math.max(s1,s2),loser=Math.min(s1,s2),format=String(match.format||'BO3').toUpperCase();
+ if(format==='BO3'&&(winner!==2||loser>1))return{valid:false,reason:'BO3 must finish 2–0 or 2–1'};
+ if(format==='BO5'&&(winner!==3||loser>2))return{valid:false,reason:'BO5 must finish 3–0, 3–1 or 3–2'};
+ if(format!=='BO3'&&format!=='BO5')return{valid:false,reason:'Choose BO3 or BO5'};
+ return{valid:true,score1:s1,score2:s2,winnerGames:winner,loserGames:loser,format:format};
+}
+function allMatches(){return draw?draw.rounds.flatMap(rd=>rd.groups.flatMap(g=>g.matches)):[];}
+function collectBatch(){
+ const matches=allMatches(),issues=[],ready=[];
+ if(!$('matchDate').value)issues.push('Choose the match date.');
+ matches.forEach(m=>{
+  const check=validateMatchScore(m);
+  if(!check.valid)issues.push(`Round ${m.roundNo} · Match #${m.matchNo} · ${m.p1} vs ${m.p2}: ${check.reason}`);
+  else ready.push(m);
+ });
+ return{matches,issues,ready};
+}
+function updateSubmissionStatus(){
+ const elStatus=$('submissionStatus');
+ const labels={draft:'DRAFT · NOT SUBMITTED',submitting:'SUBMITTING TO MYTT…',unknown:'STATUS NOT YET CONFIRMED',accepted:'SUBMITTED TO MYTT ✓',partial:'PARTIAL · ADMIN REVIEW REQUIRED',rejected:'NOT SUBMITTED · CHECK AND RETRY'};
+ elStatus.textContent=labels[submissionState]||labels.draft;
+ elStatus.className='submit-state'+(submissionState==='accepted'?' accepted':submissionState==='partial'?' partial':'');
+}
+function updateSubmissionSummary(){
+ const matches=allMatches(),data=collectBatch();
+ $('submitProgress').textContent=`${data.ready.length} / ${matches.length} results ready`;
+ const remaining=matches.length-data.ready.length;
+ $('submitProgressNote').textContent=matches.length===0?'Generate a draw first.':remaining===0?'Every match has a valid BO3 / BO5 result. Ready for final review.':`${remaining} match(es) still need a valid score or format correction.`;
+ updateSubmissionStatus();
+ const locked=['submitting','unknown','accepted','partial'].includes(submissionState);
+ $('reviewSubmitBtn').disabled=locked||!draw;
+}
+function applySubmissionLock(){
+ const locked=['submitting','unknown','accepted','partial'].includes(submissionState);
+ document.querySelectorAll('.score-box,.format-select').forEach(node=>node.disabled=locked);
+ ['playerCount','tableCount','groupSize','roundCount','playerList','matchDate','importActiveBtn','redrawBtn'].forEach(id=>$(id).disabled=locked);
+ $('clearBtn').disabled=['submitting','unknown','partial'].includes(submissionState);
+ updateSubmissionSummary();
+}
+function showReview(){
+ if(!draw){toast('Generate a draw first.');return;}
+ const data=collectBatch(),summary=$('reviewSummary'),issues=$('reviewIssues'),preview=$('reviewMatchesBody');
+ summary.replaceChildren();issues.replaceChildren();preview.replaceChildren();
+ const stats=[['Total matches',data.matches.length],['Valid results',data.ready.length],['Need attention',data.issues.length]];
+ stats.forEach(([label,value])=>{const card=el('div','review-stat');card.append(el('span','',label),el('b','',String(value)));summary.append(card)});
+ data.matches.forEach(m=>{const check=validateMatchScore(m),tr=document.createElement('tr');[String(m.roundNo),String(m.matchNo),`${m.p1} vs ${m.p2}`,m.format||'BO3',`${m.score1??'—'} – ${m.score2??'—'}`,m.referee||'—',check.valid?'Ready':check.reason].forEach(v=>tr.append(el('td','',v)));preview.append(tr)});
+ $('reviewOk').classList.toggle('hidden',data.issues.length>0);
+ data.issues.slice(0,18).forEach(issue=>issues.append(el('li','',issue)));
+ if(data.issues.length>18)issues.append(el('li','',`…and ${data.issues.length-18} more issue(s).`));
+ if(data.issues.length===0)issues.append(el('li','','Date and all match scores passed the local checks.'));
+ $('confirmSubmitBtn').disabled=data.issues.length>0||['submitting','unknown','accepted','partial'].includes(submissionState);
+ $('reviewModal').classList.remove('hidden');$('reviewModal').setAttribute('aria-hidden','false');
+}
+function closeReview(){$('reviewModal').classList.add('hidden');$('reviewModal').setAttribute('aria-hidden','true');}
+function jsonp(url,callbackName,timeoutMs){
+ return new Promise((resolve,reject)=>{
+  const script=document.createElement('script');let settled=false;
+  const cleanup=()=>{if(script.parentNode)script.parentNode.removeChild(script);try{delete window[callbackName]}catch(e){window[callbackName]=undefined}};
+  const timeout=setTimeout(()=>{if(settled)return;settled=true;cleanup();reject(new Error('MYTT API request timed out.'))},timeoutMs||12000);
+  window[callbackName]=payload=>{if(settled)return;settled=true;clearTimeout(timeout);cleanup();resolve(payload)};
+  script.onerror=()=>{if(settled)return;settled=true;clearTimeout(timeout);cleanup();reject(new Error('Could not reach the MYTT Singles API.'))};
+  script.src=url;document.head.append(script);
+ });
+}
+function makeToken(){
+ if(window.crypto&&typeof window.crypto.randomUUID==='function')return window.crypto.randomUUID();
+ return 'MYTT-'+Date.now()+'-'+Math.random().toString(36).slice(2)+Math.random().toString(36).slice(2);
+}
+function postFormToFrame(frameId,values){
+ const form=document.createElement('form');
+ form.method='POST';form.action=SINGLES_API_URL;form.target=frameId;form.style.display='none';
+ Object.entries(values).forEach(([name,value])=>{
+  const field=document.createElement('input');field.type='hidden';field.name=name;field.value=String(value??'');form.append(field);
+ });
+ document.body.append(form);
+ try{form.submit();}finally{setTimeout(()=>form.remove(),1500);}
+}
+function setAdminLoginMessage(message,isSuccess){
+ const status=$('adminLoginStatus');
+ status.textContent=message||'';
+ status.classList.toggle('success',!!isSuccess);
+}
+function lockAdminUi(message){
+ adminSessionToken='';adminSessionExpiresAt=0;
+ try{sessionStorage.removeItem(ADMIN_SESSION_STORAGE_KEY);}catch(e){}
+ document.body.classList.add('admin-locked');
+ $('adminLogoutBtn').classList.add('hidden');
+ $('adminLoginGate').classList.remove('hidden');
+ $('adminPassword').value='';
+ $('adminLoginBtn').disabled=false;
+ if(message)setAdminLoginMessage(message,false);
+}
+function unlockAdminUi(token,expiresAt){
+ adminSessionToken=String(token||'');
+ adminSessionExpiresAt=Number(expiresAt||0);
+ try{
+  sessionStorage.setItem(ADMIN_SESSION_STORAGE_KEY,JSON.stringify({
+   token:adminSessionToken,expiresAt:adminSessionExpiresAt
+  }));
+ }catch(e){}
+ document.body.classList.remove('admin-locked');
+ $('adminLoginGate').classList.add('hidden');
+ $('adminLogoutBtn').classList.remove('hidden');
+ setAdminLoginMessage('',true);
+ const delay=Math.max(0,adminSessionExpiresAt-Date.now());
+ setTimeout(()=>{
+  if(adminSessionToken&&Date.now()>=adminSessionExpiresAt){
+   lockAdminUi('Your administrator session has expired. Please log in again.');
+  }
+ },delay+100);
+}
+function restoreAdminSession(){
+ try{
+  const saved=JSON.parse(sessionStorage.getItem(ADMIN_SESSION_STORAGE_KEY)||'null');
+  if(saved&&saved.token&&Number(saved.expiresAt)>Date.now()){
+   unlockAdminUi(saved.token,Number(saved.expiresAt));
+   return;
+  }
+ }catch(e){}
+ lockAdminUi('');
+}
+function ensureAdminSession(){
+ if(adminSessionToken&&adminSessionExpiresAt>Date.now())return true;
+ lockAdminUi('Please log in with your MYTT administrator password.');
+ return false;
+}
+function submitAdminLogin(event){
+ event.preventDefault();
+ const password=$('adminPassword').value;
+ if(!password){setAdminLoginMessage('Please enter the administrator password.',false);return;}
+ authRequestId=makeToken();
+ $('adminLoginBtn').disabled=true;
+ setAdminLoginMessage('Verifying administrator access…',false);
+ postFormToFrame('smartDrawAuthFrame',{
+  action:'smartDrawLogin',requestId:authRequestId,password:password
+ });
+}
+function logoutAdmin(){
+ const token=adminSessionToken;
+ if(token){
+  postFormToFrame('smartDrawAuthFrame',{
+   action:'smartDrawLogout',requestId:makeToken(),sessionToken:token
+  });
+ }
+ lockAdminUi('You have been logged out of MYTT Smart Draw.');
+}
+function handleActivePlayersResponse(payload){
+ if(!payload)return;
+ if(payload.status==='unauthorized'){
+  lockAdminUi('Your administrator session has expired. Please log in again.');
+  $('activeImportStatus').textContent=payload.message||'Administrator login required.';
+  return;
+ }
+ if(payload.status!=='ok'||!Array.isArray(payload.players)){
+  const message=payload.message||'No active players were returned.';
+  $('activeImportStatus').textContent=message;toast(message);return;
+ }
+ const names=payload.players.map(p=>String(p.name||'').trim()).filter(Boolean);
+ if(!names.length){
+  $('activeImportStatus').textContent='The MYTT Active Players session is empty.';
+  toast('The MYTT Active Players session is empty.');return;
+ }
+ input.value=names.join('\\n');$('playerCount').value=String(names.length);
+ draw=null;submissionState='draft';submissionId='';$('resultsPanel').classList.add('hidden');
+ summary();save();applySubmissionLock();
+ $('activeImportStatus').textContent=`Imported ${names.length} active player(s) from MYTT Singles.`;
+ toast(`${names.length} Active Players imported.`);
+}
+function importActivePlayers(){
+ if(!ensureAdminSession())return;
+ if(['submitting','unknown','accepted','partial'].includes(submissionState)){toast('This submission is locked.');return;}
+ const button=$('importActiveBtn'),status=$('activeImportStatus');
+ button.disabled=true;status.textContent='Connecting securely to MYTT Singles…';
+ activePlayersRequestId=makeToken();
+ postFormToFrame('smartDrawDataFrame',{
+  action:'smartDrawActivePlayers',
+  requestId:activePlayersRequestId,
+  sessionToken:adminSessionToken
+ });
+ setTimeout(()=>{if(activePlayersRequestId){button.disabled=false;}},15000);
+}
+
+function postBatch(matches){
+ if(!ensureAdminSession())return;
+ submissionId=makeToken();submissionResponseHandled=false;submissionState='submitting';save();applySubmissionLock();
+ const form=document.createElement('form');form.method='POST';form.action=SINGLES_API_URL;form.target='smartDrawSubmitFrame';form.style.display='none';
+ const values={action:'batchSubmit',submissionId:submissionId,matchDate:$('matchDate').value,matchesJson:JSON.stringify(matches),sessionToken:adminSessionToken};
+ Object.entries(values).forEach(([name,value])=>{const input=document.createElement('input');input.type='hidden';input.name=name;input.value=String(value);form.append(input)});
+ document.body.append(form);
+ try{form.submit();setTimeout(()=>form.remove(),1500);}catch(error){submissionState='submitting';save();updateSubmissionStatus();toast('The browser did not confirm the POST. Checking the same submission ID; do not submit again.');setTimeout(()=>form.remove(),1500);}
+ pollBatchStatus(submissionId,0);
+}
+function finishBatchResponse(payload){
+ if(submissionResponseHandled||!payload||payload.submissionId!==submissionId||payload.status==='pending')return;
+ submissionResponseHandled=true;
+ if(payload.status==='unauthorized'){
+  submissionState='rejected';submissionId='';
+  updateSubmissionStatus();save();applySubmissionLock();
+  lockAdminUi('Your administrator session has expired. Please log in again. The batch was not processed.');
+  $('activeImportStatus').textContent=payload.message||'Administrator login required. No results were processed.';
+  return;
+ }
+ if(payload.status==='accepted'){
+  submissionState='accepted';
+  $('activeImportStatus').textContent='This draw has been submitted to MYTT Singles.';
+  toast(payload.message||'All results were submitted successfully.');
+ }else if(payload.status==='partial'||Number(payload.acceptedCount||0)>0){
+  submissionState='partial';
+  toast('Some results may already have changed ratings. Do not resubmit; administrator review is required.');
+ }else{
+  submissionState='rejected';submissionId='';
+  toast(payload.message||'MYTT did not accept the batch. Check the review details.');
+ }
+ updateSubmissionStatus();save();applySubmissionLock();
+ if(submissionState==='rejected'){
+  $('activeImportStatus').textContent=payload.message||'The batch was not submitted. Correct the issue and review again.';
+ }else if(submissionState==='partial'){
+  $('activeImportStatus').textContent=payload.message||'Partial processing detected. Do not resubmit this draw.';
+ }
+}
+async function pollBatchStatus(id,attempt){
+ if(!id||submissionResponseHandled||submissionState!=='submitting')return;
+ if(attempt>180){submissionState='unknown';updateSubmissionStatus();save();applySubmissionLock();$('activeImportStatus').textContent='The server has not confirmed the batch yet. Do not submit again; use the same draw and check the status before taking action.';return;}
+ const callback='MYTTBatchStatus_'+String(attempt)+'_'+makeToken().replace(/[^A-Za-z0-9_$]/g,'');
+ try{
+  const payload=await jsonp(`${SINGLES_API_URL}?action=status&id=${encodeURIComponent(id)}&callback=${encodeURIComponent(callback)}&_=${Date.now()}`,callback,12000);
+  if(payload&&payload.status&&payload.status!=='pending'){finishBatchResponse(payload);return;}
+ }catch(error){/* A temporary polling failure is retried without resubmitting the POST. */}
+ setTimeout(()=>pollBatchStatus(id,attempt+1),2000);
+}
+window.addEventListener('message',event=>{
+ const payload=event.data;
+ if(!payload||payload.source!=='MYTT_SINGLES_WEB_APP')return;
+
+ if(event.source===$('smartDrawAuthFrame').contentWindow){
+  if(payload.action==='smartDrawLogin'&&payload.requestId===authRequestId){
+   authRequestId='';
+   $('adminLoginBtn').disabled=false;
+   $('adminPassword').value='';
+   if(payload.status==='authenticated'&&payload.token&&Number(payload.expiresAt)>Date.now()){
+    unlockAdminUi(payload.token,Number(payload.expiresAt));
+    toast('MYTT Smart Draw admin access granted.');
+   }else{
+    setAdminLoginMessage(payload.message||'Administrator login failed.',false);
+   }
+  }
+  return;
+ }
+
+ if(event.source===$('smartDrawDataFrame').contentWindow){
+  if(payload.action==='smartDrawActivePlayers'&&payload.requestId===activePlayersRequestId){
+   activePlayersRequestId='';
+   $('importActiveBtn').disabled=['submitting','unknown','accepted','partial'].includes(submissionState);
+   handleActivePlayersResponse(payload);
+  }
+  return;
+ }
+
+ if(event.source===$('smartDrawSubmitFrame').contentWindow&&payload.submissionId===submissionId){
+  finishBatchResponse(payload);
+ }
+});
+function confirmBatchSubmit(){
+ const data=collectBatch();
+ if(data.issues.length){closeReview();toast('Please complete and correct every match before submission.');return;}
+ const payload=data.matches.map(m=>({
+  matchNo:m.matchNo,roundNo:m.roundNo,table:m.table,groupNo:m.groupNo,
+  p1:m.p1,p2:m.p2,score1:Number(m.score1),score2:Number(m.score2),
+  format:String(m.format||'BO3').toUpperCase(),referee:m.referee||''
+ }));
+ closeReview();postBatch(payload);
+}
+
+function render(){let{s,n,t,g,r}=draw;$('statPlayers').textContent=n;$('statTables').textContent=t;$('statGroups').textContent=Math.ceil(n/g);$('statRounds').textContent=r;$('generatedMeta').textContent=`${n} players · ${t} tables · ${g} per group · ${r} rounds`;
+$('drawOrder').replaceChildren();draw.order.forEach((p,i)=>{let c=el('span','chip');c.append(el('b','',String(i+1).padStart(2,'0')),document.createTextNode(p));$('drawOrder').append(c)});
+$('roundsView').replaceChildren();let all=[];
+draw.rounds.forEach(rd=>{let sec=el('section','roundsection'),title=el('div','roundtitle');title.append(el('b','',`ROUND ${rd.roundNo}`),el('span','',`${rd.groups.length} GROUPS · ${rd.matches.length} MATCHES · COMPLETE ALL GROUPS TO FINISH ROUND`));let grid=el('div','groups');
+rd.groups.forEach(g=>{let card=el('article','groupcard'),head=el('div','grouphead');head.append(el('b','',`GROUP ${g.groupNo} · TABLE ${g.table}`),el('span','',`WAVE ${g.wave} · ${g.matches.length} MATCHES`));let chips=el('div','chips');g.players.forEach(p=>chips.append(el('span','chip',p)));let list=el('div','matchlist');g.matches.forEach(m=>{let row=el('div','match');let referee=el('span','referee-cell');referee.append(document.createTextNode('REF: '),el('strong','',m.referee||'Not assigned'));row.append(matchMeta(m),el('span','player',m.p1),scoreInput(m,1),el('span','vs','VS'),scoreInput(m,2),el('span','player right',m.p2),referee);list.append(row);all.push(m)});card.append(head,chips,list);grid.append(card)});sec.append(title,grid);$('roundsView').append(sec)});
+$('allBody').replaceChildren();all.forEach(m=>{let tr=document.createElement('tr');[m.roundNo,m.wave,m.table,m.groupNo,m.matchNo].forEach(v=>tr.append(el('td','',String(v))));let fm=document.createElement('td');fm.append(formatSelect(m));tr.append(fm);tr.append(el('td','',m.p1));let s1=document.createElement('td');s1.append(scoreInput(m,1));tr.append(s1);let s2=document.createElement('td');s2.append(scoreInput(m,2));tr.append(s2);[m.p2,m.referee||'External referee required'].forEach(v=>tr.append(el('td','',String(v))));$('allBody').append(tr)});
+let sel=$('playerSelect');sel.replaceChildren();draw.order.forEach(p=>{let o=el('option','',p);o.value=p;sel.append(o)});playerView();updateSubmissionSummary();applySubmissionLock()
+}
+function playerView(){if(!draw)return;let p=$('playerSelect').value||draw.order[0],root=$('playerOrders');root.replaceChildren();draw.rounds.forEach(rd=>{let g=rd.groups.find(x=>x.players.includes(p));if(!g)return;let opp=g.players.filter(x=>x!==p),ms=g.matches.filter(x=>x.p1===p||x.p2===p).map(x=>(x.p1===p?x.p2:x.p1)+` (#${x.localNo})`),duties=g.matches.filter(x=>x.referee===p).map(x=>`Match #${x.localNo}: ${x.p1} vs ${x.p2}`),c=el('article','ordercard');c.append(el('span','',`ROUND ${rd.roundNo} · TABLE ${g.table} · WAVE ${g.wave}`),el('b','',`GROUP ${g.groupNo}`),el('small','',`Group: ${g.players.join(', ')}`),el('small','',`Opponents: ${opp.join(', ')}`),el('small','',`Your match order: ${ms.join(' → ')||'No matches'}`),el('small','',`Your referee duties: ${duties.join(' · ')||'None this round'}`));root.append(c)})}
+function renderStandings(){
+ if(!draw)return;
+
+ const stats=new Map(draw.order.map(name=>[name,{
+  name,played:0,wins:0,losses:0,for:0,against:0
+ }]));
+
+ draw.rounds.forEach(rd=>{
+  rd.matches.forEach(m=>{
+   const validation=validateMatchScore(m);
+   if(!validation.valid)return;
+   const s1=validation.score1,s2=validation.score2;
+
+   const p1=stats.get(m.p1),p2=stats.get(m.p2);
+   if(!p1||!p2)return;
+
+   p1.played++;p2.played++;
+   p1.for+=s1;p1.against+=s2;
+   p2.for+=s2;p2.against+=s1;
+
+   if(s1>s2){p1.wins++;p2.losses++;}
+   else{p2.wins++;p1.losses++;}
+  });
+ });
+
+ const rows=Array.from(stats.values()).map(p=>({
+  ...p,diff:p.for-p.against
+ })).sort((a,b)=>
+  b.wins-a.wins ||
+  b.diff-a.diff ||
+  b.for-a.for ||
+  a.name.localeCompare(b.name)
+ );
+
+ const body=$('standingsBody');
+ body.replaceChildren();
+
+ rows.forEach((p,index)=>{
+  const tr=document.createElement('tr');
+  const values=[
+   String(index+1),
+   p.name,
+   String(p.played),
+   String(p.wins),
+   String(p.losses),
+   String(p.for),
+   String(p.against),
+   (p.diff>0?'+':'')+String(p.diff)
+  ];
+  values.forEach((value,i)=>{
+   const td=el('td','',value);
+   if(i===0||i===3||i===7)td.style.fontWeight='900';
+   tr.append(td);
+  });
+  body.append(tr);
+ });
+}
+function view(v){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.view===v));$('roundsView').classList.toggle('hidden',v!=='rounds');$('allView').classList.toggle('hidden',v!=='all');$('playerView').classList.toggle('hidden',v!=='player');$('standingsView').classList.toggle('hidden',v!=='standings');if(v==='standings')renderStandings()}
+function fullText(){if(!draw)return'';let a=['MYTT FLEXIBLE ROUND ROBIN',''];draw.rounds.forEach(rd=>{a.push('ROUND '+rd.roundNo);rd.groups.forEach(g=>{a.push(`GROUP ${g.groupNo} TABLE ${g.table} WAVE ${g.wave}`);g.matches.forEach(m=>a.push(`Match ${m.matchNo} (${m.format||'BO3'}): ${m.p1} ${m.score1??''} vs ${m.score2??''} ${m.p2} | Referee: ${m.referee||'External referee required'}`))});a.push('')});return a.join('\n')}
+function download(name,data,type){let u=URL.createObjectURL(new Blob([data],{type})),a=el('a');a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function csv(){if(!draw)return;let rows=[['Round','Wave','Table','Group','Match','Format','Player 1','Score 1','Score 2','Player 2','Referee']];draw.rounds.forEach(rd=>rd.groups.forEach(g=>g.matches.forEach(m=>rows.push([rd.roundNo,g.wave,g.table,g.groupNo,m.matchNo,m.format||'BO3',m.p1,m.score1??'',m.score2??'',m.p2,m.referee||'External referee required']))));download('MYTT_Flexible_Round_Robin.csv','\ufeff'+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n'),'text/csv;charset=utf-8')}
+input.addEventListener('input',()=>{summary();save();if(draw){draw=null;$('resultsPanel').classList.add('hidden')}updateSubmissionSummary()});ids.forEach(id=>$(id).addEventListener('input',()=>{summary();save();if(draw){draw=null;$('resultsPanel').classList.add('hidden')}updateSubmissionSummary()}));
+$('matchDate').addEventListener('change',()=>{save();updateSubmissionSummary()});
+$('importActiveBtn').addEventListener('click',importActivePlayers);
+$('generateBtn').addEventListener('click',generate);$('redrawBtn').addEventListener('click',generate);$('clearBtn').addEventListener('click',()=>{if(['submitting','unknown','partial'].includes(submissionState)){toast('Do not clear a batch that may have been partly submitted.');return;}input.value='';draw=null;submissionState='draft';submissionId='';$('matchDate').value=localDateString();$('resultsPanel').classList.add('hidden');summary();save();applySubmissionLock();input.focus();toast('Player list cleared')});
+$('printBtn').addEventListener('click',()=>window.print());$('csvBtn').addEventListener('click',csv);$('copyBtn').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(fullText());toast('Match order copied')}catch(e){let t=el('textarea');t.value=fullText();document.body.append(t);t.select();try{document.execCommand('copy');toast('Match order copied')}catch(x){toast('Copy unavailable')}t.remove()}});
+$('reviewSubmitBtn').addEventListener('click',showReview);$('confirmSubmitBtn').addEventListener('click',confirmBatchSubmit);$('cancelReviewBtn').addEventListener('click',closeReview);document.querySelectorAll('[data-close-review]').forEach(node=>node.addEventListener('click',closeReview));
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>view(b.dataset.view)));$('playerSelect').addEventListener('change',playerView);
+$('adminLoginForm').addEventListener('submit',submitAdminLogin);
+$('adminLogoutBtn').addEventListener('click',logoutAdmin);
+restoreAdminSession();load()
+})();
+</script></body></html>
