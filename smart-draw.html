@@ -452,7 +452,9 @@ function handleActivePlayersResponse(payload){
   $('activeImportStatus').textContent='The MYTT Active Players session is empty.';
   toast('The MYTT Active Players session is empty.');return;
  }
- input.value=names.join('\\n');$('playerCount').value=String(names.length);
+
+input.value = names.join('\n');
+$('playerCount').value=String(names.length);
  draw=null;submissionState='draft';submissionId='';$('resultsPanel').classList.add('hidden');
  summary();save();applySubmissionLock();
  $('activeImportStatus').textContent=`Imported ${names.length} active player(s) from MYTT Singles.`;
