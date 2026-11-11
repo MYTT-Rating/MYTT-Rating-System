@@ -1091,6 +1091,19 @@ html body #home #viewPlayersCta > span{
         <span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
         <span>Join / Submit</span>
       </a>
+            <!-- MYTT Smart Draw Admin -->
+      <a href="https://mytt.my/smart-draw.html"
+         class="nav-link"
+         id="myttSmartDrawDesktopLink"
+         hidden>
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="4" y="4" width="16" height="16" rx="2"/>
+            <path d="M8 8h8M8 12h8M8 16h4"/>
+          </svg>
+        </span>
+        <span>Organizer Tools (Admin)</span>
+      </a>
     </nav>
 
     <div class="premium-header-badge" aria-label="Official MYTT Platform">
@@ -2570,6 +2583,20 @@ window.MYTT = {
       <span class="v14-more-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span>
       <strong>Join / Submit</strong><small>Official forms</small>
     </a>
+        <!-- MYTT Smart Draw Admin -->
+    <a href="https://mytt.my/smart-draw.html"
+       id="myttSmartDrawMobileLink"
+       data-v14-target="smart-draw"
+       hidden>
+      <span class="v14-more-icon">
+        <svg viewBox="0 0 24 24">
+          <rect x="4" y="4" width="16" height="16" rx="2"/>
+          <path d="M8 8h8M8 12h8M8 16h4"/>
+        </svg>
+      </span>
+      <strong>Smart Draw</strong>
+      <small>Tournament Draw &amp; Results · Admin</small>
+    </a>
   </div>
 </section>
 
@@ -2653,6 +2680,48 @@ window.MYTT = {
 }
 
 </style>
+
+<script>
+(function () {
+  const SESSION_KEY = 'mytt-smart-draw-admin-session-v1';
+
+  function updateAdminLinks() {
+    let isAdmin = false;
+
+    try {
+      const session = JSON.parse(
+        sessionStorage.getItem(SESSION_KEY) || 'null'
+      );
+
+      isAdmin = !!(
+        session &&
+        session.token &&
+        Number(session.expiresAt) > Date.now()
+      );
+    } catch (error) {}
+
+    const desktop = document.getElementById(
+      'myttSmartDrawDesktopLink'
+    );
+
+    const mobile = document.getElementById(
+      'myttSmartDrawMobileLink'
+    );
+
+    if (desktop) desktop.hidden = !isAdmin;
+    if (mobile) mobile.hidden = !isAdmin;
+  }
+
+  updateAdminLinks();
+
+  window.addEventListener('pageshow', updateAdminLinks);
+  window.addEventListener('focus', updateAdminLinks);
+
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) updateAdminLinks();
+  });
+})();
+</script>
 
 </body>
 </html>
