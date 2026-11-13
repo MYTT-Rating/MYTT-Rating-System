@@ -69,6 +69,133 @@ body.admin-locked .shell{visibility:hidden;pointer-events:none;user-select:none}
 .header-tools{display:flex;align-items:center;gap:8px}
 body:not(.admin-locked) .admin-login-gate{display:none}
 @media(max-width:480px){.admin-login-card{padding:20px}.admin-login-card h1{font-size:24px}.header-tools{gap:5px}.header-tools .btn{padding:8px 9px;font-size:10px}}
+
+<style>
+/* MYTT PRINT LAYOUT — ONE ROUND PER PAGE */
+
+@page {
+  size: A4 landscape;
+  margin: 6mm;
+}
+
+@media print {
+
+  /* One round = one PDF page */
+  .roundsection {
+    display: block !important;
+    width: 113.64% !important;
+    zoom: 0.88;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  .roundsection:last-child {
+    break-after: auto !important;
+    page-break-after: auto !important;
+  }
+
+  /* Four tables in a 2 x 2 layout */
+  .groups {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-flow: row !important;
+    gap: 6px !important;
+    padding: 5px 0 !important;
+  }
+
+  .groupcard {
+    min-width: 0 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    border: 1px solid #999 !important;
+  }
+
+  /* Round heading */
+  .roundtitle {
+    padding: 5px 9px !important;
+    background: #e8e8e8 !important;
+  }
+
+  .roundtitle b,
+  .roundtitle span {
+    color: #111 !important;
+  }
+
+  /* Table heading */
+  .grouphead {
+    padding: 5px 8px !important;
+    background: #e8e8e8 !important;
+  }
+
+  .grouphead b,
+  .grouphead span {
+    color: #111 !important;
+  }
+
+  /* Player names */
+  .chips {
+    padding: 4px 7px 2px !important;
+    gap: 3px !important;
+  }
+
+  .chip {
+    padding: 2px 5px !important;
+    font-size: 8px !important;
+    color: #111 !important;
+    border-color: #aaa !important;
+  }
+
+  /* Match rows */
+  .matchlist {
+    padding: 2px 7px 4px !important;
+  }
+
+  .match {
+    grid-template-columns:
+      38px minmax(0,1fr) 19px 19px 19px
+      minmax(0,1fr) minmax(85px,.8fr) !important;
+    column-gap: 3px !important;
+    padding: 2px 0 !important;
+  }
+
+  .player {
+    font-size: 8px !important;
+    line-height: 1.2 !important;
+    color: #111 !important;
+  }
+
+  .no {
+    font-size: 8px !important;
+    color: #111 !important;
+  }
+
+  .score-box {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 9px !important;
+    background: #fff !important;
+    color: #111 !important;
+    border: 1px solid #555 !important;
+  }
+
+  .vs {
+    font-size: 8px !important;
+    color: #333 !important;
+  }
+
+  .referee-cell,
+  .referee-cell strong {
+    font-size: 7px !important;
+    color: #604500 !important;
+  }
+}
+</style>
+
 </style></head>
 <body class="admin-locked">
 <div id="adminLoginGate" class="admin-login-gate">
