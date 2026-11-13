@@ -233,6 +233,253 @@ function assignReferees(matches,players){
  }
  matches.forEach((m,i)=>m.referee=bestRefs[i]);
 }
+
+function playDrawAnimation(sourceNames, finalOrder, onComplete) {
+  const styleId = 'mytt-draw-animation-style';
+
+  if (!document.getElementById(styleId)) {
+    const style = document.createElement('style');
+    style.id = styleId;
+    style.textContent = `
+      .mytt-draw-overlay {
+        position:fixed;
+        inset:0;
+        z-index:2000;
+        display:none;
+        place-items:center;
+        padding:18px;
+        background:rgba(4,7,13,.92);
+        backdrop-filter:blur(10px);
+      }
+      .mytt-draw-overlay.active {
+        display:grid;
+      }
+      .mytt-draw-card {
+        width:min(540px,100%);
+        padding:26px 22px;
+        text-align:center;
+        border:1px solid #46536a;
+        border-radius:20px;
+        background:linear-gradient(155deg,#171f2c,#101722);
+        box-shadow:0 30px 100px #000c;
+      }
+      .mytt-draw-brand {
+        font-size:25px;
+        font-weight:950;
+        letter-spacing:.12em;
+        color:#ff7786;
+      }
+      .mytt-draw-kicker {
+        margin-top:8px;
+        color:#aeb9c9;
+        font-size:10px;
+        font-weight:900;
+        letter-spacing:.18em;
+      }
+      .mytt-draw-heading {
+        margin:13px 0 5px;
+        font-size:25px;
+        font-weight:950;
+      }
+      .mytt-draw-subtitle {
+        margin:0;
+        color:#9ba8ba;
+        font-size:12px;
+      }
+      .mytt-draw-slots {
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:9px;
+        margin:22px 0 16px;
+      }
+      .mytt-draw-slot {
+        min-width:0;
+        min-height:65px;
+        padding:10px;
+        border:1px solid #354258;
+        border-radius:12px;
+        background:#0b111a;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        gap:5px;
+      }
+      .mytt-draw-slot small {
+        color:#8290a5;
+        font-size:9px;
+        font-weight:900;
+        letter-spacing:.12em;
+      }
+      .mytt-draw-slot strong {
+        color:#f4f6fb;
+        font-size:clamp(12px,2.5vw,16px);
+        overflow-wrap:anywhere;
+        animation:myttSlotRoll .16s ease-in-out infinite alternate;
+      }
+      .mytt-draw-slot strong.settled {
+        color:#7ee0b6;
+        animation:none;
+      }
+      @keyframes myttSlotRoll {
+        from {opacity:.55;transform:translateY(2px)}
+        to {opacity:1;transform:translateY(-2px)}
+      }
+      .mytt-draw-progress {
+        height:7px;
+        overflow:hidden;
+        background:#2b3545;
+        border-radius:99px;
+      }
+      .mytt-draw-progress span {
+        display:block;
+        width:0;
+        height:100%;
+        border-radius:99px;
+        background:linear-gradient(90deg,#c52b48,#ff7786);
+        transition:width .1s linear;
+      }
+      .mytt-draw-hint {
+        display:block;
+        margin-top:12px;
+        color:#aeb9c9;
+        font-size:10px;
+      }
+      @media(max-width:420px) {
+        .mytt-draw-card {padding:22px 14px}
+        .mytt-draw-slots {gap:7px}
+        .mytt-draw-slot {min-height:58px;padding:8px}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  let overlay = $('myttDrawOverlay');
+
+  if (!overlay) {
+    overlay = el('div','mytt-draw-overlay');
+    overlay.id = 'myttDrawOverlay';
+    overlay.setAttribute('aria-hidden','true');
+
+    const card = el('div','mytt-draw-card');
+    const brand = el('div','mytt-draw-brand','🏓 MYTT');
+    const kicker = el('div','mytt-draw-kicker',
+      'OFFICIAL TOURNAMENT DRAW');
+    const heading = el('h2','mytt-draw-heading',
+      'DRAW IN PROGRESS');
+    heading.id = 'myttDrawHeading';
+
+    const subtitle = el('p','mytt-draw-subtitle',
+      'Randomising players and preparing groups...');
+    subtitle.id = 'myttDrawSubtitle';
+
+    const slots = el('div','mytt-draw-slots');
+    slots.id = 'myttDrawSlots';
+
+    const track = el('div','mytt-draw-progress');
+    const bar = el('span');
+    bar.id = 'myttDrawProgress';
+    track.append(bar);
+
+    const hint = el('small','mytt-draw-hint',
+      'Please wait while the draw is being prepared.');
+    hint.id = 'myttDrawHint';
+
+    card.append(
+      brand,kicker,heading,subtitle,slots,track,hint
+    );
+
+    overlay.append(card);
+    document.body.append(overlay);
+  }
+
+  const slotsRoot = $('myttDrawSlots');
+  slotsRoot.replaceChildren();
+
+  const visibleCount = Math.min(6,finalOrder.length);
+  const slotValues = [];
+
+  for (let i = 0; i < visibleCount; i++) {
+    const slot = el('div','mytt-draw-slot');
+    slot.append(
+      el('small','',
+        'PLAYER ' + String(i+1).padStart(2,'0'))
+    );
+
+    const value = el(
+      'strong','',
+      sourceNames[Math.floor(Math.random()*sourceNames.length)]
+    );
+
+    slot.append(value);
+    slotsRoot.append(slot);
+    slotValues.push(value);
+  }
+
+  const heading = $('myttDrawHeading');
+  const subtitle = $('myttDrawSubtitle');
+  const hint = $('myttDrawHint');
+  const progress = $('myttDrawProgress');
+
+  overlay.classList.add('active');
+  overlay.setAttribute('aria-hidden','false');
+
+  const duration = 3600;
+  const started = Date.now();
+
+  function tick() {
+    const elapsed = Date.now() - started;
+    const percent = Math.min(100,elapsed/duration*100);
+
+    progress.style.width = percent + '%';
+
+    if (elapsed >= duration) {
+      slotValues.forEach((node,i) => {
+        node.textContent = finalOrder[i];
+        node.classList.add('settled');
+      });
+
+      heading.textContent = 'DRAW COMPLETE';
+      subtitle.textContent =
+        'The final player order has been confirmed.';
+
+      hint.textContent = finalOrder.length > visibleCount
+        ? finalOrder.length + ' players included · Showing first ' +
+          visibleCount
+        : finalOrder.length + ' players · Final order confirmed';
+
+      progress.style.width = '100%';
+
+      setTimeout(() => {
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden','true');
+
+        if (typeof onComplete === 'function') {
+          onComplete();
+        }
+      },650);
+
+      return;
+    }
+
+    slotValues.forEach(node => {
+      node.textContent =
+        sourceNames[Math.floor(Math.random()*sourceNames.length)];
+    });
+
+    const remaining = duration - elapsed;
+
+    const delay = remaining > 1800
+      ? 70
+      : remaining > 900
+        ? 130
+        : 210;
+
+    setTimeout(tick,delay);
+  }
+
+  tick();
+}
+      
 function generate(){
  if(['submitting','unknown','accepted','partial'].includes(submissionState)){toast('This submission is locked. Clear the completed session only after checking its final status.');return}
  let s=settings(),names=namesFrom(input.value);
@@ -244,7 +491,38 @@ function generate(){
  let seen=new Set();for(let n of names){let k=n.toLocaleLowerCase();if(seen.has(k)){toast('Duplicate name: '+n);return}seen.add(k)}
  let order=shuffle(names),pairs=new Map(),tbls=new Map(),rounds=[],global=1;
  for(let r=1;r<=s.r;r++){let gs=partition(order,s.g,s.t,r,pairs,tbls),rd={roundNo:r,groups:[],matches:[]};for(let g of gs){g.matches=groupMatches(g.players,r,g.groupNo);assignReferees(g.matches,g.players);for(let m of g.matches){Object.assign(m,{matchNo:global++,roundNo:r,wave:g.wave,table:g.table,groupNo:g.groupNo});rd.matches.push(m)}for(let i=0;i<g.players.length;i++)for(let j=i+1;j<g.players.length;j++){let k=pair(g.players[i],g.players[j]);pairs.set(k,(pairs.get(k)||0)+1)}for(let p of g.players)tbls.set(p+'|'+g.table,(tbls.get(p+'|'+g.table)||0)+1);rd.groups.push(g)}rounds.push(rd)}
- draw={order,s,rounds};submissionState='draft';submissionId='';save();render();$('resultsPanel').classList.remove('hidden');$('resultsPanel').scrollIntoView({behavior:'smooth',block:'start'})
+ 
+draw={order,s,rounds};
+submissionState='draft';
+submissionId='';
+save();
+
+const generateButton=$('generateBtn');
+const redrawButton=$('redrawBtn');
+
+generateButton.disabled=true;
+redrawButton.disabled=true;
+
+generateButton.textContent='🎲 Drawing...';
+redrawButton.textContent='🎲 Drawing...';
+
+playDrawAnimation(names,order,()=>{
+  render();
+
+  $('resultsPanel').classList.remove('hidden');
+
+  $('resultsPanel').scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+
+  generateButton.disabled=false;
+  redrawButton.disabled=false;
+
+  generateButton.textContent='✦ Generate Draw';
+  redrawButton.textContent='↻ Shuffle & Redraw';
+});
+
 }
 function el(tag,cls,text){let n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
 function scoreInput(match,side){
