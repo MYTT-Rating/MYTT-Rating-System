@@ -200,6 +200,7 @@ html body #home .hero-home-final .cta-grid-home-final .cta small{
 
 /* View Players / Marketplace / Contact Admin 图标尺寸统一 */
 html body #home #viewPlayersCta > span,
+html body #home #myttPartnerCta > span,
 html body #home #marketplaceCta > span,
 html body #home #contactAdminCta > span{
   flex:0 0 38px !important;
@@ -221,7 +222,8 @@ html body #home #viewPlayersCta > span{
   line-height:0 !important;
 }
 
-/* Marketplace + Contact Admin 使用新图标 */
+/* Partner + Marketplace + Community 使用统一圆形图标容器 */
+html body #home #myttPartnerCta > span,
 html body #home #marketplaceCta > span,
 html body #home #contactAdminCta > span{
   display:flex !important;
@@ -1256,25 +1258,33 @@ html body #home #viewPlayersCta > span{
           <small>Search official profiles</small>
         </div>
       </a>
+      <a id="myttPartnerCta" class="cta cta-dark" href="mytt-partner.html"
+         aria-label="Open MYTT Partner page">
+        <span>🤝</span>
+        <div>
+          <strong>MYTT Partner</strong>
+          <small>Official Partners &amp; Collaboration</small>
+        </div>
+      </a>
+
+      <a id="contactAdminCta"
+         class="cta cta-dark"
+         href="#community"
+         aria-label="Open MYTT Community">
+        <span>💬</span>
+        <div>
+          <strong>MYTT Community</strong>
+          <small>Join our community &amp; follow us</small>
+        </div>
+      </a>
+
       <a id="marketplaceCta" class="cta cta-dark" href="#market">
-  <span>🛒</span>
-  <div>
-    <strong>MYTT Marketplace</strong>
-    <small>Buy & sell table tennis gear</small>
-  </div>
-</a>
-
-
-<a id="contactAdminCta"
-   class="cta cta-dark"
-   href="#community"
-   aria-label="Open MYTT Community">
-  <span>👥</span>
-  <div>
-    <strong>MYTT Community</strong>
-    <small>Join our community &amp; follow us</small>
-  </div>
-</a>
+        <span>🛒</span>
+        <div>
+          <strong>MYTT Marketplace</strong>
+          <small>Buy &amp; sell table tennis gear</small>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -2599,7 +2609,7 @@ window.MYTT = {
 </section>
 
 
-<style id="mytt-mobile-community-handshake">
+<style id="mytt-mobile-community-chat">
 @media screen and (max-width: 700px) {
 
   html body #home #contactAdminCta > span:first-child {
@@ -2613,7 +2623,7 @@ window.MYTT = {
   }
 
   html body #home #contactAdminCta > span:first-child::before {
-    content: "🤝" !important;
+    content: "💬" !important;
     display: block !important;
     font-size: 28px !important;
     line-height: 1 !important;
