@@ -439,15 +439,15 @@ body:not(.admin-locked) .admin-login-gate{display:none}
 <div id="roundsView"></div><div id="allView" class="hidden"><div class="tablewrap"><table><thead><tr><th>Round</th><th>Wave</th><th>Table</th><th>Group</th><th>Match</th><th>Format</th><th>Player 1</th><th>Score 1</th><th>Score 2</th><th>Player 2</th><th>Referee</th></tr></thead><tbody id="allBody"></tbody></table></div></div>
 <div id="playerView" class="hidden">
   <div class="focus"><label for="playerSelect">Choose player</label><select id="playerSelect"></select></div>
-  <div class="analysis-intro"><strong>Player Match Records &amp; Detailed Game Scores</strong><p>Select a player to review every scheduled match. Enter the actual point score for each game (for example, 11–7 or 8–11). The detailed scores are used for Initial Rating Analysis and do not change the official match result by themselves.</p></div>
+  <div class="analysis-intro"><strong>Individual Player Match Records &amp; Detailed Game Scores</strong><p>Select one player to review all of their matches. Only the selected player's matches need detailed game scores (for example, 11–7 or 8–11). Other players do not need to enter detailed scores unless they are selected for their own analysis.</p></div>
   <div id="playerProgress" class="player-progress"></div>
   <div class="playerrounds" id="playerOrders"></div>
   <section class="player-analysis-tools" aria-label="Player rating analysis">
     <h3>MYTT Player Performance Analysis</h3>
-    <p>New players are included automatically. Select an existing player and add them to Rating Test if you want to compare their tournament performance with their current MYTT rating.</p>
+    <p>Analyse one selected player at a time. New players are assessed individually; existing players can be added to Rating Test. Detailed scores for other players are not required.</p>
     <div class="player-analysis-actions">
       <button class="btn" id="ratingTestToggleBtn" type="button">＋ Add Selected Player to Rating Test</button>
-      <button class="btn primary" id="runRatingAnalysisBtn" type="button" disabled>Analyse Player Rating</button>
+      <button class="btn primary" id="runRatingAnalysisBtn" type="button" disabled>Analyse Selected Player</button>
     </div>
     <div class="player-analysis-status" id="playerAnalysisStatus">Import MYTT Active Players to create an event snapshot before analysis.</div>
   </section>
@@ -481,6 +481,7 @@ const ADMIN_SESSION_STORAGE_KEY='mytt-smart-draw-admin-session-v1';
 let draw=null,timer,submissionState='draft',submissionId='',submissionResponseHandled=false;
 let adminSessionToken='',adminSessionExpiresAt=0,authRequestId='',activePlayersRequestId='';
 let eventId='',newPlayers=[],ratingTestPlayers=[],analysisResult=null,approvalResult=null,approvedRatingEdits={},analysisRequestId='',approvalRequestId='';
+let analysisResultsByPlayer={},analysedNewPlayers=[],approvedNewPlayers=[],requiredNewPlayers=[];
 function namesFrom(text){let s=String(text||'').replace(/\r/g,'\n').trim();if(!s)return[];let a;if(!s.includes('\n'))a=s.includes('\t')?s.split('\t'):s.includes(';')?s.split(';'):s.includes(',')?s.split(','):[s];else a=s.split('\n').flatMap(x=>x.includes('\t')?x.split('\t'):[x]);return a.map(x=>x.trim().replace(/^\s*(?:(?:\d+)[.)\-:]\s*|[-*•]\s*)/,'').trim()).filter(Boolean)}
 function toast(s){let t=$('toast');t.textContent=s;t.classList.add('show');clearTimeout(timer);timer=setTimeout(()=>t.classList.remove('show'),2400)}
 function settings(){return{n:+$('playerCount').value,t:+$('tableCount').value,g:+$('groupSize').value,r:+$('roundCount').value}}
@@ -499,7 +500,11 @@ function save(){
       ratingTestPlayers:ratingTestPlayers,
       analysisResult:analysisResult,
       approvalResult:approvalResult,
-      approvedRatingEdits:approvedRatingEdits
+      approvedRatingEdits:approvedRatingEdits,
+      analysisResultsByPlayer:analysisResultsByPlayer,
+      analysedNewPlayers:analysedNewPlayers,
+      approvedNewPlayers:approvedNewPlayers,
+      requiredNewPlayers:requiredNewPlayers
     }));
   }catch(e){
     console.warn('MYTT Smart Draw could not save locally:',e);
@@ -525,6 +530,10 @@ function load(){
       analysisResult=x.analysisResult||null;
       approvalResult=x.approvalResult||null;
       approvedRatingEdits=x.approvedRatingEdits||{};
+      analysisResultsByPlayer=x.analysisResultsByPlayer||{};
+      analysedNewPlayers=Array.isArray(x.analysedNewPlayers)?x.analysedNewPlayers:[];
+      approvedNewPlayers=Array.isArray(x.approvedNewPlayers)?x.approvedNewPlayers:[];
+      requiredNewPlayers=Array.isArray(x.requiredNewPlayers)?x.requiredNewPlayers:[];
       const savedDraw=x.draw;
       if(savedDraw && Array.isArray(savedDraw.order) && savedDraw.s &&
          Array.isArray(savedDraw.rounds) &&
@@ -896,7 +905,7 @@ function scoreInput(match,side){
   if(side===1)match.score1=value;else match.score2=value;
   document.querySelectorAll(`.score-box[data-match-no="${match.matchNo}"][data-side="${side}"]`).forEach(box=>{if(box!==input)box.value=value;});
   match.gamePoints=[];
-  invalidateRatingAnalysis('The official match result changed. Please re-enter its game scores and analyse again.');
+  invalidatePlayerAnalysisForMatch(match,'This match result changed. Re-enter its detailed game scores and re-analyse the affected player(s).');
   save();updateSubmissionSummary();
   if(!$('standingsView').classList.contains('hidden'))renderStandings();
   if(!$('playerView').classList.contains('hidden'))playerView();
@@ -914,7 +923,7 @@ function formatSelect(match){
   match.format=select.value;
   match.gamePoints=[];
   document.querySelectorAll(`.format-select[data-match-no="${match.matchNo}"]`).forEach(box=>{if(box!==select)box.value=match.format;});
-  invalidateRatingAnalysis('The match format changed. Please verify the game scores and analyse again.');
+  invalidatePlayerAnalysisForMatch(match,'This match format changed. Verify its detailed game scores and re-analyse the affected player(s).');
   save();updateSubmissionSummary();
   if(!$('playerView').classList.contains('hidden'))playerView();
   if(!$('standingsView').classList.contains('hidden'))renderStandings();
@@ -973,11 +982,41 @@ function completeGamePointsForPayload(match){
 }
 
 function invalidateRatingAnalysis(message){
- const hadAnalysis=!!analysisResult||!!approvalResult;
- analysisResult=null;approvalResult=null;approvedRatingEdits={};
+ const hadAnalysis=!!analysisResult||!!approvalResult||Object.keys(analysisResultsByPlayer).length>0;
+ analysisResult=null;approvalResult=null;approvedRatingEdits={};analysisResultsByPlayer={};analysedNewPlayers=[];approvedNewPlayers=[];requiredNewPlayers=[];
  if(hadAnalysis&&message){$('playerAnalysisStatus').textContent=message;$('playerAnalysisStatus').className='player-analysis-status bad';}
  const panel=$('ratingAnalysisResults');if(panel)panel.replaceChildren();
  if(typeof updatePlayerAnalysisControls==='function')updatePlayerAnalysisControls();
+}
+function invalidatePlayerAnalysisForMatch(match,message){
+ const affected=[match.p1,match.p2].filter(Boolean);
+ affected.forEach(name=>{
+  const key=String(name).trim().toLowerCase().replace(/\s+/g,' ');
+  delete analysisResultsByPlayer[key];
+  approvedRatingEdits=Object.fromEntries(Object.entries(approvedRatingEdits).filter(([n])=>String(n).toLowerCase()!==key));
+  analysedNewPlayers=analysedNewPlayers.filter(n=>String(n).toLowerCase()!==key);
+  approvedNewPlayers=approvedNewPlayers.filter(n=>String(n).toLowerCase()!==key);
+ });
+ analysisResult=null;approvalResult=null;
+ const selected=$('playerSelect')?$('playerSelect').value:'';
+ if(selected)analysisResult=analysisResultsByPlayer[String(selected).trim().toLowerCase().replace(/\s+/g,' ')]||null;
+ if(message){$('playerAnalysisStatus').textContent=message;$('playerAnalysisStatus').className='player-analysis-status bad';}
+ const panel=$('ratingAnalysisResults');if(panel)panel.replaceChildren();
+ save();updateSubmissionSummary();updatePlayerAnalysisControls();renderRatingAnalysisResults();
+}
+function eventNewPlayerParticipants(){
+ const participants=new Set(allMatches().flatMap(m=>[String(m.p1).toLowerCase(),String(m.p2).toLowerCase()]));
+ return newPlayers.filter(name=>participants.has(String(name).toLowerCase()));
+}
+function syncAnalysisProgress(progress){
+ if(!progress)return;
+ analysedNewPlayers=Array.isArray(progress.analysedNewPlayers)?progress.analysedNewPlayers:analysedNewPlayers;
+ approvedNewPlayers=Array.isArray(progress.approvedNewPlayers)?progress.approvedNewPlayers:approvedNewPlayers;
+ requiredNewPlayers=Array.isArray(progress.requiredNewPlayers)?progress.requiredNewPlayers:requiredNewPlayers;
+ if(progress.approvedRatings&&typeof progress.approvedRatings==='object'){
+  requiredNewPlayers.forEach(name=>{const key=String(name).trim().toLowerCase().replace(/\s+/g,' ');if(Object.prototype.hasOwnProperty.call(progress.approvedRatings,key))approvedRatingEdits[name]=progress.approvedRatings[key];});
+ }
+ save();
 }
 function getPlayerMatches(name){return allMatches().filter(m=>m.p1===name||m.p2===name);}
 function getPlayerProgress(name){
@@ -991,25 +1030,28 @@ function getPlayerProgress(name){
  return{total:matches.length,played:valid.length,wins:wins,losses:losses,details:details};
 }
 function getAnalysisTargets(){
- const participants=new Set(allMatches().flatMap(m=>[m.p1,m.p2]));
- const participantKeys=new Set(Array.from(participants).map(name=>String(name).toLowerCase()));
- const fresh=newPlayers.filter(name=>participantKeys.has(String(name).toLowerCase()));
- const freshKeys=new Set(fresh.map(name=>String(name).toLowerCase()));
- const tests=ratingTestPlayers.filter(name=>participantKeys.has(String(name).toLowerCase())&&!freshKeys.has(String(name).toLowerCase()));
- return fresh.concat(tests);
+ const player=$('playerSelect')?$('playerSelect').value:'';
+ if(!player)return[];
+ const isNew=newPlayers.some(name=>name.toLowerCase()===player.toLowerCase());
+ const isTest=ratingTestPlayers.some(name=>name.toLowerCase()===player.toLowerCase());
+ return (isNew||isTest)?[player]:[];
 }
 function getAnalysisReadiness(){
- const targets=getAnalysisTargets(),issues=[];
+ const player=$('playerSelect')?$('playerSelect').value:'';
+ const issues=[];
  if(!eventId)issues.push('Import MYTT Active Players first to create the event rating snapshot.');
- if(!targets.length)issues.push('No new player detected. Select an existing player and add them to Rating Test.');
+ if(!player)issues.push('Choose a player first.');
+ const isNew=!!player&&newPlayers.some(name=>name.toLowerCase()===player.toLowerCase());
+ const isTest=!!player&&ratingTestPlayers.some(name=>name.toLowerCase()===player.toLowerCase());
+ if(player&&!isNew&&!isTest)issues.push('This is an existing player. Add this player to Rating Test before analysing.');
  const batch=collectBatch();
- if(batch.issues.length)issues.push('Complete every official match result before running the analysis.');
- targets.forEach(name=>{
-  const progress=getPlayerProgress(name);
-  if(progress.played<9)issues.push(`${name}: ${progress.played}/9 valid matches. At least 9 are required.`);
-  if(progress.details<progress.played)issues.push(`${name}: detailed game scores recorded for ${progress.details}/${progress.played} completed matches.`);
- });
- return{ready:issues.length===0,issues:issues,targets:targets};
+ if(batch.issues.length)issues.push('Complete every official match result in this event before running the analysis.');
+ if(player&&(isNew||isTest)){
+  const progress=getPlayerProgress(player);
+  if(progress.played<9)issues.push(`${player}: ${progress.played}/9 valid matches. At least 9 are required.`);
+  if(progress.details<progress.played)issues.push(`${player}: detailed game scores recorded for ${progress.details}/${progress.played} completed matches. Enter the detailed scores only for this selected player.`);
+ }
+ return{ready:issues.length===0,issues:issues,targets:player&&(isNew||isTest)?[player]:[]};
 }
 function collectBatch(){
  const matches=allMatches(),issues=[],ready=[];
@@ -1031,14 +1073,14 @@ function updateSubmissionSummary(){
  const matches=allMatches(),data=collectBatch();
  $('submitProgress').textContent=`${data.ready.length} / ${matches.length} results ready`;
  const remaining=matches.length-data.ready.length;
- const hasNewPlayer= newPlayers.some(name=>allMatches().some(m=>String(m.p1).toLowerCase()===String(name).toLowerCase()||String(m.p2).toLowerCase()===String(name).toLowerCase()));
- const hasRatingTest= ratingTestPlayers.some(name=>allMatches().some(m=>String(m.p1).toLowerCase()===String(name).toLowerCase()||String(m.p2).toLowerCase()===String(name).toLowerCase()));
- const needsInitialApproval=hasNewPlayer&&!approvalResult;
- const needsRatingTestAnalysis=hasRatingTest&&!analysisResult;
- $('submitProgressNote').textContent=matches.length===0?'Generate a draw first.':remaining>0?`${remaining} match(es) still need a valid score or format correction.`:needsInitialApproval?'New-player Initial Rating Analysis and administrator approval are required before final submission.':needsRatingTestAnalysis?'Complete the selected Rating Test analysis again before final submission.':'Every match has a valid result. Ready for final review.';
+ const required=eventNewPlayerParticipants();
+ const approvedSet=new Set(approvedNewPlayers.map(name=>String(name).toLowerCase()));
+ const missingApprovals=required.filter(name=>!approvedSet.has(String(name).toLowerCase()));
+ const needsInitialApproval=required.length>0&&missingApprovals.length>0;
+ $('submitProgressNote').textContent=matches.length===0?'Generate a draw first.':remaining>0?`${remaining} match(es) still need a valid score or format correction.`:needsInitialApproval?`Analyse and approve each new player individually. Approved ${required.length-missingApprovals.length}/${required.length}: ${missingApprovals.join(', ')}.`:'Every match has a valid result and all new-player ratings are approved. Ready for final review.';
  updateSubmissionStatus();
  const locked=['submitting','unknown','accepted','partial'].includes(submissionState);
- $('reviewSubmitBtn').disabled=locked||!draw||needsInitialApproval||needsRatingTestAnalysis;
+ $('reviewSubmitBtn').disabled=locked||!draw||needsInitialApproval;
 }
 function applySubmissionLock(){
  const locked=['submitting','unknown','accepted','partial'].includes(submissionState);
@@ -1165,16 +1207,18 @@ function collectAnalysisMatches(){
 }
 function runInitialRatingAnalysis(){
  if(!ensureAdminSession())return;
+ const player=$('playerSelect').value;
  const readiness=getAnalysisReadiness();
- if(!readiness.ready){toast(readiness.issues[0]||'Complete the rating analysis requirements first.');updatePlayerAnalysisControls();return;}
+ if(!readiness.ready){toast(readiness.issues[0]||'Complete the selected player requirements first.');updatePlayerAnalysisControls();return;}
  analysisRequestId=makeToken();approvalResult=null;
  $('runRatingAnalysisBtn').disabled=true;
- $('playerAnalysisStatus').textContent='Analysing all target players using match results and exact game point scores…';
+ $('playerAnalysisStatus').textContent=`Analysing ${player}'s matches only, using exact game-point scores…`;
  $('playerAnalysisStatus').className='player-analysis-status';
  postFormToFrame('smartDrawAnalysisFrame',{
   action:'smartDrawInitialRatingAnalysis',requestId:analysisRequestId,eventId:eventId,
+  selectedPlayerName:player,
   matchDate:$('matchDate').value,matchesJson:JSON.stringify(collectAnalysisMatches()),
-  ratingTestPlayersJson:JSON.stringify(ratingTestPlayers),sessionToken:adminSessionToken
+  sessionToken:adminSessionToken
  });
 }
 function handleInitialRatingAnalysisResponse(payload){
@@ -1184,26 +1228,36 @@ function handleInitialRatingAnalysisResponse(payload){
   lockAdminUi('Your administrator session has expired. Please log in again.');return;
  }
  if(payload.status!=='ok'){
-  const message=payload.message||'Initial Rating Analysis could not be completed.';
+  const message=payload.message||'Player Rating Analysis could not be completed.';
   $('playerAnalysisStatus').textContent=message;$('playerAnalysisStatus').className='player-analysis-status bad';
   toast(message);updatePlayerAnalysisControls();return;
  }
- analysisResult=payload;approvalResult=null;approvedRatingEdits={};save();
- $('playerAnalysisStatus').textContent='Analysis completed. Review the recommended ratings and point-score statistics below.';
+ analysisResult=payload;
+ const resultKey=String(payload.selectedPlayerName||$('playerSelect').value||'').trim().toLowerCase().replace(/\s+/g,' ');
+ if(resultKey)analysisResultsByPlayer[resultKey]=payload;
+ const currentKey=String($('playerSelect').value||'').trim().toLowerCase().replace(/\s+/g,' ');
+ analysisResult=currentKey===resultKey?payload:(analysisResultsByPlayer[currentKey]||null);
+ approvalResult=null;
+ syncAnalysisProgress(payload.progress);
+ save();
+ $('playerAnalysisStatus').textContent=`Analysis completed for ${payload.selectedPlayerName||$('playerSelect').value}. Only this player's matches were required.`;
  $('playerAnalysisStatus').className='player-analysis-status good';
  renderRatingAnalysisResults();updateSubmissionSummary();updatePlayerAnalysisControls();
- toast('MYTT Player Performance Analysis completed.');
+ toast('Selected player analysis completed.');
 }
 function approveInitialRatings(){
  if(!ensureAdminSession())return;
- if(!analysisResult||!analysisResult.analysis||!Array.isArray(analysisResult.analysis.players)||!analysisResult.analysis.players.length){toast('There are no new-player ratings to approve.');return;}
- const approved={};
- document.querySelectorAll('.approved-rating-input').forEach(inputNode=>{approved[inputNode.dataset.playerName]=inputNode.value;});
+ const player=$('playerSelect').value;
+ if(!analysisResult||!analysisResult.analysis||!Array.isArray(analysisResult.analysis.players)||!analysisResult.analysis.players.some(p=>String(p.name).toLowerCase()===String(player).toLowerCase())){toast('Analyse the selected new player before approving a rating.');return;}
+ const inputNode=document.querySelector('.approved-rating-input');
+ if(!inputNode){toast('Enter the approved rating target first.');return;}
+ const approved={};approved[player]=inputNode.value;
  approvalRequestId=makeToken();
  const button=$('approveRatingsBtn');if(button)button.disabled=true;
- $('playerAnalysisStatus').textContent='Calculating technical starting ratings and simulating the tournament…';
+ $('playerAnalysisStatus').textContent=`Saving ${player}'s approved rating…`;
  postFormToFrame('smartDrawApprovalFrame',{
   action:'smartDrawApproveInitialRating',requestId:approvalRequestId,eventId:eventId,
+  selectedPlayerName:player,
   approvedFinalRatingsJson:JSON.stringify(approved),sessionToken:adminSessionToken
  });
 }
@@ -1218,10 +1272,20 @@ function handleInitialRatingApprovalResponse(payload){
   $('playerAnalysisStatus').textContent=message;$('playerAnalysisStatus').className='player-analysis-status bad';
   toast(message);renderRatingAnalysisResults();return;
  }
- approvalResult=payload.approval||null;save();
- $('playerAnalysisStatus').textContent='Ratings approved and tournament simulation completed. Final result submission is now unlocked.';
- $('playerAnalysisStatus').className='player-analysis-status good';
- renderRatingAnalysisResults();updateSubmissionSummary();toast('Initial ratings approved.');
+ approvalResult=payload.approval||null;
+ syncAnalysisProgress(payload.progress);
+ save();
+ if(approvalResult&&approvalResult.allApproved){
+  $('playerAnalysisStatus').textContent='All new players have been analysed and approved. Final tournament submission is now available.';
+  $('playerAnalysisStatus').className='player-analysis-status good';
+  toast('All new-player ratings approved.');
+ }else{
+  const p=approvalResult||{};
+  $('playerAnalysisStatus').textContent=`${p.approvedCount||0}/${p.requiredCount||requiredNewPlayers.length} new players approved. Select the next new player and repeat the analysis.`;
+  $('playerAnalysisStatus').className='player-analysis-status good';
+  toast('Selected player rating approved.');
+ }
+ renderRatingAnalysisResults();updateSubmissionSummary();updatePlayerAnalysisControls();
 }
 function toggleSelectedRatingTest(){
  const player=$('playerSelect').value;
@@ -1229,8 +1293,8 @@ function toggleSelectedRatingTest(){
  if(newPlayers.some(name=>name.toLowerCase()===player.toLowerCase())){toast('New players are included automatically.');return;}
  const index=ratingTestPlayers.findIndex(name=>name.toLowerCase()===player.toLowerCase());
  if(index>=0)ratingTestPlayers.splice(index,1);else ratingTestPlayers.push(player);
- invalidateRatingAnalysis('Rating Test selection changed. Run the analysis again.');
- save();updatePlayerAnalysisControls();
+ delete analysisResultsByPlayer[String(player).trim().toLowerCase().replace(/\s+/g,' ')];analysisResult=null;approvalResult=null;
+ save();updatePlayerAnalysisControls();renderRatingAnalysisResults();
 }
 
 function handleActivePlayersResponse(payload){
@@ -1254,6 +1318,7 @@ input.value = names.join('\n');
 $('playerCount').value=String(names.length);
  eventId=String(payload.eventId||'');
  newPlayers=Array.isArray(payload.newPlayers)?payload.newPlayers:[];
+ requiredNewPlayers=[];analysedNewPlayers=[];approvedNewPlayers=[];analysisResultsByPlayer={};
  ratingTestPlayers=[];analysisResult=null;approvalResult=null;approvedRatingEdits={};
  draw=null;submissionState='draft';submissionId='';$('resultsPanel').classList.add('hidden');
  summary();save();applySubmissionLock();
@@ -1264,7 +1329,7 @@ function importActivePlayers(){
  if(!ensureAdminSession())return;
  if(['submitting','unknown','accepted','partial'].includes(submissionState)){toast('This submission is locked.');return;}
  const button=$('importActiveBtn'),status=$('activeImportStatus');
- eventId='';newPlayers=[];ratingTestPlayers=[];analysisResult=null;approvalResult=null;approvedRatingEdits={};save();
+ eventId='';newPlayers=[];ratingTestPlayers=[];analysisResult=null;approvalResult=null;approvedRatingEdits={};analysisResultsByPlayer={};analysedNewPlayers=[];approvedNewPlayers=[];requiredNewPlayers=[];save();
  button.disabled=true;status.textContent='Connecting securely to MYTT Singles…';
  activePlayersRequestId=makeToken();
  postFormToFrame('smartDrawDataFrame',{
@@ -1430,10 +1495,10 @@ function confirmBatchSubmit(){
   format:String(m.format||'BO3').toUpperCase(),referee:m.referee||'',
   gamePoints:completeGamePointsForPayload(m)
  }));
- const hasNewPlayer=newPlayers.some(name=>allMatches().some(m=>String(m.p1).toLowerCase()===String(name).toLowerCase()||String(m.p2).toLowerCase()===String(name).toLowerCase()));
- const hasRatingTest=ratingTestPlayers.some(name=>allMatches().some(m=>String(m.p1).toLowerCase()===String(name).toLowerCase()||String(m.p2).toLowerCase()===String(name).toLowerCase()));
- if(hasNewPlayer&&!approvalResult){toast('Complete Initial Rating Analysis and approve all new-player ratings before final submission.');return;}
- if(hasRatingTest&&!analysisResult){toast('Complete the selected Rating Test analysis again before final submission.');return;}
+ const required=eventNewPlayerParticipants();
+ const approvedSet=new Set(approvedNewPlayers.map(name=>String(name).toLowerCase()));
+ const missing=required.filter(name=>!approvedSet.has(String(name).toLowerCase()));
+ if(missing.length){toast('Analyse and approve each new player before final submission: '+missing.join(', '));return;}
  closeReview();postBatch(payload);
 }
 
@@ -1448,6 +1513,8 @@ let sel=$('playerSelect');sel.replaceChildren();draw.order.forEach(p=>{let o=el(
 function playerView(){
  if(!draw)return;
  const player=$('playerSelect').value||draw.order[0];
+ analysisResult=analysisResultsByPlayer[String(player).trim().toLowerCase().replace(/\s+/g,' ')]||analysisResult;
+ if(analysisResult&&String(analysisResult.selectedPlayerName||'').toLowerCase()!==String(player).toLowerCase())analysisResult=null;
  const root=$('playerOrders');
  root.replaceChildren();
  const progress=getPlayerProgress(player);
@@ -1513,7 +1580,7 @@ function playerView(){
       }else{
        if(isA)targetGame.score2=value;else targetGame.score1=value;
       }
-      invalidateRatingAnalysis('Detailed game scores changed. Run the analysis again before submitting results.');
+      invalidatePlayerAnalysisForMatch(match,'Detailed scores changed. The analysis for the players in this match must be run again.');
       const current=validateGamePointsForMatch(match);
       const statusNode=matchCard.querySelector('.game-score-status');
       if(statusNode){statusNode.textContent=current.valid?'✓ Detailed game scores match the official result.':current.reason;statusNode.className='game-score-status '+(current.valid?'good':'bad');}
@@ -1553,11 +1620,14 @@ function updatePlayerAnalysisControls(){
  const readiness=getAnalysisReadiness();
  const button=$('runRatingAnalysisBtn');
  button.disabled=!readiness.ready||['submitting','unknown','accepted','partial'].includes(submissionState);
- button.textContent=newPlayers.length?'Analyse New Player Ratings':'Analyse Rating Test';
+ button.textContent='Analyse Selected Player';
  const status=$('playerAnalysisStatus');
+ const progress=getPlayerProgress(player);
+ const alreadyApproved=approvedNewPlayers.some(name=>name.toLowerCase()===player.toLowerCase());
  if(!eventId){status.textContent='Click Import MYTT Active Players before analysing. This creates the event rating snapshot.';status.className='player-analysis-status bad';}
- else if(!readiness.targets.length){status.textContent=isNew?'New player detected.':'This is an existing player. Add them to Rating Test to analyse their performance.';status.className='player-analysis-status';}
- else if(readiness.ready){status.textContent=`Ready to analyse ${readiness.targets.length} player(s). All target players have at least 9 completed matches and verified game scores.`;status.className='player-analysis-status good';}
+ else if(!isNew&&!isTest){status.textContent=`${player} is an existing player. Add this selected player to Rating Test to analyse their performance.`;status.className='player-analysis-status';}
+ else if(alreadyApproved){status.textContent=`${player} has already been analysed and approved. You can select another player.`;status.className='player-analysis-status good';}
+ else if(readiness.ready){status.textContent=`Ready to analyse ${player}: ${progress.played} valid matches and ${progress.details}/${progress.played} detailed game scores verified. Only this player is checked.`;status.className='player-analysis-status good';}
  else{status.textContent=readiness.issues.join(' ');status.className='player-analysis-status bad';}
 }
 
@@ -1581,7 +1651,7 @@ function renderRatingAnalysisResults(){
   card.append(metrics);
   card.append(el('div','analysis-detail',`Point difference: ${player.pointDifference??'—'} · Average point difference per game: ${player.averagePointDifferencePerGame??'—'} · Match scorelines: ${Object.entries(player.scorelines||{}).map(([k,v])=>`${k} (${v})`).join(', ')||'—'} · Game scorelines: ${Object.entries(player.pointScorelines||{}).map(([k,v])=>`${k} (${v})`).join(', ')||'—'}`));
   const row=el('div','approved-rating-row');const label=el('label','',`Approved rating target for ${player.name}`);label.htmlFor='approvedRating_'+slug(player.name)+'_'+playerIndex;
-  const inputNode=el('input','approved-rating-input');inputNode.type='number';inputNode.min='800';inputNode.max='2400';inputNode.step='1';inputNode.value=String(approvedRatingEdits[player.name]??player.performanceRating);inputNode.id='approvedRating_'+slug(player.name)+'_'+playerIndex;inputNode.dataset.playerName=player.name;inputNode.addEventListener('input',()=>{approvedRatingEdits[player.name]=inputNode.value;if(approvalResult){approvalResult=null;$('playerAnalysisStatus').textContent='Approved rating target changed. Click Approve Ratings & Simulate again.';$('playerAnalysisStatus').className='player-analysis-status bad';}save();updateSubmissionSummary();});
+  const inputNode=el('input','approved-rating-input');inputNode.type='number';inputNode.min='800';inputNode.max='2400';inputNode.step='1';inputNode.value=String(approvedRatingEdits[player.name]??player.performanceRating);inputNode.id='approvedRating_'+slug(player.name)+'_'+playerIndex;inputNode.dataset.playerName=player.name;inputNode.addEventListener('input',()=>{approvedRatingEdits[player.name]=inputNode.value;approvedNewPlayers=approvedNewPlayers.filter(n=>String(n).toLowerCase()!==String(player.name).toLowerCase());approvalResult=null;const approveBtn=document.getElementById('approveRatingsBtn');if(approveBtn){approveBtn.disabled=false;approveBtn.textContent='Approve Selected Player Rating';}$('playerAnalysisStatus').textContent='Approved rating target changed. Approve this selected player again.';$('playerAnalysisStatus').className='player-analysis-status bad';save();updateSubmissionSummary();});
   row.append(label,inputNode);card.append(row);root.append(card);
  });
  testCards.forEach(player=>{
@@ -1595,13 +1665,17 @@ function renderRatingAnalysisResults(){
  });
  if(newCards.length){
   const approval=el('div');
-  approval.append(el('div','analysis-approval-note','Enter or adjust the approved rating target. MYTT will calculate the technical starting rating needed so the existing match-by-match rating table can run once and reach the approved target after this tournament. No Players or Leaderboard values change during analysis or approval.'));
-  const button=el('button','btn primary','Approve Ratings & Simulate');button.type='button';button.id='approveRatingsBtn';button.disabled=['submitting','unknown','accepted','partial'].includes(submissionState);button.addEventListener('click',approveInitialRatings);approval.append(button);
+  approval.append(el('div','analysis-approval-note','Enter the approved rating target for this selected player. MYTT will keep this approval and combine it with the other new players’ approved targets. Technical starting ratings are simulated together only after every participating new player has been approved.'));
+  const isAlreadyApproved=approvedNewPlayers.some(n=>String(n).toLowerCase()===String(newCards[0].name).toLowerCase());const button=el('button','btn primary',isAlreadyApproved?'✓ Selected Player Approved':'Approve Selected Player Rating');button.type='button';button.id='approveRatingsBtn';button.disabled=isAlreadyApproved||['submitting','unknown','accepted','partial'].includes(submissionState);button.addEventListener('click',approveInitialRatings);approval.append(button);
   root.append(approval);
  }
- if(approvalResult&&Array.isArray(approvalResult.players)){
+ if(approvalResult){
   const approved=el('div','analysis-approved');
-  approved.textContent='Ratings approved. Technical starting ratings: '+approvalResult.players.map(p=>`${p.name}: ${p.technicalStartingRating} → predicted final ${p.predictedFinalRating} (target ${p.approvedFinalRating})`).join(' · ')+'. You can now review and submit the tournament results.';
+  if(approvalResult.allApproved&&Array.isArray(approvalResult.players)){
+   approved.textContent='All new-player ratings approved. Technical starting ratings: '+approvalResult.players.map(p=>`${p.name}: ${p.technicalStartingRating} → predicted final ${p.predictedFinalRating} (target ${p.approvedFinalRating})`).join(' · ')+'. You can now review and submit the tournament results.';
+  }else{
+   approved.textContent=`Selected player approved. ${approvalResult.approvedCount||0}/${approvalResult.requiredCount||requiredNewPlayers.length} new players approved. Select the next new player to continue.`;
+  }
   root.append(approved);
  }
 }
@@ -1671,10 +1745,10 @@ function csv(){if(!draw)return;let rows=[['Round','Wave','Table','Group','Match'
 input.addEventListener('input',()=>{eventId='';newPlayers=[];ratingTestPlayers=[];invalidateRatingAnalysis('Player list changed. Import MYTT Active Players again to create a matching event snapshot.');summary();save();if(draw){draw=null;$('resultsPanel').classList.add('hidden')}updateSubmissionSummary()});ids.forEach(id=>$(id).addEventListener('input',()=>{summary();save();if(draw){draw=null;$('resultsPanel').classList.add('hidden')}updateSubmissionSummary()}));
 $('matchDate').addEventListener('change',()=>{invalidateRatingAnalysis('Match date changed. Run the analysis again before submitting.');save();updateSubmissionSummary()});
 $('importActiveBtn').addEventListener('click',importActivePlayers);
-$('generateBtn').addEventListener('click',generate);$('redrawBtn').addEventListener('click',generate);$('clearBtn').addEventListener('click',()=>{if(['submitting','unknown','partial'].includes(submissionState)){toast('Do not clear a batch that may have been partly submitted.');return;}input.value='';draw=null;submissionState='draft';submissionId='';eventId='';newPlayers=[];ratingTestPlayers=[];analysisResult=null;approvalResult=null;approvedRatingEdits={};$('matchDate').value=localDateString();$('resultsPanel').classList.add('hidden');summary();save();applySubmissionLock();input.focus();toast('Player list cleared')});
+$('generateBtn').addEventListener('click',generate);$('redrawBtn').addEventListener('click',generate);$('clearBtn').addEventListener('click',()=>{if(['submitting','unknown','partial'].includes(submissionState)){toast('Do not clear a batch that may have been partly submitted.');return;}input.value='';draw=null;submissionState='draft';submissionId='';eventId='';newPlayers=[];ratingTestPlayers=[];analysisResult=null;approvalResult=null;approvedRatingEdits={};analysisResultsByPlayer={};analysedNewPlayers=[];approvedNewPlayers=[];requiredNewPlayers=[];$('matchDate').value=localDateString();$('resultsPanel').classList.add('hidden');summary();save();applySubmissionLock();input.focus();toast('Player list cleared')});
 $('printBtn').addEventListener('click',()=>window.print());$('csvBtn').addEventListener('click',csv);$('copyBtn').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(fullText());toast('Match order copied')}catch(e){let t=el('textarea');t.value=fullText();document.body.append(t);t.select();try{document.execCommand('copy');toast('Match order copied')}catch(x){toast('Copy unavailable')}t.remove()}});
 $('reviewSubmitBtn').addEventListener('click',showReview);$('confirmSubmitBtn').addEventListener('click',confirmBatchSubmit);$('cancelReviewBtn').addEventListener('click',closeReview);document.querySelectorAll('[data-close-review]').forEach(node=>node.addEventListener('click',closeReview));
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>view(b.dataset.view)));$('playerSelect').addEventListener('change',playerView);
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>view(b.dataset.view)));$('playerSelect').addEventListener('change',()=>{const selected=String($('playerSelect').value||'').trim().toLowerCase().replace(/\s+/g,' ');analysisResult=analysisResultsByPlayer[selected]||null;approvalResult=null;playerView();});
 $('ratingTestToggleBtn').addEventListener('click',toggleSelectedRatingTest);$('runRatingAnalysisBtn').addEventListener('click',runInitialRatingAnalysis);
 $('adminLoginForm').addEventListener('submit',submitAdminLogin);
 $('adminLogoutBtn').addEventListener('click',logoutAdmin);
