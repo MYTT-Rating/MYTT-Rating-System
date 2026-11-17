@@ -251,6 +251,171 @@
       *, *::before, *::after { transition-duration: .01ms !important; }
     }
   </style>
+
+<style id="mytt-partner-mobile-spacing-and-navigation">
+  @media (max-width: 700px) {
+    body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+    .intro { padding: 28px 0 22px !important; }
+    .eyebrow {
+      margin-bottom: 7px !important;
+      font-size: 10px !important;
+      letter-spacing: .15em !important;
+    }
+    h1 {
+      font-size: clamp(44px, 12vw, 64px) !important;
+      line-height: .95 !important;
+    }
+    .intro-copy {
+      margin-top: 9px !important;
+      font-size: 13px !important;
+      line-height: 1.5 !important;
+    }
+    .partners { padding: 20px 0 30px !important; }
+    .section-head { margin-bottom: 14px !important; gap: 12px !important; }
+    .section-label {
+      margin-bottom: 5px !important;
+      font-size: 10px !important;
+    }
+    .partner-list { gap: 12px !important; }
+  }
+
+  .partner-bottom-nav { display: none; }
+  .partner-more-backdrop[hidden],
+  .partner-more-sheet[hidden] { display: none !important; }
+
+  @media (max-width: 700px) {
+    .partner-bottom-nav {
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      align-items: center;
+      min-height: calc(64px + env(safe-area-inset-bottom));
+      padding: 5px 7px calc(5px + env(safe-area-inset-bottom));
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(10,11,15,.98);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+    }
+    .partner-bottom-item {
+      min-width: 0;
+      min-height: 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 3px 1px;
+      border: 0;
+      background: transparent;
+      color: #9da3ae;
+      font: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .partner-bottom-item:active,
+    .partner-bottom-item:focus-visible {
+      color: #e84146;
+      outline: none;
+    }
+    .partner-bottom-icon {
+      width: 25px;
+      height: 25px;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .partner-bottom-label {
+      display: block;
+      max-width: 100%;
+      overflow: hidden;
+      color: inherit;
+      font-size: 10px;
+      font-weight: 650;
+      line-height: 1.1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .partner-more-backdrop {
+      position: fixed;
+      z-index: 9998;
+      inset: 0;
+      background: rgba(0,0,0,.56);
+    }
+    .partner-more-sheet {
+      position: fixed;
+      z-index: 9999;
+      left: 12px;
+      right: 12px;
+      bottom: calc(72px + env(safe-area-inset-bottom));
+      padding: 17px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      background: #171920;
+      box-shadow: 0 18px 55px rgba(0,0,0,.48);
+    }
+    .partner-more-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .partner-more-title {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .partner-more-title small {
+      color: #e84146;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .16em;
+    }
+    .partner-more-title strong {
+      color: #f4f5f7;
+      font-size: 21px;
+      font-weight: 850;
+    }
+    .partner-more-close {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      background: rgba(255,255,255,.05);
+      color: #f4f5f7;
+      font-size: 22px;
+      line-height: 1;
+    }
+    .partner-more-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+    }
+    .partner-more-links a {
+      min-height: 68px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      padding: 11px 12px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 12px;
+      background: rgba(255,255,255,.035);
+      color: #f4f5f7;
+      text-decoration: none;
+    }
+    .partner-more-links strong { font-size: 13px; font-weight: 800; }
+    .partner-more-links small { color: #9da3ae; font-size: 10px; }
+  }
+</style>
+
 </head>
 <body>
   <header class="topbar">
@@ -317,5 +482,88 @@
       <span>Growing table tennis together.</span>
     </div>
   </footer>
+
+  <nav class="partner-bottom-nav" aria-label="MYTT mobile navigation">
+    <a class="partner-bottom-item" href="/#home" aria-label="Home">
+      <svg class="partner-bottom-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3.5 10.5 12 3l8.5 7.5M5.5 9.5V21h13V9.5M9.5 21v-6h5v6"/>
+      </svg>
+      <span class="partner-bottom-label">Home</span>
+    </a>
+    <a class="partner-bottom-item" href="/#singles" aria-label="Singles">
+      <svg class="partner-bottom-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="8" cy="6.8" r="2.3"/>
+        <path d="m9.7 8.4 3.3 1.9m-2.8.3-1.4 5.7M13 10.3l4.2-4.1M9 16.3l4.6 4.2"/>
+        <circle cx="18.3" cy="5.2" r="1.1"/>
+      </svg>
+      <span class="partner-bottom-label">Singles</span>
+    </a>
+    <a class="partner-bottom-item" href="/#events" aria-label="Events">
+      <svg class="partner-bottom-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 4h10v3.1c0 3-2.2 5.4-5 5.4S7 10.1 7 7.1V4Zm2 9.5h6M12 12.5V19M8.5 20h7M7 6H4v1.4c0 2.6 1.5 4.3 4 4.6M17 6h3v1.4c0 2.6-1.5 4.3-4 4.6"/>
+      </svg>
+      <span class="partner-bottom-label">Events</span>
+    </a>
+    <a class="partner-bottom-item" href="/#doubles" aria-label="Doubles">
+      <svg class="partner-bottom-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="7.5" cy="7.2" r="2.2"/>
+        <circle cx="16.2" cy="7.2" r="2.2"/>
+        <path d="M3.8 18.5c.5-3.3 2.1-5 4.7-5s4.2 1.7 4.7 5m-1.9 0c.5-3.3 2.1-5 4.7-5 1.6 0 2.9.6 3.7 1.8"/>
+      </svg>
+      <span class="partner-bottom-label">Doubles</span>
+    </a>
+    <button class="partner-bottom-item" id="partnerMoreButton" type="button"
+            aria-label="More" aria-expanded="false" aria-controls="partnerMoreSheet">
+      <svg class="partner-bottom-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="5" cy="12" r="1.2"/>
+        <circle cx="12" cy="12" r="1.2"/>
+        <circle cx="19" cy="12" r="1.2"/>
+      </svg>
+      <span class="partner-bottom-label">More</span>
+    </button>
+  </nav>
+
+  <div class="partner-more-backdrop" id="partnerMoreBackdrop" hidden></div>
+  <section class="partner-more-sheet" id="partnerMoreSheet" hidden aria-label="More MYTT navigation">
+    <div class="partner-more-head">
+      <div class="partner-more-title"><small>MYTT</small><strong>More</strong></div>
+      <button class="partner-more-close" id="partnerMoreClose" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="partner-more-links">
+      <a href="/#players"><strong>Players</strong><small>Official profiles</small></a>
+      <a href="/#submit"><strong>Join / Submit</strong><small>Official forms</small></a>
+      <a href="/#market"><strong>Marketplace</strong><small>Buy &amp; sell gear</small></a>
+      <a href="/#community"><strong>Community</strong><small>Connect with MYTT</small></a>
+      <a href="/smart-draw.html"><strong>Smart Draw</strong><small>Tournament tools</small></a>
+    </div>
+  </section>
+
+  <script id="mytt-partner-mobile-navigation-script">
+    (function () {
+      const moreButton = document.getElementById('partnerMoreButton');
+      const moreSheet = document.getElementById('partnerMoreSheet');
+      const backdrop = document.getElementById('partnerMoreBackdrop');
+      const closeButton = document.getElementById('partnerMoreClose');
+      if (!moreButton || !moreSheet || !backdrop || !closeButton) return;
+
+      function setMoreOpen(open) {
+        moreSheet.hidden = !open;
+        backdrop.hidden = !open;
+        moreButton.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      moreButton.addEventListener('click', function () {
+        setMoreOpen(moreSheet.hidden);
+      });
+      closeButton.addEventListener('click', function () { setMoreOpen(false); });
+      backdrop.addEventListener('click', function () { setMoreOpen(false); });
+      moreSheet.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setMoreOpen(false); });
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') setMoreOpen(false);
+      });
+    })();
+  </script>
+
 </body>
 </html>
