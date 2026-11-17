@@ -416,6 +416,162 @@
   }
 </style>
 
+
+<style id="mytt-partner-spacing-and-cta-v2">
+  @media (max-width: 700px) {
+    .topbar-inner {
+      min-height: 50px !important;
+    }
+
+    .intro {
+      padding: 10px 0 13px !important;
+    }
+
+    .intro .eyebrow {
+      margin: 0 0 4px !important;
+      font-size: 9px !important;
+      line-height: 1.25 !important;
+      letter-spacing: .14em !important;
+    }
+
+    .intro h1 {
+      margin: 0 !important;
+      font-size: clamp(40px, 11vw, 56px) !important;
+      line-height: .91 !important;
+      letter-spacing: -.065em !important;
+    }
+
+    .intro .intro-copy {
+      margin: 7px 0 0 !important;
+      font-size: 12px !important;
+      line-height: 1.42 !important;
+    }
+
+    .partners {
+      padding: 13px 0 20px !important;
+    }
+
+    .section-head {
+      margin-bottom: 10px !important;
+    }
+
+    .section-head .section-label {
+      margin: 0 0 3px !important;
+      font-size: 9px !important;
+      line-height: 1.25 !important;
+    }
+
+    .section-head h2 {
+      font-size: 25px !important;
+      line-height: 1.05 !important;
+    }
+
+    .partner-list {
+      gap: 10px !important;
+    }
+
+    .partner-cta {
+      margin: 2px 0 26px !important;
+      padding: 14px !important;
+      gap: 12px !important;
+      border-radius: 15px !important;
+    }
+
+    .partner-cta-title {
+      font-size: 15px !important;
+      line-height: 1.15 !important;
+    }
+
+    .partner-cta-copy {
+      margin-top: 5px !important;
+      font-size: 10px !important;
+      line-height: 1.4 !important;
+    }
+
+    .partner-cta-button {
+      min-height: 36px !important;
+      padding: 0 11px !important;
+      font-size: 10px !important;
+    }
+  }
+
+  .partner-cta {
+    margin: 4px 0 38px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    border: 1px solid rgba(232,65,70,.28);
+    border-radius: 18px;
+    background: linear-gradient(115deg, rgba(232,65,70,.09), rgba(17,19,25,.98) 58%);
+  }
+
+  .partner-cta-copy-wrap {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .partner-cta-kicker {
+    margin: 0 0 6px;
+    color: #e84146;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .partner-cta-title {
+    margin: 0;
+    color: #f4f5f7;
+    font-size: 19px;
+    font-weight: 850;
+    line-height: 1.2;
+    letter-spacing: -.035em;
+  }
+
+  .partner-cta-copy {
+    margin: 7px 0 0;
+    color: #9da3ae;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .partner-cta-button {
+    min-height: 42px;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    border-radius: 9px;
+    background: #e84146;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 850;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background .18s ease, transform .18s ease;
+  }
+
+  .partner-cta-button:hover {
+    background: #f05257;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 380px) {
+    .partner-cta {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .partner-cta-button {
+      width: 100%;
+    }
+  }
+</style>
+
 </head>
 <body>
   <header class="topbar">
@@ -474,6 +630,20 @@
         </a>
       </div>
     </section>
+
+    <section class="partner-cta" aria-label="Become a MYTT Partner">
+      <div class="partner-cta-copy-wrap">
+        <p class="partner-cta-kicker">Grow with MYTT</p>
+        <h2 class="partner-cta-title">Become a MYTT Partner</h2>
+        <p class="partner-cta-copy">Are you a sports centre, club or organisation interested in working with MYTT?</p>
+      </div>
+      <a class="partner-cta-button"
+         href="https://wa.me/601128887750?text=Hi%20MYTT%2C%20I%20am%20interested%20in%20becoming%20a%20MYTT%20Partner."
+         target="_blank" rel="noopener noreferrer">
+        Partner with us <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+
   </main>
 
   <footer>
