@@ -1291,35 +1291,20 @@ html body #home #viewPlayersCta > span{
    href="rating-rules.html"
    aria-label="Open MYTT Rating Rules">
 
-  <span aria-hidden="true"
-        style="display:flex;
-               align-items:center;
-               justify-content:center;
-               flex:0 0 38px;
-               width:38px;
-               height:38px;
-               min-width:38px;
-               min-height:38px;
-               box-sizing:border-box;
-               background:rgba(255,255,255,.05);
-               border:1px solid rgba(245,197,66,.35);
-               border-radius:50%;">
-
+  <span class="rating-rules-icon"
+        aria-hidden="true">
     <svg viewBox="0 0 24 24"
-         width="23"
-         height="23"
+         width="24"
+         height="24"
          fill="none"
          stroke="#F5C542"
          stroke-width="1.8"
          stroke-linecap="round"
          stroke-linejoin="round">
-
       <path d="M3 20h18"/>
-      <path d="M6 16v-5"/>
-      <path d="M11 16V7"/>
-      <path d="M16 16V4"/>
-      <path d="M5 8l6-4 5 2 4-3"/>
-
+      <rect x="5" y="11" width="3" height="7" rx="1"/>
+      <rect x="10.5" y="7" width="3" height="11" rx="1"/>
+      <rect x="16" y="3" width="3" height="15" rx="1"/>
     </svg>
   </span>
 
@@ -1329,7 +1314,7 @@ html body #home #viewPlayersCta > span{
   </div>
 
 </a>
-    
+
     </div>
   </section>
 
@@ -2731,6 +2716,30 @@ window.MYTT = {
     color: #E5A5B0 !important;
   }
 
+}
+
+/* MYTT RATING RULES - GOLD CHART ICON */
+html body #home #ratingRulesCta > .rating-rules-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 38px !important;
+  width: 38px !important;
+  height: 38px !important;
+  min-width: 38px !important;
+  min-height: 38px !important;
+  background: rgba(255,255,255,.05) !important;
+  background-image: none !important;
+  border: 1px solid rgba(245,197,66,.35) !important;
+  border-radius: 50% !important;
+  font-size: 0 !important;
+  color: #F5C542 !important;
+}
+
+html body #home #ratingRulesCta > .rating-rules-icon svg {
+  display: block !important;
+  width: 24px !important;
+  height: 24px !important;
 }
 
 </style>
