@@ -382,21 +382,29 @@ async function loadLeaderboard(csvUrl,bodyId,statusId,type,label){
     if(controls)controls.innerHTML="";
   }
 }
+
 function refreshLeaderboardAvatarRowsIfNeeded(){
   const signature=playerDb
-    .map(p=>`${String(p.id||"").trim()}:${slug(p.name)}`)
+    .map(p=>[
+      String(p.id||"").trim(),
+      slug(p.name),
+      String(p.region||"").trim().toLowerCase()
+    ].join(":"))
     .sort()
     .join("|");
 
   if(signature===playerDbAvatarSignature)return;
+
   playerDbAvatarSignature=signature;
 
-  // The Player DB and leaderboard CSV load in parallel. If the leaderboard
-  // finishes first, rebuild its rows once the approved player IDs are ready.
-  if(singlesPlayers.length)renderLeaderboardRows("singles");
-  if(doublesTeams.length)renderLeaderboardRows("doubles");
-}
+  if(singlesPlayers.length){
+    renderLeaderboardRows("singles");
+  }
 
+  if(doublesTeams.length){
+    renderLeaderboardRows("doubles");
+  }
+}
 async function loadPlayerDb(){
   try{
     const rows=await fetchRows(config.playerDbCsv);
